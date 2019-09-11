@@ -50,7 +50,7 @@ class App extends React.Component {
       <div>
         <BrowserRouter>
           <Navi/>
-          <Route path='/home' render={() => <Body state={this.state}/>}/>
+          <Route path='/' render={() => <Body state={this.state}/>}/>
           <Route path='/aboutus' component={AboutUs}/>
           <Route path='/calendar' component={Calendar}/>
           <Route path='/membership' component={Membership}/>
