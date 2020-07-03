@@ -38,8 +38,8 @@ class Projects extends React.Component {
                     <span class="disclaimer"><b>2. Admittance to these projects are <span class="highlight-text">first come, first served.
                     </span></b> Space is limited in these projects, so you are advised to attend the First General Meeting to secure 
                     yourself a spot in the project of your choosing.</span><br></br>
-                    <span class="disclaimer"><b>3. The deadline to apply to the Spring 2020 projects is <i><span class="highlight-text">
-                    Sunday, February 9th, 2020 at 6:00 PM.</span></i></b></span><br></br>
+                    <span class="disclaimer"><b>3. The deadline to apply to the Fall 2020 projects is <i><span class="highlight-text">
+                    Saturday, September 5, 2020 at 6:00 PM.</span></i></b></span><br></br>
                     <br></br><br></br>
                 </div>
                 
@@ -81,7 +81,7 @@ class Projects extends React.Component {
                                     <br></br><br></br> */}
                                     <Tab.Pane eventKey="fall2020projects">
                                         <Tab.Container defaultActiveKey="F2020beginner">                                            
-                                            <Nav variant="pills">
+                                            <Nav variant="tabs">
                                                 <Nav.Item>
                                                     <Nav.Link className="project-nav-link anchor-blue" eventKey="F2020beginner">Beginner Project</Nav.Link>
                                                 </Nav.Item>
@@ -129,7 +129,7 @@ class Projects extends React.Component {
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="spring2020projects">
                                         <Tab.Container defaultActiveKey="S2020beginner">                                            
-                                            <Nav variant="pills">
+                                            <Nav variant="tabs">
                                                 <Nav.Item>
                                                     <Nav.Link className="project-nav-link anchor-blue" eventKey="S2020beginner">Beginner Project</Nav.Link>
                                                 </Nav.Item>
@@ -176,7 +176,7 @@ class Projects extends React.Component {
 
                                     <Tab.Pane eventKey="fall2019projects">
                                         <Tab.Container defaultActiveKey="F2019beginner">
-                                            <Nav variant="pills">
+                                            <Nav variant="tabs">
                                                 <Nav.Item>
                                                     <Nav.Link className="project-nav-link anchor-blue" eventKey="F2019beginner">Beginner Project</Nav.Link>
                                                 </Nav.Item>
@@ -228,12 +228,12 @@ class Projects extends React.Component {
 
                                     <Tab.Pane eventKey="spring2019projects">
                                         <Tab.Container defaultActiveKey="S2019beginner">
-                                            <Nav variant="pills">
+                                            <Nav variant="tabs">
                                                 <Nav.Item>
-                                                    <Nav.Link className="project-nav-link anchor-white" eventKey="S2019beginner">Beginner Project</Nav.Link>
+                                                    <Nav.Link className="project-nav-link anchor-blue" eventKey="S2019beginner">Beginner Project</Nav.Link>
                                                 </Nav.Item>
                                                 <Nav.Item>
-                                                    <Nav.Link className="project-nav-link anchor-white" eventKey="S2019advanced">Advanced Project</Nav.Link>
+                                                    <Nav.Link className="project-nav-link anchor-blue" eventKey="S2019advanced">Advanced Project</Nav.Link>
                                                 </Nav.Item>
                                             </Nav>
                                             <Tab.Content className="project-tab-content">
@@ -270,12 +270,12 @@ class Projects extends React.Component {
 
                                     <Tab.Pane eventKey="fall2018projects">
                                         <Tab.Container defaultActiveKey="F2018beginner">
-                                            <Nav variant="pills">
+                                            <Nav variant="tabs">
                                                 <Nav.Item>
-                                                    <Nav.Link className="project-nav-link anchor-white" eventKey="F2018beginner">Beginner Project</Nav.Link>
+                                                    <Nav.Link className="project-nav-link anchor-blue" eventKey="F2018beginner">Beginner Project</Nav.Link>
                                                 </Nav.Item>
                                                 <Nav.Item>
-                                                    <Nav.Link className="project-nav-link anchor-white" eventKey="F2018advanced">Advanced Project</Nav.Link>
+                                                    <Nav.Link className="project-nav-link anchor-blue" eventKey="F2018advanced">Advanced Project</Nav.Link>
                                                 </Nav.Item>
                                             </Nav>
                                             <Tab.Content className="project-tab-content">

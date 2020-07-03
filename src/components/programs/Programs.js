@@ -45,9 +45,9 @@ class Programs extends React.Component {
                                     <h3><b>Disclaimers!</b></h3>
                                     <span class="disclaimer"><b>1. You must be a member of ACM to participate in the mentorship!</b> If you are not a member, 
                                     <b><i><span class="highlight-text"> you will not be allowed in.</span></i></b></span><br></br>
-                                    <span class="disclaimer"><b>2. Deadline to apply for the Spring 2020 mentorship program is <span class="highlight-text">
-                                    Tuesday, February 4, 2020 at 5:00 PM.</span></b></span><br></br>
-                                    <span class="disclaimer"><b>3. Changes for Spring 2020: Mentorship is only for <span class="highlight-text">mentees.</span> Tutoring will <span class="highlight-text">not</span> be offered Spring 2020. </b></span><br></br><br></br>
+                                    <span class="disclaimer"><b>2. Deadline to apply for the Fall 2020 mentorship program is <span class="highlight-text">
+                                    Thursday, September 1, 2020 at 11:59pm.</span></b></span><br></br>
+                                    <br></br>
                                     <Tab.Pane eventKey="first">
                                         <Tab.Container defaultActiveKey="mentorship">
                                             <Nav variant="tabs">
