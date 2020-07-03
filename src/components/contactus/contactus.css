@@ -1,7 +1,7 @@
-/* .header{
+.header{
     width:85%;
     max-width: 600px;
-    background: #000000;
+    background: #f1f1f1;
     position: absolute;
     transform: translate(110%, 50%);
     padding: 30px 40px;
@@ -17,8 +17,8 @@
     padding: 12px 18px;
     text-align: left;
     font-size: 16px;
-} */
-/* 
+}
+
 .contact-form{
     width:85%;
     max-width: 600px;
@@ -33,15 +33,11 @@
     text-align: center;
     box-shadow: 0 0 20px #000000b3;
     font-family: "Monteserrat", "san-serif";
-} */
+}
 
-/* .contact-form h1{
+.contact-form h1{
     margin-top: 0;
     font-weight: 200;
-} */
-
-.contact-us-page {
-    padding-top: 60px;
 }
 
 .txtb{
@@ -70,7 +66,7 @@
 
 #btn-form{
     display: block;
-    background: #2898cc;
+    background: #9b59b6;
     padding: 10px 0;
     color: white;
     text-transform: uppercase;
@@ -82,8 +78,7 @@
 .contact-us-card {    
 	width: auto;
 	height: auto;
-    background-color:black !important;
-    /* padding: 5px 150px 5px 150px; */
+    background-color: gray !important;
     padding: 10px;
 }
 
@@ -96,17 +91,9 @@
 }
 
 .contact-us-logo {
-    max-height: 200px;
-    max-width: 200px;
-    display: flexbox;
+    max-height: 300px;
+    max-width: 250px;
+    display: block;
     margin-left: auto;
     margin-right: auto;
-}
-
-.contact-us-logo-2 {
-    max-height: 75px;
-    max-width: 75px;
-    display: flexbox;
-    margin-left: auto;
-    margin-right: 15px;
 }
