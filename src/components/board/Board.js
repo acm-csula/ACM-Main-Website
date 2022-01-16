@@ -68,14 +68,16 @@ class Board extends React.Component {
                             </h2>
                           </Row>
                           <Row>
-                            <div className="row-leaders centered-leader">
-                              <BoardLeaders
-                                photo={IMAGES.Ashley2021}
-                                firstName="Ashley"
-                                lastName="Tran"
-                                year="2021"
-                                position="Treasurer"
-                              />
+                            <div className="all-row-leaders">
+                              <div className="row-leaders centered-leader">
+                                <BoardLeaders
+                                  photo={IMAGES.Ashley2021}
+                                  firstName="Ashley"
+                                  lastName="Tran"
+                                  year="2021"
+                                  position="Treasurer"
+                                />
+                              </div>
                             </div>
                           </Row>
                         </div>

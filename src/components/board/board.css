@@ -220,7 +220,7 @@ h2 {
   h2 {
     margin-left: auto;
     margin-right: auto;
-    font-size: 4vw;
+    font-size: 5vw;
   }
   .h2-leaders {
     font-size: 5.5vw;
@@ -267,5 +267,16 @@ h2 {
     margin-bottom: 4rem;
     font-size: 35px;
     text-align: center;
+  }
+  .leader-background {
+    margin-left: 25px;
+    padding-bottom: 23px;
+    width: 100%;
+    right: 44px;
+    top: 10px;
+  }
+  .image-cropper {
+    width: 72%;
+    height: 100%;
   }
 }
