@@ -44,7 +44,7 @@ class Board extends React.Component {
                         <div className="row-leaders all-row-leaders">
                           <h2 className="leader-header">LEADER OF THE MONTH</h2>
                           <div className="col-leaders justify-content-center image-contain">
-                            <img className="board-leader-winner board-leader-profile" src={IMAGES.Ashley2021}></img>
+                            <img className="board-leader-winner board-leader-profile" src={IMAGES.Ashley2021} alt={"Leader of the Month"}></img>
                           </div>
                           <h2 className="leader-info">Ashley Tran</h2>
                           <h2 className="leader-info">Executive Officer</h2>

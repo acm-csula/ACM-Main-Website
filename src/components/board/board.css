@@ -276,4 +276,7 @@ h2{
 		box-sizing: border-box;
 		border-radius: 20px;
 	  }
+	  .image-cropper{
+		  width: 150px;
+	  }
   }
