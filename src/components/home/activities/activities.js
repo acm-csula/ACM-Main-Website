@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import "animate.css/animate.min.css";
 import { Row, Col, Image } from 'react-bootstrap';
-// import projectImage from "./images/ACM_presentation.jpg";
-// import mentorshipImage from "./images/mentorship.jpg";
-// import newsImage from "./images/ACM_table.jpg";
 import "./activities.scss";
 
 
