@@ -18,6 +18,8 @@ const IMAGES = {
     Ricardo2022: require('./2022-2023-leaders/Ricardo.jpg'),
     Jay2022: require('./2022-2023-leaders/Jay.jpg'),
     Charlie2022: require('./2022-2023-leaders/Charlie.jpg'),
+    Jonathan2022: require('./2022-2023-leaders/Jonathan.jpg'),
+    Santosh2022: require('./2022-2023-leaders/Santosh.png'),
 
     // 2021-22 leaders
     Daniel2021: require('./2020-2021-leaders/Daniel.jpg'),

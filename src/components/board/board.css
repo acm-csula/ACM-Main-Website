@@ -224,7 +224,7 @@ h2{
 .leader-background {
 	width: 29rem;
 	height: 135px;
-	background: #31355f;
+	background: #1C7FDA; /*#31355f;*/
 	border: 3px solid #000000;
 	box-sizing: border-box;
 	border-radius: 20px;
@@ -272,7 +272,7 @@ h2{
 	.leader-background {
 		width: 100vw;
 		height: 135px;
-		background: #31355f;
+		background: #1C7FDA;/*#31355f;*/
 		box-sizing: border-box;
 		border-radius: 20px;
 	}
