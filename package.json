@@ -15,7 +15,7 @@
     "firebase-tools": "^7.3.2",
     "google-spreadsheet": "^3.0.13",
     "gsap": "^3.6.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "react": "^16.13.1",
     "react-animation-on-scroll": "^5.0.0",
     "react-awesome-modal": "^2.0.5",
