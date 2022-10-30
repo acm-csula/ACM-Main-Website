@@ -46,9 +46,9 @@ class Board extends React.Component {
                         <div className="row-leaders all-row-leaders">
                           <h2 className="leader-header">LEADER OF THE MONTH</h2>
                           <div className="col-leaders justify-content-center image-contain">
-                            <img className="board-leader-winner board-leader-profile" src={IMAGES.Vacant} alt={"Leader of the Month"}></img>
+                            <img className="board-leader-winner board-leader-profile" src={IMAGES.Summer2022} alt={"Leader of the Month"}></img>
                           </div>
-                          <h2 className="leader-info">Vacant</h2>
+                          <h2 className="leader-info">Summer Tran</h2>
                           <h2 className="leader-info"></h2>
                         </div>
                       </Tab.Container>
@@ -73,8 +73,7 @@ class Board extends React.Component {
                           <BoardLeaders photo={IMAGES.Patrick2022} firstName="Patrick" lastName="Sangalang" year="2022" position="Webmaster" />
                         </div>
                         <div className="row-leaders centered-leader">
-                          <BoardLeaders photo={IMAGES.Deep2022} firstName="Deep" lastName="Bhakta" year="2022" position="VP of Internal Affairs" />
-
+                          {/* <BoardLeaders photo={IMAGES.Vacant} firstName="Vacant" lastName="" year="2022" position="VP of Internal Affairs" /> */}
                           {/* <BoardLeaders photo={IMAGES.Vacant} firstName="Vacant" lastName="" year="2022" position="VP of External Affairs" /> */}
                         </div>
                       </div>
@@ -84,15 +83,15 @@ class Board extends React.Component {
                       </div>
                       <div className="all-row-leaders">
                         <div className="row-leaders centered-leader">
-                          {/* <BoardLeaders photo={IMAGES.Vacant} firstName="Vacant" lastName="" year="2022" position="Finance Officer" /> */}
                           <BoardLeaders photo={IMAGES.Daniel2022} firstName="Daniel" lastName="Ramirez" year="2022" position="Executive Officer" />
+                          <BoardLeaders photo={IMAGES.Gerardo2022} firstName="Gerardo" lastName="Ibarra" year="2022" position="Project Officer" />
+                        </div>
+                        <div className="row-leaders centered-leader">
+                          <BoardLeaders photo={IMAGES.Jose2022} firstName="Jose" lastName="Zamora" year="2022" position="Project Officer" />
                           <BoardLeaders photo={IMAGES.Fabio2022} firstName="Fabio" lastName="Carrasco" year="2022" position="Web Officer" />
                         </div>
                         <div className="row-leaders centered-leader">
-                          <BoardLeaders photo={IMAGES.Gerardo2022} firstName="Gerardo" lastName="Ibarra" year="2022" position="Project Officer" />
-                          <BoardLeaders photo={IMAGES.Jose2022} firstName="Jose" lastName="Zamora" year="2022" position="Project Officer" />
-                        </div>
-                        <div className="row-leaders centered-leader">
+                          {/* <BoardLeaders photo={IMAGES.Vacant} firstName="Vacant" lastName="" year="2022" position="Finance Officer" /> */}
                           {/* <BoardLeaders photo={IMAGES.Vacant} firstName="Vacant" lastName="" year="2022" position="Administrative Officer" /> */}
 
                         </div>
@@ -103,18 +102,46 @@ class Board extends React.Component {
                       <div className="all-row-leaders">
                         <div className="row-leaders centered-leader">
                           <BoardLeaders photo={IMAGES.Tracy2022} firstName="Tracy" lastName="Truong" year="2022" position="Design Committee" />
-                          <BoardLeaders photo={IMAGES.Katherine2022} firstName="Katherine" lastName="Bonomo" year="2022" position="Design Committee" />
+                          <BoardLeaders photo={IMAGES.Vacant} firstName="Veronica" lastName="Barragan" year="2022" position="Design Committee" />
+                        </div>
+                        <div className="row-leaders centered-leader">
+                          <BoardLeaders photo={IMAGES.Katherine2022} firstName="Katherine" lastName="Bonomo" year="2022" position="Internal/External Committee" />
+                          <BoardLeaders photo={IMAGES.Vacant} firstName="Janis" lastName="Garcia" year="2022" position="Internal/External Committee" />
                         </div>
                         <div className="row-leaders centered-leader">
                           <BoardLeaders photo={IMAGES.Lloyd2022} firstName="Lloyd" lastName="Castro" year="2022" position="Web Committee" />
+                          <BoardLeaders photo={IMAGES.Mike2022} firstName="Mike" lastName="Pacina" year="2022" position="Web Committee" />
+                        </div>
+                        <div className="row-leaders centered-leader">
+                          <BoardLeaders photo={IMAGES.Vacant} firstName="Liana" lastName="Zhu" year="2022" position="Web Committee" />
+                          <BoardLeaders photo={IMAGES.Vacant} firstName="Uriel" lastName="Baldesco" year="2022" position="Web Committee" />
+                        </div>
+                        <div className="row-leaders centered-leader">
                           <BoardLeaders photo={IMAGES.Isabella2022} firstName="Isabella" lastName="Arreguin" year="2022" position="Project Committee" />
-                        </div>
-                        <div className="row-leaders centered-leader">
                           <BoardLeaders photo={IMAGES.Ricardo2022} firstName="Ricardo" lastName="Miranda" year="2022" position="Project Committee" />
-                          <BoardLeaders photo={IMAGES.Jay2022} firstName="Jay" lastName="Perez" year="2022" position="Project Committee" />
                         </div>
                         <div className="row-leaders centered-leader">
-                          <BoardLeaders photo={IMAGES.Charlie2022} firstName="Charlie" lastName="Dominguez" year="2022" position="Project Committee" />
+                          <BoardLeaders photo={IMAGES.Jay2022} firstName="Jay" lastName="Perez" year="2022" position="Project Committee" />
+                          <BoardLeaders photo={IMAGES.Charlie2022} firstName="Charlie" lastName="Dominguez" year="2022" position="Project Committee" />          
+                        </div>
+                        <div className="row-leaders centered-leader">
+                          <BoardLeaders photo={IMAGES.Jonathan2022} firstName="Jonathan" lastName="Dang" year="2022" position="Project Committee" />
+                          <BoardLeaders photo={IMAGES.Vacant} firstName="Fabricio" lastName="Reyes" year="2022" position="Project Committee" /> 
+                        </div>
+                        <div className="row-leaders centered-leader">
+                          <BoardLeaders photo={IMAGES.Vacant} firstName="Shambhavi" lastName="Bhandari" year="2022" position="Project Committee" />
+                          <BoardLeaders photo={IMAGES.Zain2022} firstName="Zain" lastName="Syed" year="2022" position="General Committee" />                        
+                        </div>
+                        <div className="row-leaders centered-leader">
+                          <BoardLeaders photo={IMAGES.Ulises2022} firstName="Ulises" lastName="Gutierrez" year="2022" position="General Committee" />
+                          <BoardLeaders photo={IMAGES.Ivan2022} firstName="Ivan" lastName="Ho" year="2022" position="General Committee" />
+                        </div>
+                        <div className="row-leaders centered-leader">
+                          <BoardLeaders photo={IMAGES.Virginia2022} firstName="Virginia" lastName="Gonzalez" year="2022" position="General Committee" />
+                          <BoardLeaders photo={IMAGES.Santosh2022} firstName="Santosh" lastName="Kumar" year="2022" position="Finance Committee" />
+                        </div>
+                        <div className="row-leaders centered-leader">
+                          <BoardLeaders photo={IMAGES.Vacant} firstName="Joseph" lastName="Acosta" year="2022" position="Finance Committee" />
                         </div>
                       </div>
                       <div className="row">
@@ -122,12 +149,12 @@ class Board extends React.Component {
                       </div>
                       <div className="all-row-leaders">
                         <div className="row-leaders centered-leader">
-                          <BoardLeaders photo={IMAGES.Weronika2021} firstName="Weronika" lastName="Cwir" year="2022" position="Faculty Advisor" />
-                          <BoardLeaders photo={IMAGES.Vacant} firstName="Richard" lastName="Cross" year="2022" position="Faculty Advisor" />
+                          <BoardLeaders photo={IMAGES.Weronika2021} firstName="Weronika" lastName="Cwir" year="2022" position="Chapter Advisor" />
+                          <BoardLeaders photo={IMAGES.Vacant} firstName="Richard" lastName="Cross" year="2022" position="Chapter Advisor" />
                         </div>
                         <div className="row-leaders centered-leader">
-                          <BoardLeaders photo={IMAGES.Wilson2021} firstName="Wilson" lastName="Thomas" year="2022" position="Advisor" />
-                          <BoardLeaders photo={IMAGES.Alvin2021} firstName="Alvin" lastName="Lew" year="2022" position="Advisor" />
+                          <BoardLeaders photo={IMAGES.Wilson2021} firstName="Wilson" lastName="Thomas" year="2022" position="Chapter Advisor" />
+                          <BoardLeaders photo={IMAGES.Alvin2021} firstName="Alvin" lastName="Lew" year="2022" position="Student Advisor" />
                         </div>
                       </div>
                     </Tab.Pane>

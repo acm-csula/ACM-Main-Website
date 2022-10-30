@@ -1,0 +1,358 @@
+.Activities-tease {
+    background-color: #161616;
+    width: 100%;
+  
+    background-size: 100%;
+    color: white;
+
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+
+    .content{
+        
+        #blue-rectangle{
+            background-color: #1C7FDA;
+            width: 6rem;
+            height: 0.35rem;
+            margin: 70px auto 35px auto;
+            
+        }
+
+        .whats-happening{
+            display: flexbox;
+            margin: auto;
+           
+    
+            .title{
+                text-align: center;
+                font-size: 3rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                
+            }
+    
+            .description{
+                width: 50%;
+                text-align: center;
+                margin: 5rem auto 3rem auto;
+                font-size: 1.5rem;
+                
+                
+            }
+
+        }
+
+        .activity-container{
+            display: flex;
+            justify-content: center;
+            
+            height: auto;
+            
+            margin: auto;
+
+            .activity{
+                display: flex;
+                width: 28rem;
+                height: 24rem;
+                overflow: hidden;
+                position: relative;
+                text-align: center;
+                margin-bottom: 70px;
+
+                .text-box{
+                    background: rgba(0, 0, 0, 0.9);
+                    width: 28rem;
+                    height: 5rem;
+                    position: absolute;
+                    bottom: 0;
+                    
+    
+                    .label{
+                        color: #FFFFFF;
+                        text-align: center;
+                        display: block;
+                        margin-top: 1.3rem;
+                        font-size: 150%;
+                        transition: all .5s;
+                    }
+    
+                    .label:hover{
+                        transform: scale(1.1); 
+                        color: #1C7FDA;
+                    }
+                }
+            } 
+
+            .activity {
+                .bg-image{
+                    width: 28rem;
+                    height: 24rem;
+                    transition: all .5s;
+                    background-position: center;
+                }
+
+                #projectImage{
+                    background-image: url("./images/ACM_presentation.jpg");
+                    background-size: cover;
+                    
+                    
+                }
+
+                #mentorshipImage{
+                    background-image: url("./images/mentorship.jpg");
+                    background-size: cover;
+                    
+                    
+                }
+
+                #newsImage{
+                    background-image: url("./images/ACM_table.jpg");
+                    background-size: cover;
+                    
+                }
+                
+                .bg-image:hover{
+                    transform: scale(1.2);
+                }
+
+            }
+
+            
+        }
+       
+        
+    }
+
+
+
+}
+
+//Smaller screens
+@media screen and (max-width: 1400px){
+    .Activities-tease {
+        .content{
+
+            .activity-container{
+                margin-bottom: 70px;
+                .activity{
+                    width: 22rem;
+                    height: 18rem;
+                    
+
+                    .text-box{
+                        background: rgba(0, 0, 0, 0.9);
+                        width: 22rem;
+                        height: 4rem;
+                        position: absolute;
+                        bottom: 0;
+                        
+        
+                        .label{
+                            color: #FFFFFF;
+                            text-align: center;
+                            margin-top: 0.8rem;
+                            font-size: 130%;
+                            transition: all .5s;
+                        }
+        
+                        
+                    }
+                } 
+
+                .activity {
+                    .bg-image{
+                        width: 22rem;
+                        height: 18rem;
+                        transition: all .5s;
+                        background-position: center;
+                    }
+
+
+
+                }
+
+                
+            }
+        
+            
+        }
+    }
+
+}
+
+@media screen and (max-width: 1080px) {
+    .Activities-tease{
+        .content{
+
+            .whats-happening{
+
+                .description{
+                    width: 80%;
+                    text-align: center;
+                    margin: 5rem auto 3rem auto;
+                    font-size: 1.5rem;
+                    
+                }
+
+            }
+            
+            .activity-container{
+                flex-direction: column;
+                .activity{
+                    justify-content: center;
+                    height: auto;
+                    margin: auto auto 40px auto;
+                    width: 37rem;
+                    height: 33rem;
+                    
+                    
+                    .text-box{
+                        width: 37rem;
+                        height: 7rem;
+                        
+        
+                        .label{
+                            margin-top: 2rem;
+                            font-size: 180%;
+                            
+                        }
+        
+                        
+                    }
+
+                    .bg-image{
+                        width: 37rem;
+                        height: 33rem;
+                    }
+                }
+
+            }
+        }
+    }
+
+    @media screen and (max-width: 605px) {
+        .Activities-tease{
+            .content{
+                .whats-happening{
+
+                    .title{
+                        text-align: center;
+                        font-size: 2rem;
+                        text-transform: uppercase;
+                        
+                    }
+
+                    .description{
+                        font-size: 1.2rem;
+                    
+                    }
+    
+                }
+
+                .activity-container{
+                    .activity{
+                        width: 25rem;
+                        height: 21rem;
+    
+                        .text-box{
+                            width: 25rem;
+                            height: 5em;
+                            
+            
+                            .label{
+                                margin-top: 1.3em;
+                                font-size: 130%;
+                                
+                            }
+            
+                            
+                        }
+    
+                        .bg-image{
+                            width: 25rem;
+                            height: 21rem;
+                        }
+                    }
+    
+                }
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+            .Activities-tease{
+                .content{
+                    .activity-container{
+                        .activity{
+                            width: 18rem;
+                            height: 14rem;
+        
+                            .text-box{
+                                width: 18rem;
+                                height: 3rem;
+                                
+                
+                                .label{
+                                    margin-top: 0.5rem;
+                                    font-size: 110%;
+                                    
+                                }
+                
+                                
+                            }
+        
+                            .bg-image{
+                                width: 25rem;
+                                height: 21rem;
+                            }
+                        }
+        
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+
+
+//Monitor screen responsive
+@media screen and (min-width: 1800px){
+    .Activities-tease {
+        .content{
+
+            .activity-container{
+
+                .activity{
+                    width: 35rem;
+                    height: 31rem;
+                    
+
+                    .text-box{
+                        width: 35rem;
+                        height: 7rem;
+                        
+        
+                        .label{
+                            margin-top: 2rem;
+                            font-size: 180%;
+                            
+                        }
+        
+                        
+                    }
+
+                    .bg-image{
+                        width: 35rem;
+                        height: 31rem;
+                    }
+                } 
+
+                
+            }
+        
+            
+        }
+    }
+
+}

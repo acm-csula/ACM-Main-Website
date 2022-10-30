@@ -31,6 +31,9 @@ class Navi extends React.Component {
               <NavDropdown.Item href="/board">
                 <div className="nav-dropdown-text">our board</div>
               </NavDropdown.Item>
+              <NavDropdown.Item href="/contactus">
+                <div className="nav-dropdown-text">faq</div>
+              </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="programs" id="collasible-nav-dropdown">
               <NavDropdown.Item href="/projects">
@@ -44,8 +47,10 @@ class Navi extends React.Component {
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/events">calendar</Nav.Link>
+
             {/* <Nav.Link href="/contactus">contact us</Nav.Link> */}
           </Nav>
+
           <Nav.Link href="/membership">
             <Button variant="light">Membership</Button>
           </Nav.Link>

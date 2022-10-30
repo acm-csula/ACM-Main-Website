@@ -29,13 +29,11 @@ class ImpAnnouncements extends Component {
                     <div className="title">Academic Year 2022-2023</div>
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/GAC_c9xLg5U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <div className="description">
-                        <ul>
-                            <li>Communications will be done via email, Discord, and social media</li>
-                        </ul>
+                        <p>Communications will be done via email, Discord, and social media</p>
                     </div>
                     <br></br>
-                    <Row className="justify-content-md-center title">upcoming Events</Row>
-                    <Row className="justify-content-md-center">
+                    <Row className="justify-content-center title">upcoming Events</Row>
+                    <Row className="justify-content-center event-grid">
                         {
                             this.state.upcomingEvent &&
                             this.state.upcomingEvent.map( upcomingEvents => {

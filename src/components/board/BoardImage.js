@@ -18,6 +18,13 @@ const IMAGES = {
     Ricardo2022: require('./2022-2023-leaders/Ricardo.jpg'),
     Jay2022: require('./2022-2023-leaders/Jay.jpg'),
     Charlie2022: require('./2022-2023-leaders/Charlie.jpg'),
+    Ivan2022: require('./2022-2023-leaders/Ivan.jpg'),
+    Jonathan2022: require('./2022-2023-leaders/Jonathan.jpg'),
+    Mike2022: require('./2022-2023-leaders/Mike.jpg'),
+    Santosh2022: require('./2022-2023-leaders/Santosh.jpg'),
+    Ulises2022: require('./2022-2023-leaders/Ulises.jpg'),
+    Virginia2022: require('./2022-2023-leaders/Virginia.jpg'),
+    Zain2022: require('./2022-2023-leaders/Zain.jpg'),
 
     // 2021-22 leaders
     Daniel2021: require('./2020-2021-leaders/Daniel.jpg'),

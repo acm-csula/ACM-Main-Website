@@ -1,10 +1,10 @@
 .impAnnouncements-tease {
-    background-image: url('../impAnnouncements/images/announcements.jpg');
-    
+    // background-image: url('../impAnnouncements/images/announcements.jpg');
+    background-color: #282A2E;
     width: 100%;
-    background-size: cover;
-    background-position-y: 30%;
-    background-repeat: no-repeat;
+    // background-size: cover;
+    // // background-position-y: 30%;
+    // background-repeat: no-repeat;
     color: white;
 
     justify-content: center;
@@ -30,6 +30,7 @@
         vertical-align: middle;
         display: table-cell;
         height: 100%;
+        
 
         .subTitle {
             font-size: 2rem;
@@ -40,8 +41,9 @@
         .title{
             padding-top: 10px;
             margin-bottom: 2rem;
+            font-size: 3.5rem;
             font-weight: bold;
-            font-size: 3rem;
+            text-align: center;
             text-transform: uppercase;
             line-height: 1;
         }
@@ -51,6 +53,8 @@
             list-style-position: inside;
             font-weight: lighter;
             font-size: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
         }
 
         .space {
@@ -67,4 +71,21 @@
             text-decoration: underline;
         }
     }
+
+}
+
+@media screen and (max-width: 700px) {
+    .impAnnouncements-tease {
+        .content{
+        
+            .title{
+                font-size: 2.7rem;
+            }
+
+            .description {
+                font-size: 1.8rem;
+            }
+        }
+    }
+    
 }

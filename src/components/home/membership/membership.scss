@@ -1,104 +1,215 @@
 .Membership-tease {
-    background-image: url('../membership/images/membership.png');
+    // background-image: url('../membership/images/membership.png');
+    background-color: #282A2E;
     width: 100%;
-    height: 30rem;
+    // height: 30rem;
     background-size: 100%;
-    background-position-y: 40%;
-    background-repeat: no-repeat;
+    // background-position-y: 40%;
+    // background-repeat: no-repeat;
     color: white;
 
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
 
-    .left {
+    .container{
+        display: flexbox;
+        background-color: #161616;
+        width: 50rem;
+        height: 50rem;
+        margin: 80px;
 
-        width: 50%;
-        height: 100%;
+        //Image
+        #logoImage{
+            width: 22rem;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        //Title of section
+        .title{
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+        }
+
+        //Description
+        .description{
+            width: 85%;
+            margin-top: 3rem;
+            font-size: 1.5rem;
+        }
+
+        .title, .description{
+            display: block;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        //Button
+        .link-btn{
+            text-align: center;
+            margin-top: 6rem;
+            .label{
+                font-size: 20px;
+                padding: 1rem;
+                color: white;
+                background-color: #0A84FF;
+                transition: all .5s;
+                
+            }
+
+            .label:hover{
+                background-color: white;
+                color: #0A84FF;
+            }
+        }
         
-        .content { 
-            
-            width: 51rem;
-            padding: 8rem;
+    }
+    
+}
 
-            .subTitle {
-                font-size: 2rem;
-                line-height: 1;
-                font-weight: lighter;
+
+@media screen and (max-width: 750px){
+    .Membership-tease{
+        
+        .container{
+
+            #logoImage{
+                width: 17rem;
             }
 
             .title{
-                font-weight: bold;
-                font-size: 4rem;
-                text-transform: uppercase;
-                line-height: 1;
+                font-size: 2.5rem;
             }
     
-            .link-btn{
-                margin-top: 1rem;
-
-                .label {
-                    padding: 1rem;
-                    color: white;
-                    background-color: #0A84FF;
-                }
-
-                .label:hover{
-                    background-color: white;
-                    color: #0A84FF;
-                }
+            .description{
+                font-size: 1.3rem;
             }
         }
     }
 
-    .right{
+    @media screen and (max-width: 550px) {
+        .Membership-tease{
+        
+            .container{
+                width: 44rem;
+                height: 44rem;
+        
 
-        width: 50%;
+                .title{
+                    font-size: 2rem;
+                }
+        
+                .description{
+                    font-size: 1rem;
+                }
+    
+                .link-btn{
+                    margin-bottom: 3rem;
+
+                    .label{
+                        font-size: 16px;
+                        
+                    }
+                }
+            }
+        }
     }
+    
 }
 
-@media screen and (max-width: 1200px) {
+// @media screen and (max-width: 1200px) {
 
-    .Membership-tease {
+//     .Membership-tease {
 
-        background-size: 300%;
-        background-position: center;
+//         background-size: 300%;
+//         background-position: center;
 
-        .right {
-            display: none;
-        }
+//         .right {
+//             display: none;
+//         }
     
-        .left {
-            width: 100%;
-            display: table-cell;
-            height: 100%;
+//         .left {
+//             width: 100%;
+//             display: table-cell;
+//             height: 100%;
 
-            .content {
-                padding: 4rem;
-                width: inherit;
-                display: table-cell;
-                height: 100%;
-                vertical-align: middle;
+//             .content {
+//                 padding: 4rem;
+//                 width: inherit;
+//                 display: table-cell;
+//                 height: 100%;
+//                 vertical-align: middle;
 
 
-                .subTitle {
-                    font-size: 1.5rem;
-                }
+//                 .subTitle {
+//                     font-size: 1.5rem;
+//                 }
     
-                .title {
-                    font-size: 3rem;
-                }
-            }
+//                 .title {
+//                     font-size: 3rem;
+//                 }
+//             }
 
 
-        }
-    }
+//         }
+//     }
 
-  }
+//   }
   
-  @media only screen and (max-width: 600px) {
-    .Membership-tease {
-        height: 100%;
-        background-size: cover;
-  }
-}
+//   @media only screen and (max-width: 600px) {
+//     .Membership-tease {
+//         height: 100%;
+//         background-size: cover;
+//   }
+// }
+
+// .left {
+
+    //     width: 50%;
+    //     height: 100%;
+        
+    //     .content { 
+            
+    //         width: 51rem;
+    //         padding: 8rem;
+
+    //         .subTitle {
+    //             font-size: 2rem;
+    //             line-height: 1;
+    //             font-weight: lighter;
+    //         }
+
+    //         .title{
+    //             font-weight: bold;
+    //             font-size: 4rem;
+    //             text-transform: uppercase;
+    //             line-height: 1;
+    //         }
+    
+    //         .link-btn{
+    //             margin-top: 1rem;
+
+    //             .label {
+    //                 padding: 1rem;
+    //                 color: white;
+    //                 background-color: #0A84FF;
+    //             }
+
+    //             .label:hover{
+    //                 background-color: white;
+    //                 color: #0A84FF;
+    //             }
+    //         }
+    //     }
+    // }
+
+    // .right{
+
+    //     width: 50%;
+    // }
