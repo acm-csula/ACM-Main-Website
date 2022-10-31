@@ -71,7 +71,7 @@ class ContactUs extends React.Component {
 
                   <Dropdown.Menu>
                     <Dropdown.Item href="#/action-1">
-                      Memebership fee is $5 for the entire year
+                      Memebership fee is $5 for the entire year test
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
