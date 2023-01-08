@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import "./aboutus.css";
-
+// balls
 class AboutUs extends React.Component {
 	render() {
 		let acmImages = ["./images/2021_2022_leaders.jpg", "./images/group.jpg"]
