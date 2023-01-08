@@ -7,6 +7,25 @@ import "./Programs.css";
 import Mentorship from "./Mentorship";
 import flyerS2021 from "./pictures/spring2021-mentorship-flyer.png";
 
+/*Importing icons: 
+  Step 1: Go to link here -> "https://react-icons.github.io/react-icons" 
+  Step 2: Search your icon, and copy the icon name
+  Step 3: Import your icon like these examples: (One import per icon)
+  -> import {FaGraduationCap} "react-icons/fa";
+  -> import {HiDocumentText} from "react-icons/hi";
+  Step 4: Add your icon as an HTML element -> <FaGraduationCap/>
+
+  Note: make sure the import path corresponds to its icon library:
+  = FaGraduationCap -> react-icons/fa
+  = HiDocumentText -> react-icons/hi
+  = SiHandshake -> react-icons/si
+*/
+import { FaGraduationCap } from "react-icons/fa";
+import {HiDocumentText} from "react-icons/hi";
+import {SiHandshake} from "react-icons/si";
+import {FiSearch} from "react-icons/fi";
+import {FaMoneyBillWave} from "react-icons/fa";
+
 class Programs extends React.Component {
   constructor(props) {
     super(props);
@@ -52,21 +71,7 @@ class Programs extends React.Component {
                 */}
 
         <div className="intro" class="row">
-        <div className="videoWrapper" class="col-lg-8 order-1">
-            <div className="embed-responsive embed-responsive-16by9">
-              <iframe
-                width="600"
-                height="315"
-                src="https://www.youtube.com/embed/gCGZ_U_9jeY"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-
-          <div className="disclaimer-body" class="col-lg-3 order-2">
+          <div className="disclaimer-body" class="col-lg-5 order-1">
             <h3 className="disclaimer_header">
               <b>Disclaimers</b>
             </h3>
@@ -84,6 +89,19 @@ class Programs extends React.Component {
                 close on (that date).
               </b>
             </span>
+          </div>
+          <div className="videoWrapper" class="col-lg-7 order-2">
+            <div className="embed-responsive embed-responsive-16by9">
+              <iframe
+                width="600"
+                height="315"
+                src="https://www.youtube.com/embed/gCGZ_U_9jeY"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
           </div>
         </div>
 
@@ -185,27 +203,32 @@ class Programs extends React.Component {
                                 These are the following workshops:
                               </p>
                               <p>
-                                ❖
+                                <FaGraduationCap/>
                                 <span className="highlight-text point">
                                   <b>How to Succeed as an Undergrad</b>
                                 </span>
-                                <br />❖
+                                <br />
+                                
+                                <FiSearch/>
                                 <span className="highlight-text point">
                                   <b>Internship/Job Hunting</b>
                                 </span>
-                                <br />❖
+                                <br />
+                                <HiDocumentText/>
                                 <span className="highlight-text point">
                                   <b>
                                     Building your Resume and LinkedIn
                                   </b>
                                 </span>
-                                <br />❖
+                                <br />
+                                <SiHandshake/>
                                 <span className="highlight-text point">
                                   <b>
                                     Mock Interviews
                                   </b>
                                 </span>
-                                <br />❖
+                                <br />
+                                <FaMoneyBillWave/>
                                 <span className="highlight-text point">
                                   <b>Financial Management</b>
                                 </span>

@@ -23,6 +23,7 @@
     "react-bootstrap": "^1.2.2",
     "react-dom": "^16.13.1",
     "react-double-marquee": "^0.3.4",
+    "react-icons": "^4.7.1",
     "react-multi-carousel": "^2.5.5",
     "react-paypal-button": "^4.1.1",
     "react-paypal-button-v2": "^2.6.2",
