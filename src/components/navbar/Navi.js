@@ -39,7 +39,7 @@ class Navi extends React.Component {
                 <div className="nav-dropdown-text">project workshops</div>
               </NavDropdown.Item>
               <NavDropdown.Item href="/programs">
-                <div className="nav-dropdown-text">mentorship</div>
+                <div className="nav-dropdown-text">pro-dev</div>
               </NavDropdown.Item>
               <NavDropdown.Item href="/professional">
                 <div className="nav-dropdown-text">events</div>
