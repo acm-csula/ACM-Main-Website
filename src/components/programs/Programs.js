@@ -70,38 +70,36 @@ class Programs extends React.Component {
                 2. Signup deadline 
                 */}
 
-        <div className="intro" class="row">
-          <div className="disclaimer-body" class="col-lg-5 order-1">
-            <h3 className="disclaimer_header">
-              <b>Disclaimers</b>
-            </h3>
-            <span className="disclaimer">
-              <b>
-                1. You first must be a member of ACM to be in the PRO-DEV workshops.
-                If you are not a member, you will not be allowed in.
-              </b>
-            </span>
-            <br/>
-            <br/>
-            <span className="disclaimer">
-              <b>
-                2. Signing up for workshops opens (this date) and will
-                close on (that date).
-              </b>
-            </span>
-          </div>
-          <div className="videoWrapper" class="col-lg-7 order-2">
-            <div className="embed-responsive embed-responsive-16by9">
-              <iframe
-                width="600"
-                height="315"
-                src="https://www.youtube.com/embed/gCGZ_U_9jeY"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-            </div>
+<div className="disclaimer-body">
+          <h3 className="disclaimer_header">
+            <b>Disclaimers</b>
+          </h3>
+          <span className="disclaimer">
+            <b>
+              1. You must be a member of ACM to participate in the projects! If
+              you are not a member, you will not be allowed in.
+            </b>
+          </span>
+          <br />
+          <span className="disclaimer">
+            <b>
+              2. Mentorship signups will open Monday, August 8, 2022 and will
+              close Wednesday, August 31, 2022.
+            </b>
+          </span>
+        </div>
+
+        <div className="videoWrapper">
+          <div className="embed-responsive embed-responsive-16by9">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/gCGZ_U_9jeY"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
 
