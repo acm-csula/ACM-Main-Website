@@ -1,6 +1,6 @@
 import React from "react";
 import firebase from "../professional/firebaseConfig.js";
-import { Row, Col, Tab, Nav, Container, Button } from "react-bootstrap";
+import { Row, Col, Tab, Nav, Container, Button, NavDropdown } from "react-bootstrap";
 import ModalImage from "./ModalImage";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Programs.css";
@@ -21,10 +21,10 @@ import flyerS2021 from "./pictures/spring2021-mentorship-flyer.png";
   = SiHandshake -> react-icons/si
 */
 import { FaGraduationCap } from "react-icons/fa";
-import {HiDocumentText} from "react-icons/hi";
-import {SiHandshake} from "react-icons/si";
-import {FiSearch} from "react-icons/fi";
-import {FaMoneyBillWave} from "react-icons/fa";
+import { HiDocumentText } from "react-icons/hi";
+import { SiHandshake } from "react-icons/si";
+import { FiSearch } from "react-icons/fi";
+import { FaMoneyBillWave } from "react-icons/fa";
 
 class Programs extends React.Component {
   constructor(props) {
@@ -59,8 +59,7 @@ class Programs extends React.Component {
     return (
       <div className="programs-body">
         <div className="mentor-title-text">
-          <p>Interested in developing your PROFESSIONAL skills?</p>
-          <p>Participate in our PRO-DEV workshops!</p>
+          <p>Our PRO-DEV workshops will improve your Professional Skills!</p>
         </div>
         <div className="mentorship-title-card"></div>
 
@@ -70,7 +69,7 @@ class Programs extends React.Component {
                 2. Signup deadline 
                 */}
 
-<div className="disclaimer-body">
+        <div className="disclaimer-body">
           <h3 className="disclaimer_header">
             <b>Disclaimers</b>
           </h3>
@@ -102,7 +101,17 @@ class Programs extends React.Component {
             ></iframe>
           </div>
         </div>
-
+        <NavDropdown title="Year">
+          <NavDropdown.Item>
+            2023
+          </NavDropdown.Item>
+          <NavDropdown.Item>
+            2022
+          </NavDropdown.Item>
+          <NavDropdown.Item>
+            2021
+          </NavDropdown.Item>
+        </NavDropdown>
         <br></br>
         <div className="card programs-card">
           <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -188,52 +197,85 @@ class Programs extends React.Component {
                                   <b>About this program:</b>
                                 </span>
                               </h2>
+                              <div></div>
                               <p>
-                                If you feel like you lack professional skills, then this program is perfectly for you!
-                                The Professional Development (PRO-DEV) program provides a series of workshops that teaches valuable skills 
-                                and knowledge that are cruicial as a professional. Such topics include building a resume, applying for internships,
-                                self-management, and many more! By applying, you will have the opportunity to learn from your ACM leaders, and
-                                to benefit yourself professionally by the time you graduate.
-                                <br/>
-                                These workshops is open for all ACM members in all different levels (Freshmen, Sophomore, Junior, Seniors).
+                                If you feel like you lack professional skills,
+                                then this program is perfectly for you! The
+                                Professional Development (PRO-DEV) program
+                                provides a series of workshops that teaches
+                                valuable skills and knowledge that are cruicial
+                                as a professional. Such topics include building
+                                a resume, applying for internships,
+                                self-management, and many more! By applying, you
+                                will have the opportunity to learn from your ACM
+                                leaders, and to benefit yourself professionally
+                                by the time you graduate.
+                                <br />
+                                These workshops is open for all ACM members in
+                                all different levels (Freshmen, Sophomore,
+                                Junior, Seniors).
                               </p>
                               <p className="program-description">
                                 These are the following workshops:
                               </p>
-                              <p>
-                                <FaGraduationCap/>
-                                <span className="highlight-text point">
-                                  <b>How to Succeed as an Undergrad</b>
-                                </span>
-                                <br />
-                                
-                                <FiSearch/>
-                                <span className="highlight-text point">
-                                  <b>Internship/Job Hunting</b>
-                                </span>
-                                <br />
-                                <HiDocumentText/>
-                                <span className="highlight-text point">
-                                  <b>
-                                    Building your Resume and LinkedIn
-                                  </b>
-                                </span>
-                                <br />
-                                <SiHandshake/>
-                                <span className="highlight-text point">
-                                  <b>
-                                    Mock Interviews
-                                  </b>
-                                </span>
-                                <br />
-                                <FaMoneyBillWave/>
-                                <span className="highlight-text point">
-                                  <b>Financial Management</b>
-                                </span>
-                              </p>
+
+                              {/*LIST OF WORKSHOPS*/}
+                              <div id="workshops" class="row">
+                                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                                  <div class="icon-box">
+                                    <div class="icon">
+                                      <FaGraduationCap />
+                                    </div>
+                                    <span className="highlight-text point">
+                                      <b>How to Succeed as an Undergrad</b>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                                  <div class="icon-box">
+                                    <div class="icon">
+                                      <FiSearch />
+                                    </div>
+                                    <span className="highlight-text point">
+                                      <b>Internship/Job Hunting</b>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                                  <div class="icon-box">
+                                    <div class="icon">
+                                      <HiDocumentText />
+                                    </div>
+                                    <span className="highlight-text point">
+                                      <b>Building your Resume and LinkedIn</b>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                                  <div class="icon-box">
+                                    <div class="icon">
+                                      <SiHandshake />
+                                    </div>
+                                    <span className="highlight-text point">
+                                      <b>Mock Interviews</b>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                                  <div class="icon-box">
+                                    <div class="icon" >
+                                      <FaMoneyBillWave />
+                                    </div>
+
+                                    <span className="highlight-text point">
+                                      <b>Financial Management</b>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
                               <p className="program-description">
-                                The deadline to apply is TBD. Join our workshops today before
-                                it's too late!
+                                The deadline to apply is TBD. Join our workshops
+                                today before it's too late!
                               </p>
                             </p>
                             {/* use for now to display image */}
