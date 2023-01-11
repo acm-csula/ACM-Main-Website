@@ -229,8 +229,7 @@ class Projects extends React.Component {
           <br></br>
           <div className="disclaimer">
             <b>
-              3. Project signups open Thursday, August 25, 2022 and will close
-              Sunday, September 4, 2022
+              3. Project signup dates will be announced soon!
             </b>
           </div>
         </div>
