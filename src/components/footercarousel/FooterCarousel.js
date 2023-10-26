@@ -10,6 +10,7 @@ import {
 
 import "bootstrap/dist/css/bootstrap.css";
 class FooterCarousel extends React.Component {
+
   render() {
     return (
       <div className="container top-container">

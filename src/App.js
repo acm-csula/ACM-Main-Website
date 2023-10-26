@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -25,7 +25,12 @@ import NewBoard from "./components/board/NewBoard";
 import ACM_Login from "./components/login/ACM_Login.js"
 import Admin from "./components/admin/Admin";
 import { Navbar } from "react-bootstrap";
-import { Router, Switch } from "react-router-dom/cjs/react-router-dom.min";
+
+
+import ProjectsAdmin from "./components/admin/projectsAdmin/ProjectsAdmin";
+import BoardAdmin from "./components/admin/boardAdmin/BoardAdmin";
+import EventsAdmin from "./components/admin/eventsAdmin/EventsAdmin";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -64,17 +69,24 @@ class App extends React.Component {
   }
   render() {
     const SuccessPage = () => <Route path="/Success" component={Success} />;
-    return (
-      <div>
-        
-        <BrowserRouter>
 
-           
-            <Navi />
-          <Route exact path="/" component={Home} />
+    const AdminContainer = () => (
+      <>
+        {/* <Route exact path='/' render={() => <Redirect to="/login" />} /> */}
+        <Route path="/login" component={ACM_Login} />
+        <Route path="/admin/" component={Admin} />
+        <Route path="/admin/projects" component={ProjectsAdmin} />
+        <Route path="/admin/events" component={EventsAdmin} />
+        <Route path="/admin/board" component={BoardAdmin} />
+      </>
+    )
+    const DefaultContainer = () => (
+      <>
+      <Navi />
+      <Route exact path="/" component={Home} />
           {/*<Route exact path='/' render={() => <Body state={this.state}/>}/>*/}
           {/*<Route path="/sponsor" component={Sponsor} />*/}
-            
+
             <Route path="/aboutus" component={AboutUs} />
             <Route path="/calendar" component={Calendar} />
             <Route path="/membership" component={Membership} />
@@ -87,11 +99,6 @@ class App extends React.Component {
             <Route path="/programs" component={Programs} />
             <Route path="/portal" component={Portal} />
             <Route path="/Success" component={SuccessPage} />
-            <Route path="/login" component={ACM_Login} />
-              <Route path="/admin" component={Admin} />
-
-          
-          
           <Route
             path="/discord"
             component={() => {
@@ -99,8 +106,17 @@ class App extends React.Component {
               return null;
             }}
           />
-        
+
         <FooterCarousel />
+      </>
+    )
+    return (
+      <div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path={['/login', '/admin*']} component={AdminContainer} />
+            <Route component={DefaultContainer} />
+          </Switch>
         </BrowserRouter>
       </div>
     );
