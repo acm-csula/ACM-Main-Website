@@ -1,11 +1,15 @@
 import React from "react";
+import './ProjectsAdmin.scss'
 
 const ProjectsAdmin
  = () => {
 
     return(
-        <div>
-        </div>
+        <>
+        
+
+        </>
+
     )
 
 }
