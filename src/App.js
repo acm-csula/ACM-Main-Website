@@ -22,15 +22,13 @@ import FooterCarousel from "./components/footercarousel/FooterCarousel.js";
 import Success from "./components/membership/CheckoutComponents/Success.js";
 import Portal from "./components/portal/Portal.js";
 import NewBoard from "./components/board/NewBoard";
-import ACM_Login from "./components/login/ACM_Login.js"
+import ACM_Login from "./components/login/ACM_Login.js";
 import Admin from "./components/admin/Admin";
 import { Navbar } from "react-bootstrap";
 
-
 import ProjectsAdmin from "./components/admin/projectsAdmin/ProjectsAdmin";
 import BoardAdmin from "./components/admin/boardAdmin/BoardAdmin";
-import EventsAdmin from "./components/admin/eventsAdmin/EventsAdmin";
-
+import EventsAdmin from "./components/admin/eventsAdmin/eventsAdmin";
 
 class App extends React.Component {
   constructor(props) {
@@ -72,49 +70,52 @@ class App extends React.Component {
 
     const AdminContainer = () => (
       <>
-        {/* <Route exact path='/' render={() => <Redirect to="/login" />} /> */}
+        <Route exact path="/admin" component={Admin} />
         <Route path="/login" component={ACM_Login} />
-        <Route path="/admin/" component={Admin} />
         <Route path="/admin/projects" component={ProjectsAdmin} />
         <Route path="/admin/events" component={EventsAdmin} />
         <Route path="/admin/board" component={BoardAdmin} />
       </>
-    )
+    );
     const DefaultContainer = () => (
       <>
-      <Navi />
-      <Route exact path="/" component={Home} />
-          {/*<Route exact path='/' render={() => <Body state={this.state}/>}/>*/}
-          {/*<Route path="/sponsor" component={Sponsor} />*/}
+        <Navi />
+        <Route exact path="/" component={Home} />
+        {/*<Route exact path='/' render={() => <Body state={this.state}/>}/>*/}
+        {/*<Route path="/sponsor" component={Sponsor} />*/}
 
-            <Route path="/aboutus" component={AboutUs} />
-            <Route path="/calendar" component={Calendar} />
-            <Route path="/membership" component={Membership} />
-            <Route path="/faq" component={FAQ} />
-            <Route path="/contactus" component={ContactUs}/>
-            <Route path="/events" component={Events} />
-            <Route path="/projects" component={Projects} />
-            <Route path="/professional" component={Professional} />
-            <Route path="/board" component={NewBoard} />
-            <Route path="/programs" component={Programs} />
-            <Route path="/portal" component={Portal} />
-            <Route path="/Success" component={SuccessPage} />
-          <Route
-            path="/discord"
-            component={() => {
-              window.location = "https://discord.com/invite/wX58JRv";
-              return null;
-            }}
-          />
+        <Route path="/aboutus" component={AboutUs} />
+        <Route path="/calendar" component={Calendar} />
+        <Route path="/membership" component={Membership} />
+        <Route path="/faq" component={FAQ} />
+        <Route path="/contactus" component={ContactUs} />
+        <Route path="/events" component={Events} />
+        <Route path="/projects" component={Projects} />
+        <Route path="/professional" component={Professional} />
+        <Route path="/board" component={NewBoard} />
+        <Route path="/programs" component={Programs} />
+        <Route path="/portal" component={Portal} />
+        <Route path="/Success" component={SuccessPage} />
+        <Route
+          path="/discord"
+          component={() => {
+            window.location = "https://discord.com/invite/wX58JRv";
+            return null;
+          }}
+        />
 
         <FooterCarousel />
       </>
-    )
+    );
     return (
       <div>
         <BrowserRouter>
           <Switch>
-            <Route exact path={['/login', '/admin*']} component={AdminContainer} />
+            <Route
+              exact
+              path={["/login", "/admin*"]}
+              component={AdminContainer}
+            />
             <Route component={DefaultContainer} />
           </Switch>
         </BrowserRouter>
