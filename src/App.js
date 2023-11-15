@@ -28,7 +28,7 @@ import { Navbar } from "react-bootstrap";
 
 import ProjectsAdmin from "./components/admin/projectsAdmin/ProjectsAdmin";
 import BoardAdmin from "./components/admin/boardAdmin/BoardAdmin";
-import EventsAdmin from "./components/admin/eventsAdmin/eventsAdmin";
+import EventsAdmin from "./components/admin/eventsAdmin/EventsAdmin";
 
 class App extends React.Component {
   constructor(props) {
