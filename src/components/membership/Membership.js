@@ -20,7 +20,7 @@ class Membership extends React.Component {
 					</div>
 					<div className="membership-card"></div>
 				</div>
-				<div className="card">
+				<div className="card mem-card">
 					{/* <center>
 						<div className="carousel_container" style={{ display: 'flex', justifyContent: 'center' }}>
 							<Carousel>
