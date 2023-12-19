@@ -35,8 +35,6 @@ class Projects extends React.Component {
       this.setState({ currentProjSem: project.reverse()[0].semester });
       this.setState({ currentProj: project.shift() });
       this.setState({ archiveProj: project });
-      console.log(this.state.currentProj);
-      console.log(this.state.currentProj.level.advanced.flyer);
 
 
     

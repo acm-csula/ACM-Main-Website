@@ -135,7 +135,7 @@
 	width: 9rem;
 }
 
-.card{
+.mem-card{
 	width: auto;
 	height: auto;
 	background-color:#00000000 !important;
@@ -148,7 +148,7 @@
 }
 
 .nav-item{
-	color:white !important;
+	color:white ;
 
 }
 

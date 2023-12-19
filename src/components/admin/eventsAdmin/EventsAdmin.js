@@ -53,8 +53,9 @@ const EventsAdmin = () => {
 
   return (
     <div class="container main-event">
-      <h1>Events page</h1>
-      <Button className="mx-auto" onClick={() => setAddModal(true)}>Add an event</Button>
+      <h1 align="center">Events page</h1>
+      
+      <Button className="mx-auto mb-3" onClick={() => setAddModal(true)}>Add an event</Button>
       <AddModal show={addModal} onHide={() => setAddModal(false)} currentTab={activeTab} />
       <Tabs defaultActiveKey={activeTab} onSelect={handleTabSelect} id="sub-tabs" className="mb-3 event-tabs">
         <Tab eventKey="upcoming" title="Upcoming">

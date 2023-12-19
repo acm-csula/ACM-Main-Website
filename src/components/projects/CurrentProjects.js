@@ -55,7 +55,7 @@ const CurrentProjects = (props) => {
               class="current-flyer img-thumbnail shadow-lg mb-5 bg-white rounded"
             />
             <Card.Body>
-              <Card.Title className="shadow mb-3">
+              <Card.Title className="titlecard shadow mb-3">
                 Beginners Workshop
               </Card.Title>
               <Card.Text className="currentDesc p-2">
@@ -118,7 +118,7 @@ const CurrentProjects = (props) => {
               class="current-flyer img-thumbnail shadow-lg mb-5 bg-white rounded"
             />
             <Card.Body>
-              <Card.Title className="shadow mb-3">Advanced Workshop</Card.Title>
+              <Card.Title className="titlecard shadow mb-3">Advanced Workshop</Card.Title>
               <Card.Text className="currentDesc p-2">
                 Interested in game development? In this advanced workshop series, we are
                 using C# and Unity game engine to create and implement a 2 dimensional plaform game.
