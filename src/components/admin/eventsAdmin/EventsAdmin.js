@@ -42,8 +42,11 @@ const dummyUpcoming = [
 
 
 const EventsAdmin = () => {
-    const [activeTab, setActiveTab] = useState('upcoming');//stores current tab
+    const [activeTab, setActiveTab] = useState('upcoming');//currently selected tab
     const [addModal, setAddModal] = useState(false);
+    const [upcoming, setUpcoming] = useState([]);
+    const [semester, setSemester] = useState([]);
+    const [past, setPast] = useState([]);
 
     //sets the current selected tab
     const handleTabSelect = (selectedKey) => {

@@ -11,14 +11,14 @@ const AddModal = (props) => {
     setImage(file);
   };
 
-  const addHandler = (e) =>{
+  const addHandler = (e) => {
     e.preventDefault();
     //store image in firebase storage first
     //create image url
-    //create event object and store 'title' and 'imgUrl' 
+    //create event object and store 'title' and 'imgUrl'
     //add event object to firestore with corresponding section (upcoming, semester, or past)
     props.onHide();
-  }
+  };
   return (
     <>
       <Modal
@@ -36,12 +36,45 @@ const AddModal = (props) => {
           <Form onSubmit={addHandler}>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="text" placeholder="Enter title" ref={titleRef} required/>
+              <Form.Control
+                type="text"
+                placeholder="Enter title"
+                ref={titleRef}
+                required
+              />
             </Form.Group>
-
+            <Form.Group>
+              <Form.Label>Semester</Form.Label>
+              {["radio"].map((type) => (
+                <div key={`inline-${type}`} className="mb-3">
+                  <Form.Check
+                    inline
+                    label="Fall"
+                    name="group1"
+                    type={type}
+                    id={`inline-${type}-1`}
+                  />
+                  <Form.Check
+                    inline
+                    label="Spring"
+                    name="group1"
+                    type={type}
+                    id={`inline-${type}-2`}
+                  />
+                </div>
+              ))}
+            </Form.Group>
+            <Form.Group controlId="title">
+              <Form.Label>Year</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="YYYY"
+                required
+              />
+            </Form.Group>
             <Form.Group controlId="image">
               <Form.Label>Flyer Image</Form.Label>
-              <Form.Control type="file" required onChange={handleImg}/>
+              <Form.Control type="file" required onChange={handleImg} />
             </Form.Group>
             <Modal.Footer>
               <Button variant="success" type="submit">

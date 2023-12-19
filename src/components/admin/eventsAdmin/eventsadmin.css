@@ -1,16 +1,16 @@
-.main-event{
-    height: 100vh;
-    max-width: 100vw;
+.main-event {
+  height: 100vh;
+  max-width: 100vw;
 }
 .event-tabs .nav-link {
-    color:aquamarine;
-  }
-  
-  /* Change the active tab text color */
-  .event-tabs .nav-link.active {
-    color:blue;
-  }
-.event-card{
-    margin: auto;
-    background-color: rgb(9, 92, 160) !important;
+  color: aquamarine;
+}
+
+/* Change the active tab text color */
+.event-tabs .nav-link.active {
+  color: blue;
+}
+.event-card {
+  margin: auto;
+  background-color: rgb(9, 92, 160) !important;
 }
