@@ -1,11 +1,14 @@
 import React from "react";
-import { Button, Col, Form, Image, Modal, Row, Stack} from "react-bootstrap";
+import { Button, Col, Form, Image, Modal, Row } from "react-bootstrap";
+// import dummyImg from "../dummyAdvanced.jpg";
 
 
 const ProjectEditModal = (props) => {
 
+  
   return (
     <>
+      
       <Modal
         {...props}
         size="lg"
@@ -17,39 +20,44 @@ const ProjectEditModal = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            
-              <Form.Group as={Col} controlId="title">
+          <Form className="mb-5">
+            <Row md={5} style={{ gap: "40px" }}>
+              <Form.Group controlId="title" style={{ gap: "40px" }}>
                 <Form.Label>Change Title</Form.Label>
                 <Form.Control
                   type="text"
+                  style={{ marginBottom: "40px" }}
                   placeholder="project_title"
                 />
-              </Form.Group>
-           
-              <Form.Group as={Col} controlId="listSkills">
+
                 <Form.Label>Change Skills</Form.Label>
-                <Form.Control as="textarea" />
-              </Form.Group>
-            
-              <Form.Group as={Col} controlId="listLeaders">
+                <Form.Control
+                  as="textarea"
+                  style={{ marginBottom: "40px", paddingBottom: "20px" }}
+                />
+
                 <Form.Label>Change Leaders</Form.Label>
-                <Form.Control as="textarea" />
+                <Form.Control as="textarea" style={{ paddingBottom: "20px" }} />
               </Form.Group>
 
-              <Form.Group as={Row} controlId="changeImg">
-                <Image src="./dummyAdvanced.jpg" />
+              <Form.Group style={{}} controlId="changeImg">
+                <Image width="300px" height="350px" src={props.imgUrl} />
                 <Form.Control type="file" size="lg" />
               </Form.Group>
-         
+            </Row>
+            <Button variant="primary" type="submit" style={{ float: "right" }}>
+              Confirm
+            </Button>
+            <Button
+              onClick={props.onHide}
+              style={{ float: "right", marginRight: "20px" }}>
+              Close
+            </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
     </>
   );
-}
+};
 
-export default ProjectEditModal
+export default ProjectEditModal;

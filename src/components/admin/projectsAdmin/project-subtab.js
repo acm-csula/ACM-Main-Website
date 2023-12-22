@@ -4,12 +4,12 @@ import ProjectEditModal from "./modals/projectEditModel";
 
 const ProjectSubTab = (props) => {
   const [editModel, setEditModel] = useState(false);
-  const editToggle = () => setEditModel(true)
+  
 
   
   return (
     <>
-      <Row md={2}>
+      <Row md={3}>
         {props.data &&
           props.data.map((e) => (
             <>
@@ -42,6 +42,8 @@ const ProjectSubTab = (props) => {
               <ProjectEditModal
                 show={editModel}
                 onHide={() => setEditModel(false)}
+                imgUrl={(e.imgUrl)}
+                id={(e._id)}
               />
             </>
           ))}

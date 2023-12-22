@@ -9,16 +9,15 @@ import dummyAdImg from "./dummyAdvanced.jpg";
 const ProjectsAdmin = () => {
   const [activeTab, setActiveTab] = useState("semester"); //Sets active tab
 
-  const handleTabSelect = (selectedKey) => {
-    setActiveTab(selectedKey);
-  };
 
   const currentProjects = [
     {
+      _id: 0,
       altText: "BP Event Name",
       imgUrl: dummyBegImg,
     },
     {
+      _id: 1,
       altText: "AP Event Name",
       imgUrl: dummyAdImg,
     },
@@ -45,7 +44,7 @@ const ProjectsAdmin = () => {
 
         
           
-          <h1>Projects</h1>
+          <h1 >Projects</h1>
           <Tabs defaultActiveKey={activeTab}  variant="pills" id="sub-tabs" className="mb-3 event-tabs">
           <Tab eventKey="semester" title="Semester">
             <ProjectSubTab data={currentProjects} />

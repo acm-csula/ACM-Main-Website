@@ -15,35 +15,41 @@ const EventSubTab = (props) => {
         {props.data &&
           props.data.map((e) => (
             <>
-              <Card className="mx-auto my-2 event-card bg-secondary" style={{ width: "18rem" }}>
+              <Card
+                className="mx-auto my-2 event-card bg-secondary"
+                style={{ width: "18rem" }}>
                 <Card.Body>
                   <Card.Title className="text-light">{e.altText}</Card.Title>
                   <Button
                     className="mx-1"
                     variant="warning"
-                    onClick={() => setViewModal(true)}
-                  >
+                    onClick={() => setViewModal(true)}>
                     View
                   </Button>
                   <Button
                     className="mx-1"
                     variant="danger"
-                    onClick={() => setDelModal(true)}
-                  >
+                    onClick={() => setDelModal(true)}>
                     Delete
                   </Button>
                   <Button
                     className="mx-1"
                     variant="dark"
-                    onClick={() => setEditModal(true)}
-                  >
+                    onClick={() => setEditModal(true)}>
                     Edit
                   </Button>
                 </Card.Body>
               </Card>
-              <ViewModal image={e.imgUrl} show={viewModal} onHide={() => setViewModal(false)}/>
-              <DeleteModal show={deleteModal} onHide={() => setDelModal(false)}/>
-              <EditModal show={editModal} onHide={() => setEditModal(false)}/>
+              <ViewModal
+                image={e.imgUrl}
+                show={viewModal}
+                onHide={() => setViewModal(false)}
+              />
+              <DeleteModal
+                show={deleteModal}
+                onHide={() => setDelModal(false)}
+              />
+              <EditModal show={editModal} onHide={() => setEditModal(false)} />
             </>
           ))}
       </Row>
