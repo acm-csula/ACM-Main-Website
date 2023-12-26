@@ -15,6 +15,7 @@ const DeleteModal = (props) => {
         );
 
         props.onHide();
+        props.removeEvent(props.data.id);
       } catch (error) {
         console.error("Error deleting document:", error);
       }
