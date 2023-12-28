@@ -10,10 +10,10 @@ const ViewModal = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">View</Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">{props.data.altText}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <img src={props.image} className="modal-image img-fluid"/>
+            <img src={props.data.imgUrl} className="modal-image img-fluid"/>
         </Modal.Body>
       </Modal>
     </>
