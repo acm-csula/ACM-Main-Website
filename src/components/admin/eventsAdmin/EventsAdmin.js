@@ -144,6 +144,38 @@ const EventsAdmin = () => {
     }
   };
 
+  const onEditHandler = (idToEdit, newName) => {
+    if (activeTab === "upcomingEvents") {
+      const updatedUpcoming = upcoming.map((obj) =>{
+        if(obj.id === idToEdit){
+          return { ...obj, altText: newName }
+        }
+        return obj;
+      });
+
+      setUpcoming(updatedUpcoming);
+    } else if (activeTab === "semesterEvents") {
+      const updatedSemester = semester.map((obj) =>{
+        if(obj.id === idToEdit){
+          return { ...obj, altText: newName }
+        }
+        return obj;
+      });
+
+      setSemester(updatedSemester);
+    } else {
+      const updatedPast = past.map((obj) =>{
+        if(obj.id === idToEdit){
+          return { ...obj, altText: newName }
+        }
+        return obj;
+      });
+      console.log(updatedPast);
+      console.log(newName);
+      setPast(updatedPast);
+    }
+  };
+
   return (
     <div class="container main-event">
       <h1 align="center">Events page</h1>
@@ -168,6 +200,7 @@ const EventsAdmin = () => {
             data={upcoming}
             activeSection={activeTab}
             onDelete={onDeleteHandler}
+            onEdit={onEditHandler}
           />
         </Tab>
         <Tab eventKey="semesterEvents" title="Semester">
@@ -175,6 +208,7 @@ const EventsAdmin = () => {
             data={semester}
             activeSection={activeTab}
             onDelete={onDeleteHandler}
+            onEdit={onEditHandler}
           />
         </Tab>
         <Tab eventKey="pastEvents" title="Past">
@@ -182,6 +216,7 @@ const EventsAdmin = () => {
             data={past}
             activeSection={activeTab}
             onDelete={onDeleteHandler}
+            onEdit={onEditHandler}
           />
         </Tab>
       </Tabs>

@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Modal, Form, Dropdown } from "react-bootstrap";
+import { db } from "../../../professional-events/firebaseConfig";
+import { doc, updateDoc } from "firebase/firestore"; 
 const EditModal = (props) => {
+  const [title, setTitle] = useState("");
+
+  const editHandler = async () =>{
+      try {
+        if(title !== ""){
+          const eventRef = doc(db, props.eventSection, props.data.id);
+          await updateDoc(eventRef,{altText:title});
+        }
+        console.log("Successfully edited: ", title);
+      } catch (error) {
+        console.error("Error editing event:", error.message);
+      }
+      props.editEvent(props.data.id, title);
+      props.onHide();
+  };
   return (
     <>
       <Modal
@@ -11,14 +28,14 @@ const EditModal = (props) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Edit "selected_event"
+            Edit "{props.data.altText}"
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={editHandler}>
             <Form.Group controlId="title">
               <Form.Label>Change title</Form.Label>
-              <Form.Control type="text" placeholder="current_name" />
+              <Form.Control type="text" placeholder={props.data.altText} onChange={(e) => setTitle(e.target.value)}/>
             </Form.Group>
 
             <Dropdown className="my-2">
