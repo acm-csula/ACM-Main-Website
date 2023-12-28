@@ -58,12 +58,15 @@ const EventsAdmin = () => {
       try {
         const upcoming = collectionGroup(db, "upcomingEvents");
         const semester = collectionGroup(db, "semesterEvents");
+        const past = collectionGroup(db, "pastEvents");
         const upcomingSnapshot = await getDocs(upcoming);
         const semSnapshot = await getDocs(semester);
+        const pastSnapshot = await getDocs(past);
 
         if (isMounted) {
           const upcomingGroup = [];
           const semGroup = [];
+          const pastGroup = [];
           upcomingSnapshot.forEach((doc) => {
             const uEvent = {};
             uEvent["id"] = doc.id;
@@ -78,11 +81,20 @@ const EventsAdmin = () => {
             sEvent["imgUrl"] = doc.data().imgUrl;
             semGroup.push(sEvent);
           });
+          pastSnapshot.forEach((doc) => {
+            const pEvent = {};
+            pEvent["id"] = doc.id;
+            pEvent["altText"] = doc.data().altText;
+            pEvent["imgUrl"] = doc.data().imgUrl;
+            pastGroup.push(pEvent);
+          });
 
           setUpcoming(upcomingGroup);
           setSemester(semGroup);
+          setPast(pastGroup);
           console.log(upcomingGroup);
           console.log(semGroup);
+          console.log(pastGroup);
         }
       } catch (err) {
         console.log("Error occured when fetching events");
@@ -167,7 +179,7 @@ const EventsAdmin = () => {
         </Tab>
         <Tab eventKey="pastEvents" title="Past">
           <EventSubTab
-            data={dummyPast}
+            data={past}
             activeSection={activeTab}
             onDelete={onDeleteHandler}
           />
