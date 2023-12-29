@@ -170,8 +170,32 @@ const EventsAdmin = () => {
         }
         return obj;
       });
-      console.log(updatedPast);
-      console.log(newName);
+      setPast(updatedPast);
+    }
+  };
+
+  const onMoveHandler = (oldCopyID, newCopy, newTab) =>{
+    if (newTab === "upcomingEvents") {
+      setUpcoming((prevArray) => [...prevArray, newCopy]);
+    } else if (newTab === "semesterEvents") {
+      setSemester((prevArray) => [...prevArray, newCopy]);
+    } else {
+      setPast((prevArray) => [...prevArray, newCopy]);
+    }
+
+    if (activeTab === "upcomingEvents") {
+      // Use the filter method to create a new array without the element with the specified id
+      const updatedUpcoming = upcoming.filter((item) => item.id !== oldCopyID);
+
+      // Update the state with the new array
+      setUpcoming(updatedUpcoming);
+    } else if (activeTab === "semesterEvents") {
+      const updatedSemester = semester.filter((item) => item.id !== oldCopyID);
+
+      setSemester(updatedSemester);
+    } else {
+      const updatedPast = past.filter((item) => item.id !== oldCopyID);
+
       setPast(updatedPast);
     }
   };
@@ -201,6 +225,7 @@ const EventsAdmin = () => {
             activeSection={activeTab}
             onDelete={onDeleteHandler}
             onEdit={onEditHandler}
+            onMove={onMoveHandler}
           />
         </Tab>
         <Tab eventKey="semesterEvents" title="Semester">
@@ -209,6 +234,7 @@ const EventsAdmin = () => {
             activeSection={activeTab}
             onDelete={onDeleteHandler}
             onEdit={onEditHandler}
+            onMove={onMoveHandler}
           />
         </Tab>
         <Tab eventKey="pastEvents" title="Past">
@@ -217,6 +243,7 @@ const EventsAdmin = () => {
             activeSection={activeTab}
             onDelete={onDeleteHandler}
             onEdit={onEditHandler}
+            onMove={onMoveHandler}
           />
         </Tab>
       </Tabs>

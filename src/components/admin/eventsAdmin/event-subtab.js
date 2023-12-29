@@ -63,7 +63,7 @@ const EventSubTab = (props) => {
               onHide={() => setViewModal(false)}
             />
             <DeleteModal data={selectedEvent} eventSection={props.activeSection} show={deleteModal} onHide={() => setDelModal(false)} removeEvent={props.onDelete} />
-            <EditModal data={selectedEvent} eventSection={props.activeSection} show={editModal} onHide={() => setEditModal(false)} editEvent={props.onEdit} />
+            <EditModal data={selectedEvent} eventSection={props.activeSection} show={editModal} onHide={() => setEditModal(false)} editEvent={props.onEdit} moveEvent={props.onMove} />
           </>
         )}
       </Row>
