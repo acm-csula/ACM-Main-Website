@@ -144,6 +144,62 @@ const EventsAdmin = () => {
     }
   };
 
+  const onEditHandler = (idToEdit, newName) => {
+    if (activeTab === "upcomingEvents") {
+      const updatedUpcoming = upcoming.map((obj) =>{
+        if(obj.id === idToEdit){
+          return { ...obj, altText: newName }
+        }
+        return obj;
+      });
+
+      setUpcoming(updatedUpcoming);
+    } else if (activeTab === "semesterEvents") {
+      const updatedSemester = semester.map((obj) =>{
+        if(obj.id === idToEdit){
+          return { ...obj, altText: newName }
+        }
+        return obj;
+      });
+
+      setSemester(updatedSemester);
+    } else {
+      const updatedPast = past.map((obj) =>{
+        if(obj.id === idToEdit){
+          return { ...obj, altText: newName }
+        }
+        return obj;
+      });
+      setPast(updatedPast);
+    }
+  };
+
+  const onMoveHandler = (oldCopyID, newCopy, newTab) =>{
+    if (newTab === "upcomingEvents") {
+      setUpcoming((prevArray) => [...prevArray, newCopy]);
+    } else if (newTab === "semesterEvents") {
+      setSemester((prevArray) => [...prevArray, newCopy]);
+    } else {
+      setPast((prevArray) => [...prevArray, newCopy]);
+    }
+
+    if (activeTab === "upcomingEvents") {
+      // Use the filter method to create a new array without the element with the specified id
+      const updatedUpcoming = upcoming.filter((item) => item.id !== oldCopyID);
+
+      // Update the state with the new array
+      setUpcoming(updatedUpcoming);
+    } else if (activeTab === "semesterEvents") {
+      const updatedSemester = semester.filter((item) => item.id !== oldCopyID);
+
+      setSemester(updatedSemester);
+    } else {
+      const updatedPast = past.filter((item) => item.id !== oldCopyID);
+
+      setPast(updatedPast);
+    }
+  };
+
   return (
     <div class="container main-event">
       <h1 align="center">Events page</h1>
@@ -168,6 +224,8 @@ const EventsAdmin = () => {
             data={upcoming}
             activeSection={activeTab}
             onDelete={onDeleteHandler}
+            onEdit={onEditHandler}
+            onMove={onMoveHandler}
           />
         </Tab>
         <Tab eventKey="semesterEvents" title="Semester">
@@ -175,6 +233,8 @@ const EventsAdmin = () => {
             data={semester}
             activeSection={activeTab}
             onDelete={onDeleteHandler}
+            onEdit={onEditHandler}
+            onMove={onMoveHandler}
           />
         </Tab>
         <Tab eventKey="pastEvents" title="Past">
@@ -182,6 +242,8 @@ const EventsAdmin = () => {
             data={past}
             activeSection={activeTab}
             onDelete={onDeleteHandler}
+            onEdit={onEditHandler}
+            onMove={onMoveHandler}
           />
         </Tab>
       </Tabs>
