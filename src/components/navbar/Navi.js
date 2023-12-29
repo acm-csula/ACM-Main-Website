@@ -181,9 +181,9 @@ class Navi extends React.Component {
         </Navbar>
         <div class="hover-announcements-background"></div>
         <div class="hover-announcements">
-        Hone your technical skills at our upcoming Hackathon!: 
-        Algorithm Arena event on November 15th, 6-8pm, at the 
-        Student Union Building, Room B.
+          Come attend ACM's last general meeting on Nov 28th, 3:00-4:20pm, at
+          FA219 to see how much the club has accomplished over the Fall 2023
+          semester.
         </div>
       </>
     );
