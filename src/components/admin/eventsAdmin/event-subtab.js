@@ -6,11 +6,12 @@ import EditModal from "./modals/editModal";
 import DeleteModal from "./modals/deleteModal";
 import "./eventsadmin.css";
 const EventSubTab = (props) => {
+  //handles showing/hiding for each modal
   const [viewModal, setViewModal] = useState(false);
   const [deleteModal, setDelModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
 
-  const [selectedEvent, setSelected] = useState(null);
+  const [selectedEvent, setSelected] = useState(null); //keeps track of the selected event card
 
   return (
     <>

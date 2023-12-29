@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Dropdown } from "react-bootstrap";
 import { db } from "../../../professional-events/firebaseConfig";
-import { doc, updateDoc, collection, addDoc, deleteDoc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  collection,
+  addDoc,
+  deleteDoc,
+  getDoc,
+} from "firebase/firestore";
 const EditModal = (props) => {
   const [title, setTitle] = useState("");
 
+  //handles title change
   const editHandler = () => {
     const editEvent = async () => {
       try {
@@ -22,24 +30,26 @@ const EditModal = (props) => {
     editEvent();
   };
 
+  //moves the event to different tab
   const moveHandler = async (e) => {
-    try {
-      const newEvent = await addDoc(collection(db, e), {
-        altText: props.data.altText,
-        imgUrl: props.data.imgUrl,
-      });
-      let newEventRef = (await getDoc(newEvent)).data();
-      newEventRef = {
-        id: newEvent.id,
-        ...newEventRef,
-      };
-      console.log("Successfully moved event with new ID: ", newEventRef);
-      console.log("Going to remove event with old ID: ", props.data)
-      await deleteDoc(doc(db, props.eventSection, props.data.id));
-      
-      props.moveEvent(props.data.id, newEventRef, e);
-    } catch (error) {
-      console.error("Error moving event:", error.message);
+    if (props.eventSection !== e) {
+      try {
+        const newEvent = await addDoc(collection(db, e), {
+          altText: props.data.altText,
+          imgUrl: props.data.imgUrl,
+        });
+        let newEventRef = (await getDoc(newEvent)).data();
+        newEventRef = {
+          id: newEvent.id,
+          ...newEventRef,
+        };
+        console.log("Successfully moved event");
+        await deleteDoc(doc(db, props.eventSection, props.data.id));
+
+        props.moveEvent(props.data.id, newEventRef, e);
+      } catch (error) {
+        console.error("Error moving event:", error.message);
+      }
     }
     props.onHide();
   };

@@ -6,12 +6,12 @@ import { doc, deleteDoc } from "firebase/firestore";
 const DeleteModal = (props) => {
   //handles deletion
   const deleteHandler = () => {
-    //perform a firebase query based on the event title 'altText'
+    //perform a firebase query based on the event id
     const deleteDocument = async () => {
       try {
         await deleteDoc(doc(db, props.eventSection, props.data.id));
         console.log(
-          `Document with ID ${props.data.id} deleted successfully from ${props.eventSection} collection.`
+          `Document deleted successfully from ${props.eventSection} collection.`
         );
 
         props.onHide();
