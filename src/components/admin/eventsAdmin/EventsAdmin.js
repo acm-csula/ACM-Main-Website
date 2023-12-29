@@ -1,56 +1,25 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Card, Tab, Tabs, Row, Button } from "react-bootstrap";
-import img from "./IMG_0118.png";
 import EventSubTab from "./event-subtab";
 import AddModal from "./modals/addModal";
 import "./eventsadmin.css";
 import { db } from "../../professional-events/firebaseConfig";
 import { collectionGroup, getDocs } from "firebase/firestore";
-const dummyUpcoming = [
-  {
-    altText: "Event name",
-    imgUrl: img,
-  },
-  {
-    altText: "Event name2",
-    imgUrl: img,
-  },
-  {
-    altText: "Event name3",
-    imgUrl: img,
-  },
-];
-const dummySemester = [
-  {
-    altText: "Event name3",
-    imgUrl: img,
-  },
-  {
-    altText: "Event name4",
-    imgUrl: img,
-  },
-];
-const dummyPast = [
-  {
-    altText: "Event name5",
-    imgUrl: img,
-  },
-  {
-    altText: "Event name6",
-    imgUrl: img,
-  },
-];
 
 const EventsAdmin = () => {
   const [activeTab, setActiveTab] = useState("upcomingEvents"); //currently selected tab
-  const [addModal, setAddModal] = useState(false);
+  const [addModal, setAddModal] = useState(false); //handles state for showing/hiding add modal
+
+  //these are list states for locally storing data from database
   const [upcoming, setUpcoming] = useState([]);
   const [semester, setSemester] = useState([]);
   const [past, setPast] = useState([]);
 
-  //initialization
-  //fetch events from firestore collection: upcomingEvents, semesterEvents, pastEvents
+  /* INITIALIZATION (useEffect)
+    1. fetch events from firestore collection: upcomingEvents, semesterEvents, pastEvents
+    2. store the fetched events into states
+  */
   useEffect(() => {
     let isMounted = true;
 
@@ -92,9 +61,6 @@ const EventsAdmin = () => {
           setUpcoming(upcomingGroup);
           setSemester(semGroup);
           setPast(pastGroup);
-          console.log(upcomingGroup);
-          console.log(semGroup);
-          console.log(pastGroup);
         }
       } catch (err) {
         console.log("Error occured when fetching events");
@@ -113,6 +79,8 @@ const EventsAdmin = () => {
     setActiveTab(selectedKey);
   };
 
+
+  //updates the local state after adding new event
   const onAddHandler = (eid, title, img) => {
     const newEventObj = { id: eid, altText: title, imgUrl: img };
 
@@ -144,6 +112,7 @@ const EventsAdmin = () => {
     }
   };
 
+  //handles the title change of an event
   const onEditHandler = (idToEdit, newName) => {
     if (activeTab === "upcomingEvents") {
       const updatedUpcoming = upcoming.map((obj) =>{
@@ -174,7 +143,15 @@ const EventsAdmin = () => {
     }
   };
 
+
+  /*handles moving an event to different tab
+    1. copy the old event from previous tab location 
+    2. paste to different tab location
+    3. delete the old event
+  */
   const onMoveHandler = (oldCopyID, newCopy, newTab) =>{
+
+    //pasting to new tab location
     if (newTab === "upcomingEvents") {
       setUpcoming((prevArray) => [...prevArray, newCopy]);
     } else if (newTab === "semesterEvents") {
@@ -183,11 +160,10 @@ const EventsAdmin = () => {
       setPast((prevArray) => [...prevArray, newCopy]);
     }
 
+    //delete old event from previous tab location
     if (activeTab === "upcomingEvents") {
-      // Use the filter method to create a new array without the element with the specified id
       const updatedUpcoming = upcoming.filter((item) => item.id !== oldCopyID);
 
-      // Update the state with the new array
       setUpcoming(updatedUpcoming);
     } else if (activeTab === "semesterEvents") {
       const updatedSemester = semester.filter((item) => item.id !== oldCopyID);

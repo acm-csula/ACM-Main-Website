@@ -6,29 +6,33 @@ import { addDoc, collection } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddModal = (props) => {
+  //refers to field values from form inputs
   const titleRef = useRef(null);
   const yearRef = useRef(null);
   const fallRef = useRef(null);
   const springRef = useRef(null);
   const [image, setImage] = useState(null);
 
+  //uploading image
   const handleImg = (e) => {
     const file = e.target.files[0];
     setImage(file);
   };
 
+
+  //uploads new event to database
   const addHandler = async (e) => {
     e.preventDefault();
-    //store image in firebase storage first
-    //create image url
-    //create event object and store 'title' and 'imgUrl'
-    //add event object to firestore with corresponding section (upcoming, semester, or past)
+
+    //get input values
     const title = titleRef.current.value;
     const semester = fallRef.current.checked ? "Fall" : "Spring";
     const year = yearRef.current.value;
-    const storage = getStorage();
 
+    const storage = getStorage();
+    
     try {
+      //store image in firebase storage first
       if (image) {
         // Create a storage reference with the folderName as the path
         const storageRef = ref(
@@ -44,6 +48,7 @@ const AddModal = (props) => {
 
         console.log("Image uploaded successfully:", downloadURL);
 
+        //add new firestore document into the collection based on selected "currentTab"
         const newEvent = await addDoc(collection(db, props.currentTab), {
           altText: title,
           imgUrl: downloadURL,
