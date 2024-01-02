@@ -1,0 +1,11 @@
+.main-boardadmin {
+    height: 100vh;
+    max-width: 100vw;
+  }
+
+  .current-boardtab{
+    color: black;
+  }
+  .current-boardtab .card{
+    width:100%;
+  }

@@ -16,9 +16,11 @@ const Admin = () => {
             Events
           </Button>
         </Link>
-        <Button variant="primary" className="m-2">
-          Board
-        </Button>
+        <Link to="/admin/board">
+          <Button variant="primary" className="m-2">
+            Board
+          </Button>
+        </Link>
         <Button variant="primary" className="m-2">
           Mentorship
         </Button>
