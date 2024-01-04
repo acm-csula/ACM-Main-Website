@@ -9,3 +9,7 @@
   .current-boardtab .card{
     width:100%;
   }
+
+.board-cards{
+  height:auto;
+}

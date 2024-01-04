@@ -1,6 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import logo from "./img/acm_logo.png";
+import { Button } from "react-bootstrap";
+import * as Icon from "react-bootstrap-icons";
 
 const BoardLeaders = (props) => {
   if (props.leader == null) {
@@ -8,6 +10,7 @@ const BoardLeaders = (props) => {
   } else {
     return (
       <div class="leadercontainer card">
+          {props.enableEdit && <Button style={{width:"3em"}}><Icon.PencilFill/></Button>}
         <div align="center">
           {props.leader.img && (
             <img
@@ -30,6 +33,7 @@ const BoardLeaders = (props) => {
               {props.leader.position}
             </h6>
           </div>
+          
         </div>
       </div>
     );
