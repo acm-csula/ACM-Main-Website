@@ -5,6 +5,7 @@ const CurrentTab = (props) => {
   return (
     <div class="current-boardtab mx-auto">
       <Row>
+      <h1 class="text-light mx-auto">{props.data.schoolyear}</h1>
         <Card className="board-cards">
           <Card.Header>Board</Card.Header>
           <Card.Body className="row container mx-auto">

@@ -31,7 +31,7 @@ const BoardAdmin = () => {
           setCurrent(boardList.at(boardList.length - 1));
         }
       } catch (err) {
-        console.log("Error occured when fetching events", err);
+        console.log("Error occured when fetching board", err);
       }
     };
     fetchData();
