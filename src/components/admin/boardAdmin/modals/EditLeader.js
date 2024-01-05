@@ -1,6 +1,10 @@
 import React from "react";
 import { Modal, Form, Button, InputGroup } from "react-bootstrap";
 const EditLeader = (props) => {
+
+  const updateLeaderHandler = () =>{
+
+  };
   return (
     <>
       <Modal
@@ -10,7 +14,9 @@ const EditLeader = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">Edit Leader Info</Modal.Title>
+          <Button variant="danger">
+                Clear Info
+              </Button>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -29,7 +35,7 @@ const EditLeader = (props) => {
               <Form.Control type="file" required />
             </Form.Group>
             <Modal.Footer>
-              <Button variant="success" className="mb-2">
+              <Button variant="success" onClick={updateLeaderHandler} className="mb-2">
                 Confirm
               </Button>
               <Button variant="warning" onClick={props.onHide} className="mb-2">
