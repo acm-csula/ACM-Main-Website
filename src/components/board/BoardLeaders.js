@@ -16,15 +16,23 @@ const BoardLeaders = (props) => {
     return (
       <div class="leadercontainer card">
         {props.enableEdit && (
-          <Button
-            style={{ width: "3em" }}
-            onClick={() => {
-              setSelected(props.leader);
-              setEditModal(true);
-            }}
-          >
-            <Icon.PencilFill />
-          </Button>
+          <div>
+            <Button
+              style={{ width: "3em" }}
+              onClick={() => {
+                setSelected(props.leader);
+                setEditModal(true);
+              }}
+            >
+              <Icon.PencilFill />
+            </Button>
+            <Button
+              style={{ width: "3em"}}
+              variant="danger"
+            >
+              <Icon.Trash />
+            </Button>
+          </div>
         )}
         <div align="center">
           {props.leader.img && (
@@ -47,13 +55,13 @@ const BoardLeaders = (props) => {
           </div>
         </div>
 
-
         {/*This component is only rendered on editing board leaders*/}
         {selectedLeader && (
           <EditLeader
             leader={selectedLeader}
             show={editModal}
             onHide={() => setEditModal(false)}
+            onUpdate={props.onUpdate}
           />
         )}
       </div>

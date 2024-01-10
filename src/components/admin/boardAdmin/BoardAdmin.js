@@ -43,6 +43,62 @@ const BoardAdmin = () => {
   }, []);
   console.log(currentBoard);
 
+
+  const updateLeaderHandler = (newData)=>{
+    if (newData.section == "board"){
+      if (newData.oldLeader.position == "President"){
+        console.log(currentBoard.leaders.board.president);
+      }
+      else if (newData.oldLeader.position == "Vice President"){
+        console.log(currentBoard.leaders.board.vicepresident);
+      }
+      else if (newData.oldLeader.position == "Secretary"){
+        console.log(currentBoard.leaders.board.secretary);
+      }
+      else if (newData.oldLeader.position == "Treasurer"){
+        console.log(currentBoard.leaders.board.treasurer);
+      }
+      else if (newData.oldLeader.position == "VP of Internal Affairs"){
+        console.log(currentBoard.leaders.board.vp_affairs1);
+      }
+      else if (newData.oldLeader.position == "VP of External Affairs"){
+        console.log(currentBoard.leaders.board.vp_affairs2);
+      }
+      else if (newData.oldLeader.position == "Web Master"){
+        console.log(currentBoard.leaders.board.webmaster);
+      }
+      else if (newData.oldLeader.position == "Project Manager"){
+        console.log(currentBoard.leaders.board.proj_manager1);
+      }
+    }
+    else if (newData.section === "officers"){
+      const lodash = require('lodash');
+      const selectedGroup = currentBoard.leaders.officers.filter(g => g.role_group === newData.role_group);
+      selectedGroup.at(0).members.forEach(element => {
+        if(lodash.isEqual(element, newData.oldLeader)){
+          console.log(element);
+        }
+      });
+    }
+    else if (newData.section === "committee"){
+      const lodash = require('lodash');
+      const selectedGroup = currentBoard.leaders.committee.filter(g => g.role_group === newData.role_group);
+      selectedGroup.at(0).members.forEach(element => {
+        if(lodash.isEqual(element, newData.oldLeader)){
+          console.log(element);
+        }
+      });
+    }
+    else{
+      console.log(currentBoard.leaders.advisors);
+      const lodash = require('lodash');
+      currentBoard.leaders.advisors.forEach(element => {
+        if(lodash.isEqual(element, newData.oldLeader)){
+          console.log(element);
+        }
+      });
+    }
+  };
   return (
     <div class="container main-boardadmin">
       {currentBoard && (
@@ -52,7 +108,7 @@ const BoardAdmin = () => {
           <Button className="mr-3 mb-3">Add new empty board</Button>
           <Tabs id="sub-tabs" className="mb-3 event-tabs">
             <Tab eventKey="current" title="Current">
-              <CurrentTab data={currentBoard} />
+              <CurrentTab data={currentBoard} onUpdate={updateLeaderHandler}/>
             </Tab>
             <Tab eventKey="archive" title="Archive">
               <ArchiveTab />
