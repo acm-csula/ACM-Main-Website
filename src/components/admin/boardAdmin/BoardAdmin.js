@@ -13,6 +13,7 @@ import {
   updateDoc,
   doc,
   getDoc,
+  arrayUnion,
 } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db } from "../../professional-events/firebaseConfig";
@@ -52,90 +53,138 @@ const BoardAdmin = () => {
       isMounted = false;
     };
   }, []);
-  console.log("Current Leaders State: ",currentBoard);
+  console.log("Current Leaders State: ", currentBoard);
 
   const updateLeaderHandler = (newData) => {
     if (newData.section == "board") {
       if (newData.oldLeader.position == "President") {
-        setCurrent((prevLeaders) => {
-          const newLeaders = { ...prevLeaders };
-          let selectedLeader = newLeaders.leaders.board.president;
-          selectedLeader.first = newData.leader.first;
-          selectedLeader.last = newData.leader.last;
-          selectedLeader.position = newData.leader.position;
-          return newLeaders;
-        });
-        updateBoardFirebase(newData,"leaders.board.president");
+        updateBoardFirebase(newData, "leaders.board.president")
+          .then((result) => {
+            setCurrent((prevLeaders) => {
+              const newLeaders = { ...prevLeaders };
+              let selectedLeader = newLeaders.leaders.board.president;
+              selectedLeader.first = newData.leader.first;
+              selectedLeader.last = newData.leader.last;
+              selectedLeader.position = newData.leader.position;
+              selectedLeader.img = result;
+              return newLeaders;
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } else if (newData.oldLeader.position == "Vice President") {
-        setCurrent((prevLeaders) => {
-          const newLeaders = { ...prevLeaders };
-          let selectedLeader = newLeaders.leaders.board.vicepresident;
-          selectedLeader.first = newData.leader.first;
-          selectedLeader.last = newData.leader.last;
-          selectedLeader.position = newData.leader.position;
-          return newLeaders;
-        });
-        updateBoardFirebase(newData,"leaders.board.vicepresident");
+        updateBoardFirebase(newData, "leaders.board.vicepresident")
+          .then((result) => {
+            setCurrent((prevLeaders) => {
+              const newLeaders = { ...prevLeaders };
+              let selectedLeader = newLeaders.leaders.board.vicepresident;
+              selectedLeader.first = newData.leader.first;
+              selectedLeader.last = newData.leader.last;
+              selectedLeader.position = newData.leader.position;
+              selectedLeader.img = result;
+              return newLeaders;
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } else if (newData.oldLeader.position == "Secretary") {
-        setCurrent((prevLeaders) => {
-          const newLeaders = { ...prevLeaders };
-          let selectedLeader = newLeaders.leaders.board.secretary;
-          selectedLeader.first = newData.leader.first;
-          selectedLeader.last = newData.leader.last;
-          selectedLeader.position = newData.leader.position;
-          return newLeaders;
-        });
-        updateBoardFirebase(newData,"leaders.board.secretary");
+        updateBoardFirebase(newData, "leaders.board.secretary")
+          .then((result) => {
+            setCurrent((prevLeaders) => {
+              const newLeaders = { ...prevLeaders };
+              let selectedLeader = newLeaders.leaders.board.secretary;
+              selectedLeader.first = newData.leader.first;
+              selectedLeader.last = newData.leader.last;
+              selectedLeader.position = newData.leader.position;
+              selectedLeader.img = result;
+              return newLeaders;
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } else if (newData.oldLeader.position == "Treasurer") {
-        setCurrent((prevLeaders) => {
-          const newLeaders = { ...prevLeaders };
-          let selectedLeader = newLeaders.leaders.board.treasurer;
-          selectedLeader.first = newData.leader.first;
-          selectedLeader.last = newData.leader.last;
-          selectedLeader.position = newData.leader.position;
-          return newLeaders;
-        });
-        updateBoardFirebase(newData,"leaders.board.treasurer");
+        updateBoardFirebase(newData, "leaders.board.treasurer")
+          .then((result) => {
+            setCurrent((prevLeaders) => {
+              const newLeaders = { ...prevLeaders };
+              let selectedLeader = newLeaders.leaders.board.treasurer;
+              selectedLeader.first = newData.leader.first;
+              selectedLeader.last = newData.leader.last;
+              selectedLeader.position = newData.leader.position;
+              selectedLeader.img = result;
+              return newLeaders;
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } else if (newData.oldLeader.position == "VP of Internal Affairs") {
-        setCurrent((prevLeaders) => {
-          const newLeaders = { ...prevLeaders };
-          let selectedLeader = newLeaders.leaders.board.vp_affairs1;
-          selectedLeader.first = newData.leader.first;
-          selectedLeader.last = newData.leader.last;
-          selectedLeader.position = newData.leader.position;
-          return newLeaders;
-        });
-        updateBoardFirebase(newData,"leaders.board.vp_affairs1");
+        updateBoardFirebase(newData, "leaders.board.vp_affairs1")
+          .then((result) => {
+            setCurrent((prevLeaders) => {
+              const newLeaders = { ...prevLeaders };
+              let selectedLeader = newLeaders.leaders.board.vp_affairs1;
+              selectedLeader.first = newData.leader.first;
+              selectedLeader.last = newData.leader.last;
+              selectedLeader.position = newData.leader.position;
+              selectedLeader.img = result;
+              return newLeaders;
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } else if (newData.oldLeader.position == "VP of External Affairs") {
-        setCurrent((prevLeaders) => {
-          const newLeaders = { ...prevLeaders };
-          let selectedLeader = newLeaders.leaders.board.vp_affairs2;
-          selectedLeader.first = newData.leader.first;
-          selectedLeader.last = newData.leader.last;
-          selectedLeader.position = newData.leader.position;
-          return newLeaders;
-        });
-        updateBoardFirebase(newData,"leaders.board.vp_affairs2");
+        updateBoardFirebase(newData, "leaders.board.vp_affairs2")
+          .then((result) => {
+            setCurrent((prevLeaders) => {
+              const newLeaders = { ...prevLeaders };
+              let selectedLeader = newLeaders.leaders.board.vp_affairs2;
+              selectedLeader.first = newData.leader.first;
+              selectedLeader.last = newData.leader.last;
+              selectedLeader.position = newData.leader.position;
+              selectedLeader.img = result;
+              return newLeaders;
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } else if (newData.oldLeader.position == "Web Master") {
-        setCurrent((prevLeaders) => {
-          const newLeaders = { ...prevLeaders };
-          let selectedLeader = newLeaders.leaders.board.webmaster;
-          selectedLeader.first = newData.leader.first;
-          selectedLeader.last = newData.leader.last;
-          selectedLeader.position = newData.leader.position;
-          return newLeaders;
-        });
-        updateBoardFirebase(newData,"leaders.board.webmaster");
+        updateBoardFirebase(newData, "leaders.board.webmaster")
+          .then((result) => {
+            setCurrent((prevLeaders) => {
+              const newLeaders = { ...prevLeaders };
+              let selectedLeader = newLeaders.leaders.board.webmaster;
+              selectedLeader.first = newData.leader.first;
+              selectedLeader.last = newData.leader.last;
+              selectedLeader.position = newData.leader.position;
+              selectedLeader.img = result;
+              return newLeaders;
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } else if (newData.oldLeader.position == "Project Manager") {
-        setCurrent((prevLeaders) => {
-          const newLeaders = { ...prevLeaders };
-          let selectedLeader = newLeaders.leaders.board.proj_manager1;
-          selectedLeader.first = newData.leader.first;
-          selectedLeader.last = newData.leader.last;
-          selectedLeader.position = newData.leader.position;
-          return newLeaders;
-        });
-        updateBoardFirebase(newData,"leaders.board.proj_manager1");
+        updateBoardFirebase(newData, "leaders.board.proj_manager1")
+          .then((result) => {
+            setCurrent((prevLeaders) => {
+              const newLeaders = { ...prevLeaders };
+              let selectedLeader = newLeaders.leaders.board.proj_manager1;
+              selectedLeader.first = newData.leader.first;
+              selectedLeader.last = newData.leader.last;
+              selectedLeader.position = newData.leader.position;
+              selectedLeader.img = result;
+              return newLeaders;
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
     } else if (newData.section === "officers") {
       updateOfficersOrCommittee(
@@ -160,34 +209,43 @@ const BoardAdmin = () => {
   };
 
   const updateOfficersOrCommittee = (newData, section, sectionName) => {
-    const groupIndex = section.findIndex(
-      (g) => g.role_group === newData.role_group
-    );
-    const memberIndex = section[groupIndex].members.findIndex((member) =>
+    const memberIndex = section[newData.role_group].findIndex((member) =>
       lodash.isEqual(member, newData.oldLeader)
     );
-    setCurrent((prevLeaders) => {
-      // Create a shallow copy of the leaders object
-      const newLeaders = { ...prevLeaders };
+    OfficerCommitteeAdvisorsFirebase(
+      newData,
+      sectionName,
+      newData.role_group,
+      memberIndex
+    )
+      .then((result) => {
+        setCurrent((prevLeaders) => {
+          // Create a shallow copy of the leaders object
+          const newLeaders = { ...prevLeaders };
 
-      // Navigate to the deep nested structure
-      let selectedLeader;
-      if (sectionName == "committee") {
-        selectedLeader =
-          newLeaders.leaders.committee[groupIndex].members[memberIndex];
-      } else {
-        selectedLeader =
-          newLeaders.leaders.officers[groupIndex].members[memberIndex];
-      }
+          // Navigate to the deep nested structure
+          let selectedLeader;
+          if (sectionName == "committee") {
+            selectedLeader =
+              newLeaders.leaders.committee[newData.role_group][memberIndex];
+            console.log(selectedLeader);
+          } else {
+            selectedLeader = newLeaders.leaders.officers[memberIndex];
+          }
 
-      // Update the desired property
-      selectedLeader.first = newData.leader.first;
-      selectedLeader.last = newData.leader.last;
-      selectedLeader.position = newData.leader.position;
+          // Update the desired property
+          selectedLeader.first = newData.leader.first;
+          selectedLeader.last = newData.leader.last;
+          selectedLeader.position = newData.leader.position;
+          selectedLeader.img = result;
 
-      // Return the updated state
-      return newLeaders;
-    });
+          // Return the updated state
+          return newLeaders;
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const updateBoardFirebase = async (newInfo, boardPath) => {
@@ -200,7 +258,11 @@ const BoardAdmin = () => {
         // Create a storage reference with the folderName as the path
         const storageRef = ref(
           storage,
-          `${"gs://acm-calstatela.appspot.com/Leaders" + " " + currentBoard.schoolyear}/${newInfo.leader.img.name}`
+          `${
+            "gs://acm-calstatela.appspot.com/Leaders" +
+            " " +
+            currentBoard.schoolyear
+          }/${newInfo.leader.img.name}`
         );
 
         // Upload the file to the specified folder
@@ -221,6 +283,63 @@ const BoardAdmin = () => {
         } else {
           console.error("Document does not exist!");
         }
+        return downloadURL;
+      }
+    } catch (error) {
+      console.error("Error updating President subobject: ", error);
+    }
+  };
+
+  const OfficerCommitteeAdvisorsFirebase = async (
+    newInfo,
+    path,
+    role_group,
+    memberIndex
+  ) => {
+    const storage = getStorage();
+    const objPath = "leaders." + path + "." + role_group;
+    console.log(objPath);
+    try {
+      const docRef = doc(db, "acm_board", currentBoard.id);
+      const docSnapshot = await getDoc(docRef);
+      let leader = newInfo.leader;
+      if (typeof newInfo.leader.img === "object") {
+        // Create a storage reference with the folderName as the path
+        const storageRef = ref(
+          storage,
+          `${
+            "gs://acm-calstatela.appspot.com/Leaders" +
+            " " +
+            currentBoard.schoolyear
+          }/${newInfo.leader.img.name}`
+        );
+
+        // Upload the file to the specified folder
+        await uploadBytes(storageRef, newInfo.leader.img);
+
+        // Get the download URL of the uploaded file
+        const downloadURL = await getDownloadURL(storageRef);
+
+        console.log("Image uploaded successfully:", downloadURL);
+
+        leader.img = downloadURL;
+        console.log(leader);
+
+        if (docSnapshot.exists()) {
+          const currentMembers = docSnapshot.data().leaders[path][role_group];
+          currentMembers[memberIndex].first = newInfo.leader.first;
+          currentMembers[memberIndex].last = newInfo.leader.last;
+          currentMembers[memberIndex].position = newInfo.leader.position;
+          currentMembers[memberIndex].img = downloadURL;
+
+          const updateObject = { [objPath]: currentMembers };
+          await updateDoc(docRef, updateObject);
+
+          console.log("Board leader successfully updated!");
+        } else {
+          console.error("Document does not exist!");
+        }
+        return downloadURL;
       }
     } catch (error) {
       console.error("Error updating President subobject: ", error);

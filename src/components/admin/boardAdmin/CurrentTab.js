@@ -138,18 +138,18 @@ const CurrentTab = (props) => {
         <Card className="board-cards">
           <Card.Header>Committee</Card.Header>
           <ListGroup variant="flush">
-            {props.data.leaders.committee.map((group) => (
-              <ListGroup.Item variant="flush" key={group.role_group}>
-                {group.role_group}
+            {Object.keys(props.data.leaders.committee).map((groupKey) => (
+              <ListGroup.Item variant="flush" key={groupKey}>
+                {groupKey}
                 <Card.Body className="row container mx-auto">
-                  {group.members.map((member) => (
+                  {props.data.leaders.committee[groupKey].map((member) => (
                     <BoardLeaders
                       className="col-md-6"
                       enableEdit={true}
                       leader={member}
                       onUpdate={(leaderData) => {
                         const section = { section: "committee" };
-                        const r_group = { role_group: group.role_group };
+                        const r_group = { role_group: groupKey };
                         const oldLeader = { oldLeader: member };
                         props.onUpdate({
                           ...leaderData,
