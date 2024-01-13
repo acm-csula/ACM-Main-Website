@@ -55,7 +55,7 @@ const BoardLeaders = (props) => {
           </div>
         </div>
 
-        {/*This component is only rendered on editing board leaders*/}
+        {/*This component is only rendered on editing leaders*/}
         {selectedLeader && (
           <EditLeader
             leader={selectedLeader}

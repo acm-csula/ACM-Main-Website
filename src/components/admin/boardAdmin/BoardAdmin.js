@@ -332,8 +332,12 @@ const BoardAdmin = () => {
           currentMembers[memberIndex].position = newInfo.leader.position;
           currentMembers[memberIndex].img = downloadURL;
 
-          const updateObject = { [objPath]: currentMembers };
-          await updateDoc(docRef, updateObject);
+          if(path === "committee"){
+            const leaders = "leaders";
+            const committee = "committee";
+            const updateObject = { [`${leaders}.${committee}.${role_group}`]: currentMembers };
+            await updateDoc(docRef, updateObject);
+          }
 
           console.log("Board leader successfully updated!");
         } else {
