@@ -8,11 +8,18 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import { addDoc, collection, getDoc, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDoc,
+  arrayUnion,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db } from "../../../professional-events/firebaseConfig";
 
-const AddCommittee = (props) => {
+const AddMembers = (props) => {
   const [selectedGroup, setGroup] = useState("Select role group");
 
   const firstRef = useRef("");
@@ -29,56 +36,73 @@ const AddCommittee = (props) => {
   //uploads new member to database
   const addHandler = async (e) => {
     e.preventDefault();
+    if (selectedGroup == "Select role group") {
+      alert("Select a group first");
+    } else {
+      //get input values
+      const firstN = firstRef.current.value;
+      const lastN = lastRef.current.value;
+      const pos = positionRef.current.value;
 
-    //get input values
-    const firstN = firstRef.current.value;
-    const lastN = lastRef.current.value;
-    const pos = positionRef.current.value;
+      const storage = getStorage();
 
-    const storage = getStorage();
+      try {
+        const docRef = doc(db, "acm_board", props.data.id);
+        let downloadURL = "";
+        //store image in firebase storage first
+        if (img) {
+          // Create a storage reference with the folderName as the path
+          const storageRef = ref(
+            storage,
+            `${
+              "gs://acm-calstatela.appspot.com/Leaders" +
+              " " +
+              props.data.schoolyear
+            }/${img.name}`
+          );
 
-    try {
-      const docRef = doc(db, "acm_board", props.data.id);
-      const docSnapshot = await getDoc(docRef);
+          // Upload the file to the specified folder
+          await uploadBytes(storageRef, img);
 
-      //store image in firebase storage first
-      if (img) {
-        // Create a storage reference with the folderName as the path
-        const storageRef = ref(
-          storage,
-          `${
-            "gs://acm-calstatela.appspot.com/Leaders" +
-            " " +
-            props.data.schoolyear
-          }/${img.name}`
-        );
+          // Get the download URL of the uploaded file
+          downloadURL = await getDownloadURL(storageRef);
 
-        // Upload the file to the specified folder
-        await uploadBytes(storageRef, img);
+          console.log("Image uploaded successfully:", downloadURL);
 
-        // Get the download URL of the uploaded file
-        const downloadURL = await getDownloadURL(storageRef);
-
-        console.log("Image uploaded successfully:", downloadURL);
-
-        if(props.section == "committee"){
-            const newLeader = {
-                first: firstN,
-                last: lastN,
-                position: pos,
-                img: downloadURL,
-            }
-            const leaders = "leaders";
-            const committee = "committee";
-            const updateObj = { [`${leaders}.${committee}.${selectedGroup}`]: arrayUnion(newLeader) };
-            await updateDoc(docRef, updateObj);
         }
-
+        const newLeader = {
+          first: firstN,
+          last: lastN,
+          position: pos,
+          img: downloadURL ? downloadURL : "",
+        };
+        const leaders = "leaders";
+        let updateObj = {};
+        if (props.section == "committee") {
+          const committee = "committee";
+          updateObj = {
+            [`${leaders}.${committee}.${selectedGroup}`]:
+              arrayUnion(newLeader),
+          };
+        } else if (props.section == "officers") {
+          const officers = "officers";
+          updateObj = {
+            [`${leaders}.${officers}.${selectedGroup}`]:
+              arrayUnion(newLeader),
+          };
+        } else {
+          const advisors = "advisors";
+          updateObj = {
+            [`${leaders}.${advisors}`]: arrayUnion(newLeader),
+          };
+        }
+        await updateDoc(docRef, updateObj);
+        console.log("New leader: ", newLeader);
+      } catch (error) {
+        console.error("Error adding event:", error.message);
       }
-    } catch (error) {
-      console.error("Error adding event:", error.message);
+      props.onHide();
     }
-    props.onHide();
   };
 
   return (
@@ -91,7 +115,7 @@ const AddCommittee = (props) => {
       >
         <Modal.Header closeButton>
           <DropdownButton id="dropdown-basic-button" title={selectedGroup}>
-            {props.roleGroups.map((group) => (
+            {Object.keys(props.data.leaders[props.section]).map((group) => (
               <Dropdown.Item onClick={() => setGroup(group)}>
                 {group}
               </Dropdown.Item>
@@ -121,8 +145,8 @@ const AddCommittee = (props) => {
               <Form.Control type="text" ref={positionRef} required />
             </Form.Group>
             <Form.Group controlId="image">
-              <Form.Label>Update photo</Form.Label>
-              <Form.Control type="file" onChange={handleImg} required />
+              <Form.Label>Upload photo</Form.Label>
+              <Form.Control type="file" onChange={handleImg} />
             </Form.Group>
             <Modal.Footer>
               <Button variant="success" className="mb-2" type="submit">
@@ -139,4 +163,4 @@ const AddCommittee = (props) => {
   );
 };
 
-export default AddCommittee;
+export default AddMembers;

@@ -230,7 +230,8 @@ const BoardAdmin = () => {
               newLeaders.leaders.committee[newData.role_group][memberIndex];
             console.log(selectedLeader);
           } else {
-            selectedLeader = newLeaders.leaders.officers[memberIndex];
+            selectedLeader =
+              newLeaders.leaders.officers[newData.role_group][memberIndex];
           }
 
           // Update the desired property
@@ -336,6 +337,12 @@ const BoardAdmin = () => {
             const leaders = "leaders";
             const committee = "committee";
             const updateObject = { [`${leaders}.${committee}.${role_group}`]: currentMembers };
+            await updateDoc(docRef, updateObject);
+          }
+          else{
+            const leaders = "leaders";
+            const officers = "officers";
+            const updateObject = { [`${leaders}.${officers}.${role_group}`]: currentMembers };
             await updateDoc(docRef, updateObject);
           }
 
