@@ -1,19 +1,16 @@
 import React from "react";
-import { Button, Col, Form, Image, Modal, Row } from "react-bootstrap";
-// import dummyImg from "../dummyAdvanced.jpg";
-
+import { Button, Form, Image, Modal, Row } from "react-bootstrap";
 
 const ProjectEditModal = (props) => {
-
-  
+  console.log(props);
   return (
     <>
-      
       <Modal
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
-        centered>
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Edit "select_project"
@@ -33,6 +30,7 @@ const ProjectEditModal = (props) => {
                 <Form.Label>Change Skills</Form.Label>
                 <Form.Control
                   as="textarea"
+                  placeholder={props.data.skills}
                   style={{ marginBottom: "40px", paddingBottom: "20px" }}
                 />
 
@@ -50,7 +48,8 @@ const ProjectEditModal = (props) => {
             </Button>
             <Button
               onClick={props.onHide}
-              style={{ float: "right", marginRight: "20px" }}>
+              style={{ float: "right", marginRight: "20px" }}
+            >
               Close
             </Button>
           </Form>
