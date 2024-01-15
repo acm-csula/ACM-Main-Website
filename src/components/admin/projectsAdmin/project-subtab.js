@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Button, Card, ListGroup, Row } from "react-bootstrap";
 import ProjectEditModal from "./modals/projectEditModel";
-import { ButtonOr } from "semantic-ui-react";
 
 const ProjectSubTab = (props) => {
   const [editModel, setEditModal] = useState(false);
 
   const [selectedProject, setSelected] = useState(null);
+
+
 
   return (
     <>
@@ -14,6 +15,7 @@ const ProjectSubTab = (props) => {
         {props.data &&
           props.data.map((e) => (
             <>
+            
               <Card
                 className="mx-auto project-card bg-secondary"
                 style={{
@@ -36,7 +38,8 @@ const ProjectSubTab = (props) => {
                     style={{ color: "black", textAlign: "center" }}
                   >
                     <ListGroup.Item>{e.skills}</ListGroup.Item>
-                    <ListGroup.Item>{e.leaders.name}</ListGroup.Item>
+                    <ListGroup.Item></ListGroup.Item>
+                    
                   </ListGroup>
                   <Button
                     variant="primary"

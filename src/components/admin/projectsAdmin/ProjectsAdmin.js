@@ -65,47 +65,63 @@ const ProjectsAdmin = () => {
           //beginner snap
           proSnap.forEach((doc) => {
             const uProject = {};
+
+            var skillsArr = doc.data().level.beginners.skills
+            skillsArr = skillsArr.join(", ")
+            
             uProject["level"] = "Beginners";
             uProject["imgUrl"] = doc.data().level.beginners.flyer;
             uProject["title"] = doc.data().level.beginners.title;
             uProject["id"] = doc.id;
             uProject["leaders"] = doc.data().level.beginners.leaders;
-            uProject["skills"] = doc.data().level.beginners.skills;
+            uProject["skills"] = skillsArr
             curGroup.push(uProject);
           });
 
           //advanced snap
           proSnap.forEach((doc) => {
             const uProject = {};
+
+            var skillsArr = doc.data().level.advanced.skills;
+            skillsArr = skillsArr.join(", ")
+
             uProject["level"] = "Advanced";
             uProject["imgUrl"] = doc.data().level.advanced.flyer;
             uProject["title"] = doc.data().level.advanced.title;
             uProject["id"] = doc.id;
             uProject["leaders"] = doc.data().level.advanced.leaders;
-            uProject["skills"] = doc.data().level.advanced.skills;
+            uProject["skills"] = skillsArr
             curGroup.push(uProject);
           });
 
           //archived benginners snap
           archSnap.forEach((doc) => {
+
+            var skillsArr = doc.data().level.beginners.skills;
+            skillsArr = skillsArr.join(", ");
+
             const uProject = {};
             uProject["level"] = "Beginners";
             uProject["imgUrl"] = doc.data().level.beginners.flyer;
             uProject["title"] = doc.data().level.beginners.title;
             uProject["id"] = doc.id;
             uProject["leaders"] = doc.data().level.beginners.leaders;
-            uProject["skills"] = doc.data().level.beginners.skills;
+            uProject["skills"] = skillsArr;
             archGroup.push(uProject);
           });
           //archived advanced snap
           archSnap.forEach((doc) => {
             const uProject = {};
+
+            var skillsArr = doc.data().level.advanced.skills;
+            skillsArr = skillsArr.join(", ");
+
             uProject["level"] = "Advanced";
             uProject["imgUrl"] = doc.data().level.advanced.flyer;
             uProject["title"] = doc.data().level.advanced.title;
             uProject["id"] = doc.id;
             uProject["leaders"] = doc.data().level.advanced.leaders;
-            uProject["skills"] = doc.data().level.advanced.skills;
+            uProject["skills"] = skillsArr;
             archGroup.push(uProject);
           });
 

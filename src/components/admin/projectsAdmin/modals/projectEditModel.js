@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Form, Image, Modal, Row } from "react-bootstrap";
 
 const ProjectEditModal = (props) => {
-  console.log(props);
   return (
     <>
       <Modal
