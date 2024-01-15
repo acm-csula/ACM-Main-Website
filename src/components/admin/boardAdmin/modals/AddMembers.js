@@ -36,7 +36,7 @@ const AddMembers = (props) => {
   //uploads new member to database
   const addHandler = async (e) => {
     e.preventDefault();
-    if (selectedGroup == "Select role group") {
+    if ((selectedGroup == "Select role group")&&(props.section !== "advisors")) {
       alert("Select a group first");
     } else {
       //get input values
@@ -68,7 +68,6 @@ const AddMembers = (props) => {
           downloadURL = await getDownloadURL(storageRef);
 
           console.log("Image uploaded successfully:", downloadURL);
-
         }
         const newLeader = {
           first: firstN,
@@ -81,14 +80,12 @@ const AddMembers = (props) => {
         if (props.section == "committee") {
           const committee = "committee";
           updateObj = {
-            [`${leaders}.${committee}.${selectedGroup}`]:
-              arrayUnion(newLeader),
+            [`${leaders}.${committee}.${selectedGroup}`]: arrayUnion(newLeader),
           };
         } else if (props.section == "officers") {
           const officers = "officers";
           updateObj = {
-            [`${leaders}.${officers}.${selectedGroup}`]:
-              arrayUnion(newLeader),
+            [`${leaders}.${officers}.${selectedGroup}`]: arrayUnion(newLeader),
           };
         } else {
           const advisors = "advisors";
@@ -114,13 +111,15 @@ const AddMembers = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <DropdownButton id="dropdown-basic-button" title={selectedGroup}>
-            {Object.keys(props.data.leaders[props.section]).map((group) => (
-              <Dropdown.Item onClick={() => setGroup(group)}>
-                {group}
-              </Dropdown.Item>
-            ))}
-          </DropdownButton>
+          {props.section !== "advisors" && (
+            <DropdownButton id="dropdown-basic-button" title={selectedGroup}>
+              {Object.keys(props.data.leaders[props.section]).map((group) => (
+                <Dropdown.Item onClick={() => setGroup(group)}>
+                  {group}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
+          )}
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={addHandler}>

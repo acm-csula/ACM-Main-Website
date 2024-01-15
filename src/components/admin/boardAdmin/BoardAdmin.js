@@ -187,31 +187,37 @@ const BoardAdmin = () => {
           });
       }
     } else if (newData.section === "officers") {
-      updateOfficersOrCommittee(
+      updateOfficersCommitteeAdvisors(
         newData,
         currentBoard.leaders.officers,
         "officers"
       );
     } else if (newData.section === "committee") {
-      updateOfficersOrCommittee(
+      updateOfficersCommitteeAdvisors(
         newData,
         currentBoard.leaders.committee,
         "committee"
       );
     } else {
-      console.log(currentBoard.leaders.advisors);
-      currentBoard.leaders.advisors.forEach((element) => {
-        if (lodash.isEqual(element, newData.oldLeader)) {
-          console.log(element);
-        }
-      });
+      updateOfficersCommitteeAdvisors(
+        newData,
+        currentBoard.leaders.advisors,
+        "advisors"
+      );
     }
   };
 
-  const updateOfficersOrCommittee = (newData, section, sectionName) => {
-    const memberIndex = section[newData.role_group].findIndex((member) =>
-      lodash.isEqual(member, newData.oldLeader)
-    );
+  const updateOfficersCommitteeAdvisors = (newData, section, sectionName) => {
+    let memberIndex;
+    if (sectionName == "committee" || sectionName == "officers") {
+      memberIndex = section[newData.role_group].findIndex((member) =>
+        lodash.isEqual(member, newData.oldLeader)
+      );
+    } else {
+      memberIndex = section.findIndex((member) =>
+        lodash.isEqual(member, newData.oldLeader)
+      );
+    }
     OfficerCommitteeAdvisorsFirebase(
       newData,
       sectionName,
@@ -229,9 +235,11 @@ const BoardAdmin = () => {
             selectedLeader =
               newLeaders.leaders.committee[newData.role_group][memberIndex];
             console.log(selectedLeader);
-          } else {
+          } else if (sectionName == "officers") {
             selectedLeader =
               newLeaders.leaders.officers[newData.role_group][memberIndex];
+          } else {
+            selectedLeader = newLeaders.leaders.advisors[memberIndex];
           }
 
           // Update the desired property
@@ -298,12 +306,11 @@ const BoardAdmin = () => {
     memberIndex
   ) => {
     const storage = getStorage();
-    const objPath = "leaders." + path + "." + role_group;
-    console.log(objPath);
     try {
       const docRef = doc(db, "acm_board", currentBoard.id);
       const docSnapshot = await getDoc(docRef);
       let leader = newInfo.leader;
+      let downloadURL = "";
       if (typeof newInfo.leader.img === "object") {
         // Create a storage reference with the folderName as the path
         const storageRef = ref(
@@ -319,43 +326,180 @@ const BoardAdmin = () => {
         await uploadBytes(storageRef, newInfo.leader.img);
 
         // Get the download URL of the uploaded file
-        const downloadURL = await getDownloadURL(storageRef);
+        downloadURL = await getDownloadURL(storageRef);
 
         console.log("Image uploaded successfully:", downloadURL);
 
         leader.img = downloadURL;
         console.log(leader);
-
-        if (docSnapshot.exists()) {
+      } else {
+        downloadURL = newInfo.leader.img;
+      }
+      if (docSnapshot.exists()) {
+        const leaders = "leaders";
+        if (path === "committee") {
           const currentMembers = docSnapshot.data().leaders[path][role_group];
           currentMembers[memberIndex].first = newInfo.leader.first;
           currentMembers[memberIndex].last = newInfo.leader.last;
           currentMembers[memberIndex].position = newInfo.leader.position;
           currentMembers[memberIndex].img = downloadURL;
-
-          if(path === "committee"){
-            const leaders = "leaders";
-            const committee = "committee";
-            const updateObject = { [`${leaders}.${committee}.${role_group}`]: currentMembers };
-            await updateDoc(docRef, updateObject);
-          }
-          else{
-            const leaders = "leaders";
-            const officers = "officers";
-            const updateObject = { [`${leaders}.${officers}.${role_group}`]: currentMembers };
-            await updateDoc(docRef, updateObject);
-          }
-
-          console.log("Board leader successfully updated!");
+          const committee = "committee";
+          const updateObject = {
+            [`${leaders}.${committee}.${role_group}`]: currentMembers,
+          };
+          await updateDoc(docRef, updateObject);
+        } else if (path === "officers") {
+          const currentMembers = docSnapshot.data().leaders[path][role_group];
+          currentMembers[memberIndex].first = newInfo.leader.first;
+          currentMembers[memberIndex].last = newInfo.leader.last;
+          currentMembers[memberIndex].position = newInfo.leader.position;
+          currentMembers[memberIndex].img = downloadURL;
+          const officers = "officers";
+          const updateObject = {
+            [`${leaders}.${officers}.${role_group}`]: currentMembers,
+          };
+          await updateDoc(docRef, updateObject);
         } else {
-          console.error("Document does not exist!");
+          const currentMembers = docSnapshot.data().leaders[path];
+          currentMembers[memberIndex].first = newInfo.leader.first;
+          currentMembers[memberIndex].last = newInfo.leader.last;
+          currentMembers[memberIndex].position = newInfo.leader.position;
+          currentMembers[memberIndex].img = downloadURL;
+          console.log(currentMembers);
+          const advisors = "advisors";
+          const updateObject = {
+            [`${leaders}.${advisors}`]: currentMembers,
+          };
+          await updateDoc(docRef, updateObject);
         }
-        return downloadURL;
+
+        console.log("Board leader successfully updated!");
+      } else {
+        console.error("Document does not exist!");
       }
+      return downloadURL;
     } catch (error) {
-      console.error("Error updating President subobject: ", error);
+      console.error("Error updating leader: ", error);
     }
   };
+
+  const deleteLeaderHandler = (info) => {
+    if (info.section == "board") {
+      setCurrent((prevLeaders) => {
+        Object.keys(prevLeaders.leaders.board).map((leader) => {
+          if (prevLeaders.leaders.board[leader].position == info.position) {
+            prevLeaders.leaders.board[leader].first = "Vacant";
+            prevLeaders.leaders.board[leader].last = "Position";
+            prevLeaders.leaders.board[leader].img = "";
+          }
+        });
+        return prevLeaders;
+      });
+    } else if (info.section == "committee") {
+      setCurrent((prevLeaders) => {
+        const memberIndex = prevLeaders.leaders.committee[info.role_group].map(
+          (leader, index) => {
+            if (leader.first === info.first && leader.last === info.last) {
+              return index;
+            }
+          }
+        );
+
+        // Create a shallow copy of the leaders object
+        const newLeaders = { ...prevLeaders };
+
+        // Navigate to the deep nested structure
+        const committee = newLeaders.leaders.committee;
+        const roleGroup = info.role_group;
+        const currentArray = committee[roleGroup];
+        // Ensure that the currentArray exists and has elements
+        if (currentArray && currentArray.length > 0) {
+          // Remove the element at the specified memberIndex
+          const updatedArray = [
+            ...currentArray.slice(0, memberIndex),
+            ...currentArray.slice(memberIndex + 1),
+          ];
+
+          // Update the newLeaders object with the modified array
+          newLeaders.leaders.committee[roleGroup] = updatedArray;
+        }
+
+        // Return the updated state
+        return newLeaders;
+      });
+    } else if (info.section == "officers") {
+      setCurrent((prevLeaders) => {
+        const memberIndex = prevLeaders.leaders.officers[info.role_group].map(
+          (leader, index) => {
+            if (leader.first === info.first && leader.last === info.last) {
+              return index;
+            }
+          }
+        );
+
+        // Create a shallow copy of the leaders object
+        const newLeaders = { ...prevLeaders };
+
+        // Navigate to the deep nested structure
+        const officers = newLeaders.leaders.officers;
+        const roleGroup = info.role_group;
+        const currentArray = officers[roleGroup];
+        // Ensure that the currentArray exists and has elements
+        if (currentArray && currentArray.length > 0) {
+          // Remove the element at the specified memberIndex
+          const updatedArray = [
+            ...currentArray.slice(0, memberIndex),
+            ...currentArray.slice(memberIndex + 1),
+          ];
+
+          // Update the newLeaders object with the modified array
+          newLeaders.leaders.officers[roleGroup] = updatedArray;
+        }
+
+        // Return the updated state
+        return newLeaders;
+      });
+    } else {
+      setCurrent((prevLeaders) => {
+        let memberIndex =-1;
+        prevLeaders.leaders.advisors.map(
+          (leader, index) => {
+            if ((leader.first === info.first) && (leader.last === info.last)) {
+              memberIndex = index;
+            }
+          }
+        );
+        console.log(memberIndex);
+
+        // Create a shallow copy of the leaders object
+        const newLeaders = { ...prevLeaders };
+
+        // Navigate to the deep nested structure
+        const currentArray = newLeaders.leaders.advisors;
+        // Ensure that the currentArray exists and has elements
+        if (currentArray && currentArray.length > 0) {
+          // Remove the element at the specified memberIndex
+          const updatedArray = [
+            ...currentArray.slice(0, memberIndex),
+            ...currentArray.slice(memberIndex + 1),
+          ];
+
+          // Update the newLeaders object with the modified array
+          newLeaders.leaders.advisors = updatedArray;
+        }
+
+        // Return the updated state
+        return newLeaders;
+      });
+    }
+  };
+  const deleteLeaderFirestore = (section, leaderData) => {
+    if (section == "board") {
+    } else if (section == "committee" || section == "officers") {
+    } else {
+    }
+  };
+
   return (
     <div class="container main-boardadmin">
       {currentBoard && (
@@ -365,7 +509,11 @@ const BoardAdmin = () => {
           <Button className="mr-3 mb-3">Add new empty board</Button>
           <Tabs id="sub-tabs" className="mb-3 event-tabs">
             <Tab eventKey="current" title="Current">
-              <CurrentTab data={currentBoard} onUpdate={updateLeaderHandler} />
+              <CurrentTab
+                data={currentBoard}
+                onUpdate={updateLeaderHandler}
+                onDelete={deleteLeaderHandler}
+              />
             </Tab>
             <Tab eventKey="archive" title="Archive">
               <ArchiveTab />

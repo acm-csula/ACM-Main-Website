@@ -38,9 +38,6 @@ const EditLeader = (props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          <Button variant="danger">Clear Info</Button>
-        </Modal.Header>
         <Modal.Body>
           <Form>
             <InputGroup className="mb-3">
