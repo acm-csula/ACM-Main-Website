@@ -36,7 +36,7 @@ const AddMembers = (props) => {
   //uploads new member to database
   const addHandler = async (e) => {
     e.preventDefault();
-    if ((selectedGroup == "Select role group")&&(props.section !== "advisors")) {
+    if (selectedGroup == "Select role group" && props.section !== "advisors") {
       alert("Select a group first");
     } else {
       //get input values
@@ -45,7 +45,7 @@ const AddMembers = (props) => {
       const pos = positionRef.current.value;
 
       const storage = getStorage();
-
+      let newLeader;
       try {
         const docRef = doc(db, "acm_board", props.data.id);
         let downloadURL = "";
@@ -69,7 +69,7 @@ const AddMembers = (props) => {
 
           console.log("Image uploaded successfully:", downloadURL);
         }
-        const newLeader = {
+        newLeader = {
           first: firstN,
           last: lastN,
           position: pos,
@@ -98,6 +98,7 @@ const AddMembers = (props) => {
       } catch (error) {
         console.error("Error adding event:", error.message);
       }
+      props.onAdd(newLeader, selectedGroup);
       props.onHide();
     }
   };
@@ -110,19 +111,22 @@ const AddMembers = (props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          {props.section !== "advisors" && (
-            <DropdownButton id="dropdown-basic-button" title={selectedGroup}>
-              {Object.keys(props.data.leaders[props.section]).map((group) => (
-                <Dropdown.Item onClick={() => setGroup(group)}>
-                  {group}
-                </Dropdown.Item>
+        <Form onSubmit={addHandler}>
+          <Modal.Header closeButton>
+            {props.section !== "advisors" &&
+              Object.keys(props.data.leaders[props.section]).map((group) => (
+                <Form.Check // prettier-ignore
+                inline
+                  type={"radio"}
+                  id={`default-radio`}
+                  label={group}
+                  name="radioGroup"
+                  onClick={() => setGroup(group)}
+                  required
+                />
               ))}
-            </DropdownButton>
-          )}
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={addHandler}>
+          </Modal.Header>
+          <Modal.Body>
             <InputGroup className="mb-3">
               <InputGroup.Text>First name</InputGroup.Text>
               <Form.Control
@@ -151,12 +155,19 @@ const AddMembers = (props) => {
               <Button variant="success" className="mb-2" type="submit">
                 Confirm
               </Button>
-              <Button variant="warning" onClick={props.onHide} className="mb-2">
+              <Button
+                variant="warning"
+                onClick={() => {
+                  setGroup("Select role group");
+                  props.onHide();
+                }}
+                className="mb-2"
+              >
                 Cancel
               </Button>
             </Modal.Footer>
-          </Form>
-        </Modal.Body>
+          </Modal.Body>
+        </Form>
       </Modal>
     </>
   );

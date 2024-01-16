@@ -391,7 +391,7 @@ const BoardAdmin = () => {
       img: info.img,
     };
     if (info.section == "board") {
-      deleteLeaderFirestore(info.section, leader);
+      deleteBoardFirestore(info.section, leader);
       setCurrent((prevLeaders) => {
         Object.keys(prevLeaders.leaders.board).map((leader) => {
           if (prevLeaders.leaders.board[leader].position == info.position) {
@@ -427,6 +427,8 @@ const BoardAdmin = () => {
             ...currentArray.slice(memberIndex + 1),
           ];
 
+          deleteOffCommAdvFirestore(info.section,roleGroup, updatedArray);
+
           // Update the newLeaders object with the modified array
           newLeaders.leaders.committee[roleGroup] = updatedArray;
         }
@@ -458,6 +460,7 @@ const BoardAdmin = () => {
             ...currentArray.slice(0, memberIndex),
             ...currentArray.slice(memberIndex + 1),
           ];
+          deleteOffCommAdvFirestore(info.section,roleGroup, updatedArray);
 
           // Update the newLeaders object with the modified array
           newLeaders.leaders.officers[roleGroup] = updatedArray;
@@ -488,7 +491,7 @@ const BoardAdmin = () => {
             ...currentArray.slice(0, memberIndex),
             ...currentArray.slice(memberIndex + 1),
           ];
-
+          deleteOffCommAdvFirestore(info.section,"", updatedArray);
           // Update the newLeaders object with the modified array
           newLeaders.leaders.advisors = updatedArray;
         }
@@ -498,12 +501,11 @@ const BoardAdmin = () => {
       });
     }
   };
-  const deleteLeaderFirestore = async (section, leaderData) => {
+  const deleteBoardFirestore = async (leaderData) => {
     const docRef = doc(db, "acm_board", currentBoard.id);
     const docSnapshot = await getDoc(docRef);
 
     try {
-      if (section == "board") {
         Object.keys(currentBoard.leaders.board).map(async (leaderKey) => {
           if (
             currentBoard.leaders.board[leaderKey].position ===
@@ -525,11 +527,26 @@ const BoardAdmin = () => {
             }
           }
         });
-      } else if (section == "committee" || section == "officers") {
-      } else {
-      }
     } catch (error) {
       console.log("Cannot delete leader", error);
+    }
+  };
+
+  const deleteOffCommAdvFirestore = async(section,role_group, newArray) =>{
+    const docRef = doc(db, "acm_board", currentBoard.id);
+    const docSnapshot = await getDoc(docRef);
+    try {
+      if (section==="committee"){
+        await updateDoc(docRef,{[`leaders.committee.${role_group}`]:newArray});
+      }
+      else if(section === "officers"){
+        await updateDoc(docRef,{[`leaders.officers.${role_group}`]:newArray});
+      }
+      else{
+        await updateDoc(docRef,{[`leaders.advisors`]:newArray});
+      }
+    } catch (error) {
+      console.error("Document does not exist!", error);
     }
   };
 
