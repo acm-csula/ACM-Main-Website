@@ -20,81 +20,126 @@ const CurrentTab = (props) => {
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.president}
+              onUpdate={(leaderData) => {
+                const section = { section: "board" };
+                const oldLeader = { oldLeader: props.data.leaders.board.president };
+                props.onUpdate({ ...leaderData, ...oldLeader, ...section });
+              }}
               onDelete={(leaderData) => {
                 const section = { section: "board" };
-                props.onDelete({ ...leaderData, ...section});
+                props.onDelete({ ...leaderData, ...section });
               }}
             />
             <BoardLeaders
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.vicepresident}
+              onUpdate={(leaderData) => {
+                const section = { section: "board" };
+                const oldLeader = { oldLeader: props.data.leaders.board.vicepresident };
+                props.onUpdate({ ...leaderData, ...oldLeader, ...section });
+              }}
               onDelete={(leaderData) => {
                 const section = { section: "board" };
-                props.onDelete({ ...leaderData, ...section});
+                props.onDelete({ ...leaderData, ...section });
               }}
             />
             <BoardLeaders
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.secretary}
+              onUpdate={(leaderData) => {
+                const section = { section: "board" };
+                const oldLeader = { oldLeader: props.data.leaders.board.secretary };
+                props.onUpdate({ ...leaderData, ...oldLeader, ...section });
+              }}
               onDelete={(leaderData) => {
                 const section = { section: "board" };
-                props.onDelete({ ...leaderData, ...section});
+                props.onDelete({ ...leaderData, ...section });
               }}
             />
             <BoardLeaders
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.treasurer}
+              onUpdate={(leaderData) => {
+                const section = { section: "board" };
+                const oldLeader = { oldLeader: props.data.leaders.board.treasurer };
+                props.onUpdate({ ...leaderData, ...oldLeader, ...section });
+              }}
               onDelete={(leaderData) => {
                 const section = { section: "board" };
-                props.onDelete({ ...leaderData, ...section});
+                props.onDelete({ ...leaderData, ...section });
               }}
             />
             <BoardLeaders
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.vp_affairs1}
+              onUpdate={(leaderData) => {
+                const section = { section: "board" };
+                const oldLeader = { oldLeader: props.data.leaders.board.vp_affairs1 };
+                props.onUpdate({ ...leaderData, ...oldLeader, ...section });
+              }}
               onDelete={(leaderData) => {
                 const section = { section: "board" };
-                props.onDelete({ ...leaderData, ...section});
+                props.onDelete({ ...leaderData, ...section });
               }}
             />
             <BoardLeaders
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.vp_affairs2}
+              onUpdate={(leaderData) => {
+                const section = { section: "board" };
+                const oldLeader = { oldLeader: props.data.leaders.board.vp_affairs2 };
+                props.onUpdate({ ...leaderData, ...oldLeader, ...section });
+              }}
               onDelete={(leaderData) => {
                 const section = { section: "board" };
-                props.onDelete({ ...leaderData, ...section});
+                props.onDelete({ ...leaderData, ...section });
               }}
             />
             <BoardLeaders
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.webmaster}
+              onUpdate={(leaderData) => {
+                const section = { section: "board" };
+                const oldLeader = { oldLeader: props.data.leaders.board.webmaster };
+                props.onUpdate({ ...leaderData, ...oldLeader, ...section });
+              }}
               onDelete={(leaderData) => {
                 const section = { section: "board" };
-                props.onDelete({ ...leaderData, ...section});
+                props.onDelete({ ...leaderData, ...section });
               }}
             />
             <BoardLeaders
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.proj_manager1}
+              onUpdate={(leaderData) => {
+                const section = { section: "board" };
+                const oldLeader = { oldLeader: props.data.leaders.board.proj_manager1 };
+                props.onUpdate({ ...leaderData, ...oldLeader, ...section });
+              }}
               onDelete={(leaderData) => {
                 const section = { section: "board" };
-                props.onDelete({ ...leaderData, ...section});
+                props.onDelete({ ...leaderData, ...section });
               }}
             />
             <BoardLeaders
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.proj_manager2}
+              onUpdate={(leaderData) => {
+                const section = { section: "board" };
+                const oldLeader = { oldLeader: props.data.leaders.board.proj_manager2 };
+                props.onUpdate({ ...leaderData, ...oldLeader, ...section });
+              }}
               onDelete={(leaderData) => {
                 const section = { section: "board" };
-                props.onDelete({ ...leaderData, ...section});
+                props.onDelete({ ...leaderData, ...section });
               }}
             />
           </Card.Body>
@@ -242,9 +287,9 @@ const CurrentTab = (props) => {
                   const oldLeader = { oldLeader: advisor };
                   props.onUpdate({ ...leaderData, ...section, ...oldLeader });
                 }}
-                onDelete={(leaderData)=>{
-                  const section = {section:"advisors"};
-                  props.onDelete({...leaderData,...section});
+                onDelete={(leaderData) => {
+                  const section = { section: "advisors" };
+                  props.onDelete({ ...leaderData, ...section });
                 }}
               />
             ))}

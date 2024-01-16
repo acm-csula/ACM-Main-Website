@@ -384,7 +384,14 @@ const BoardAdmin = () => {
   };
 
   const deleteLeaderHandler = (info) => {
+    const leader = {
+      first: info.first,
+      last: info.last,
+      position: info.position,
+      img: info.img,
+    };
     if (info.section == "board") {
+      deleteLeaderFirestore(info.section, leader);
       setCurrent((prevLeaders) => {
         Object.keys(prevLeaders.leaders.board).map((leader) => {
           if (prevLeaders.leaders.board[leader].position == info.position) {
@@ -461,14 +468,12 @@ const BoardAdmin = () => {
       });
     } else {
       setCurrent((prevLeaders) => {
-        let memberIndex =-1;
-        prevLeaders.leaders.advisors.map(
-          (leader, index) => {
-            if ((leader.first === info.first) && (leader.last === info.last)) {
-              memberIndex = index;
-            }
+        let memberIndex = -1;
+        prevLeaders.leaders.advisors.map((leader, index) => {
+          if (leader.first === info.first && leader.last === info.last) {
+            memberIndex = index;
           }
-        );
+        });
         console.log(memberIndex);
 
         // Create a shallow copy of the leaders object
@@ -493,10 +498,38 @@ const BoardAdmin = () => {
       });
     }
   };
-  const deleteLeaderFirestore = (section, leaderData) => {
-    if (section == "board") {
-    } else if (section == "committee" || section == "officers") {
-    } else {
+  const deleteLeaderFirestore = async (section, leaderData) => {
+    const docRef = doc(db, "acm_board", currentBoard.id);
+    const docSnapshot = await getDoc(docRef);
+
+    try {
+      if (section == "board") {
+        Object.keys(currentBoard.leaders.board).map(async (leaderKey) => {
+          if (
+            currentBoard.leaders.board[leaderKey].position ===
+            leaderData.position
+          ) {
+            if (docSnapshot.exists()) {
+              // Document exists, proceed with the update
+              await updateDoc(docRef, {
+                [`leaders.board.${leaderKey}`]: {
+                  first: "Vacant",
+                  last: "Position",
+                  position: leaderData.position,
+                  img: "",
+                },
+              });
+              console.log("Board leader deleted");
+            } else {
+              console.error("Document does not exist!");
+            }
+          }
+        });
+      } else if (section == "committee" || section == "officers") {
+      } else {
+      }
+    } catch (error) {
+      console.log("Cannot delete leader", error);
     }
   };
 
