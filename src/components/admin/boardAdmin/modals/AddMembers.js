@@ -36,9 +36,7 @@ const AddMembers = (props) => {
   //uploads new member to database
   const addHandler = async (e) => {
     e.preventDefault();
-    if (selectedGroup == "Select role group" && props.section !== "advisors") {
-      alert("Select a group first");
-    } else {
+    if (selectedGroup !== "Select role group") {
       //get input values
       const firstN = firstRef.current.value;
       const lastN = lastRef.current.value;
@@ -98,9 +96,9 @@ const AddMembers = (props) => {
       } catch (error) {
         console.error("Error adding event:", error.message);
       }
-      props.onAdd(newLeader, selectedGroup);
+      props.onAdd(newLeader, props.section, selectedGroup);
       props.onHide();
-    }
+    } 
   };
 
   return (

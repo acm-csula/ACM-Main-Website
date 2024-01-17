@@ -304,6 +304,7 @@ const CurrentTab = (props) => {
             show={addModal}
             section={currentSection}
             roleGroups={Object.keys(props.data.leaders.committee)}
+            onAdd={props.onAdd}
           />
           <AddGroup
             data={props.data}

@@ -534,7 +534,6 @@ const BoardAdmin = () => {
 
   const deleteOffCommAdvFirestore = async(section,role_group, newArray) =>{
     const docRef = doc(db, "acm_board", currentBoard.id);
-    const docSnapshot = await getDoc(docRef);
     try {
       if (section==="committee"){
         await updateDoc(docRef,{[`leaders.committee.${role_group}`]:newArray});
@@ -547,6 +546,52 @@ const BoardAdmin = () => {
       }
     } catch (error) {
       console.error("Document does not exist!", error);
+    }
+  };
+
+  const addLeaderHandler = (newLeader, section, role_group) =>{
+    console.log(newLeader,section, role_group);
+    let updatedObj;
+    if(section === "committee"){
+      setCurrent((prevLeaders)=>{
+        updatedObj = {
+          ...prevLeaders,
+          leaders:{
+            ...prevLeaders.leaders,
+            committee:{
+              ...prevLeaders.leaders.committee,
+              [role_group]:[...prevLeaders.leaders.committee[role_group], newLeader]
+            }
+          }
+        }
+        return updatedObj;
+      })
+    }
+    else if(section === "officers"){
+      setCurrent((prevLeaders)=>{
+        updatedObj = {
+          ...prevLeaders,
+          leaders:{
+            ...prevLeaders.leaders,
+            officers:{
+              ...prevLeaders.leaders.officers,
+              [role_group]:[...prevLeaders.leaders.officers[role_group], newLeader]
+            }
+          }
+        }
+        return updatedObj;
+      })
+    }
+    else{
+      setCurrent((prevLeaders)=>{
+        updatedObj = {
+          ...prevLeaders,
+          leaders:{
+            ...prevLeaders.leaders,
+            advisors:[...prevLeaders.leaders.advisors,newLeader]
+          }
+        }
+      })
     }
   };
 
@@ -563,6 +608,7 @@ const BoardAdmin = () => {
                 data={currentBoard}
                 onUpdate={updateLeaderHandler}
                 onDelete={deleteLeaderHandler}
+                onAdd={addLeaderHandler}
               />
             </Tab>
             <Tab eventKey="archive" title="Archive">
