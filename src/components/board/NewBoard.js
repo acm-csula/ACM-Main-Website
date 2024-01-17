@@ -7,6 +7,8 @@ import {
   collectionGroup,
   getDocs,
   getFirestore,
+  query,
+  orderBy,
 } from "firebase/firestore";
 import logo from "./img/acm_logo.png";
 import BoardLeaders from "./BoardLeaders";
@@ -14,21 +16,34 @@ const NewBoard = () => {
   const [currentBoard, setBoard] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const boardCollection = collectionGroup(db, "acm_board");
-        const queryBoardMembers = await getDocs(boardCollection);
-        const board = [];
+    let isMounted = true;
 
-        queryBoardMembers.forEach((doc) => {
-          const data = doc.data();
-          board.push(data);
-        });
-        setBoard(board.reverse()[0]);
+    const fetchData = async () => {
+      try {
+        const board = query(
+          collectionGroup(db, "acm_board"),
+          orderBy("year", "asc")
+        );
+        const boardSnapshot = await getDocs(board);
+
+        if (isMounted) {
+          const boardList = [];
+          boardSnapshot.forEach((doc) => {
+            const boardItem = { id: doc.id, ...doc.data() };
+            boardList.push(boardItem);
+          });
+          setBoard(boardList.at(boardList.length - 1));
+        }
       } catch (err) {
-        console.log("Error occured when fetching board");
+        console.log("Error occured when fetching board", err);
       }
-    })();
+    };
+    fetchData();
+
+    return () => {
+      // Cleanup function to set isMounted to false when the component is unmounted
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -104,28 +119,30 @@ const NewBoard = () => {
                   <Tab.Pane eventKey="officer">
                     <h2 class="groupheader text-light">Officers</h2>
                     <div class="card-deck justify-content-center align-items-center mb-5 text-light">
-                      {currentBoard.leaders.officers &&
-                        currentBoard.leaders.officers.map((group) =>
-                          group.members.map((member) => (
-                            <BoardLeaders leader={member} />
-                          ))
-                        )}
+                      {Object.keys(currentBoard.leaders.officers).map((group) =>
+                        currentBoard.leaders.officers[group].map((member) => (
+                          <BoardLeaders leader={member} />
+                        ))
+                      )}
                     </div>
                   </Tab.Pane>
                   <Tab.Pane eventKey="committee">
-                    {currentBoard.leaders.committee &&
-                      currentBoard.leaders.committee.map((group) => (
+                    {Object.keys(currentBoard.leaders.committee).map(
+                      (group) => (
                         <>
                           <h3 class="text-light" align="center">
-                            {group.role_group}
+                            {group}
                           </h3>
                           <div class="card-deck justify-content-center align-items-center mb-5 text-light">
-                            {group.members.map((member) => (
-                              <BoardLeaders leader={member} />
-                            ))}
+                            {currentBoard.leaders.committee[group].map(
+                              (member) => (
+                                <BoardLeaders leader={member} />
+                              )
+                            )}
                           </div>
                         </>
-                      ))}
+                      )
+                    )}
                   </Tab.Pane>
                   <Tab.Pane eventKey="advisor">
                     <h2 class="groupheader text-light">Advisors</h2>
