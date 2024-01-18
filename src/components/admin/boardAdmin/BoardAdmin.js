@@ -1,3 +1,12 @@
+/*
+Known bugs:
+- Editing wihout a photo wont change into default logo
+- Uploading a photo then cancelling the dialog button, keeps that photo. 
+This may cause the following update to use that previous photo if no new photo was uploaded
+- (AVOID EDITING BOARD LEADERS' "POSITION" FIELD) In the Board section, if the position field is edited, the webpage may not function properly
+*/
+
+
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./boardadmin.css";
@@ -390,8 +399,8 @@ const BoardAdmin = () => {
       position: info.position,
       img: info.img,
     };
-    if (info.section == "board") {
-      deleteBoardFirestore(info.section, leader);
+    if (info.section === "board") {
+      deleteBoardFirestore(leader);
       setCurrent((prevLeaders) => {
         Object.keys(prevLeaders.leaders.board).map((leader) => {
           if (prevLeaders.leaders.board[leader].position == info.position) {
@@ -402,15 +411,15 @@ const BoardAdmin = () => {
         });
         return prevLeaders;
       });
-    } else if (info.section == "committee") {
+    } else if (info.section === "committee") {
       setCurrent((prevLeaders) => {
-        const memberIndex = prevLeaders.leaders.committee[info.role_group].map(
-          (leader, index) => {
-            if (leader.first === info.first && leader.last === info.last) {
-              return index;
-            }
+        let memberIndex = -1;
+        prevLeaders.leaders.committee[info.role_group].map((leader, index) => {
+          if (leader.first === info.first && leader.last === info.last) {
+            memberIndex = index;
           }
-        );
+        });
+        console.log(memberIndex);
 
         // Create a shallow copy of the leaders object
         const newLeaders = { ...prevLeaders };
@@ -427,7 +436,7 @@ const BoardAdmin = () => {
             ...currentArray.slice(memberIndex + 1),
           ];
 
-          deleteOffCommAdvFirestore(info.section,roleGroup, updatedArray);
+          deleteOffCommAdvFirestore(info.section, roleGroup, updatedArray);
 
           // Update the newLeaders object with the modified array
           newLeaders.leaders.committee[roleGroup] = updatedArray;
@@ -436,15 +445,15 @@ const BoardAdmin = () => {
         // Return the updated state
         return newLeaders;
       });
-    } else if (info.section == "officers") {
+    } else if (info.section === "officers") {
+      console.log("Delete officers");
       setCurrent((prevLeaders) => {
-        const memberIndex = prevLeaders.leaders.officers[info.role_group].map(
-          (leader, index) => {
-            if (leader.first === info.first && leader.last === info.last) {
-              return index;
-            }
+        let memberIndex = -1;
+        prevLeaders.leaders.officers[info.role_group].map((leader, index) => {
+          if (leader.first === info.first && leader.last === info.last) {
+            memberIndex = index;
           }
-        );
+        });
 
         // Create a shallow copy of the leaders object
         const newLeaders = { ...prevLeaders };
@@ -460,7 +469,7 @@ const BoardAdmin = () => {
             ...currentArray.slice(0, memberIndex),
             ...currentArray.slice(memberIndex + 1),
           ];
-          deleteOffCommAdvFirestore(info.section,roleGroup, updatedArray);
+          deleteOffCommAdvFirestore(info.section, roleGroup, updatedArray);
 
           // Update the newLeaders object with the modified array
           newLeaders.leaders.officers[roleGroup] = updatedArray;
@@ -491,7 +500,7 @@ const BoardAdmin = () => {
             ...currentArray.slice(0, memberIndex),
             ...currentArray.slice(memberIndex + 1),
           ];
-          deleteOffCommAdvFirestore(info.section,"", updatedArray);
+          deleteOffCommAdvFirestore(info.section, "", updatedArray);
           // Update the newLeaders object with the modified array
           newLeaders.leaders.advisors = updatedArray;
         }
@@ -506,92 +515,100 @@ const BoardAdmin = () => {
     const docSnapshot = await getDoc(docRef);
 
     try {
-        Object.keys(currentBoard.leaders.board).map(async (leaderKey) => {
-          if (
-            currentBoard.leaders.board[leaderKey].position ===
-            leaderData.position
-          ) {
-            if (docSnapshot.exists()) {
-              // Document exists, proceed with the update
-              await updateDoc(docRef, {
-                [`leaders.board.${leaderKey}`]: {
-                  first: "Vacant",
-                  last: "Position",
-                  position: leaderData.position,
-                  img: "",
-                },
-              });
-              console.log("Board leader deleted");
-            } else {
-              console.error("Document does not exist!");
-            }
+      Object.keys(currentBoard.leaders.board).map(async (leaderKey) => {
+        if (
+          currentBoard.leaders.board[leaderKey].position === leaderData.position
+        ) {
+          if (docSnapshot.exists()) {
+            // Document exists, proceed with the update
+            await updateDoc(docRef, {
+              [`leaders.board.${leaderKey}`]: {
+                first: "Vacant",
+                last: "Position",
+                position: leaderData.position,
+                img: "",
+              },
+            });
+            console.log("Board leader deleted");
+          } else {
+            console.error("Document does not exist!");
           }
-        });
+        }
+      });
     } catch (error) {
       console.log("Cannot delete leader", error);
     }
   };
 
-  const deleteOffCommAdvFirestore = async(section,role_group, newArray) =>{
+  const deleteOffCommAdvFirestore = async (section, role_group, newArray) => {
     const docRef = doc(db, "acm_board", currentBoard.id);
     try {
-      if (section==="committee"){
-        await updateDoc(docRef,{[`leaders.committee.${role_group}`]:newArray});
-      }
-      else if(section === "officers"){
-        await updateDoc(docRef,{[`leaders.officers.${role_group}`]:newArray});
-      }
-      else{
-        await updateDoc(docRef,{[`leaders.advisors`]:newArray});
+      if (section === "committee") {
+        await updateDoc(docRef, {
+          [`leaders.committee.${role_group}`]: newArray,
+        });
+      } else if (section === "officers") {
+        await updateDoc(docRef, {
+          [`leaders.officers.${role_group}`]: newArray,
+        });
+      } else {
+        await updateDoc(docRef, { [`leaders.advisors`]: newArray });
       }
     } catch (error) {
       console.error("Document does not exist!", error);
     }
   };
 
-  const addLeaderHandler = (newLeader, section, role_group) =>{
-    console.log(newLeader,section, role_group);
+  const addLeaderHandler = (newLeader, section, role_group) => {
+    console.log(newLeader, section, role_group);
     let updatedObj;
-    if(section === "committee"){
-      setCurrent((prevLeaders)=>{
+    if (section === "committee") {
+      setCurrent((prevLeaders) => {
         updatedObj = {
           ...prevLeaders,
-          leaders:{
+          leaders: {
             ...prevLeaders.leaders,
-            committee:{
+            committee: {
               ...prevLeaders.leaders.committee,
-              [role_group]:[...prevLeaders.leaders.committee[role_group], newLeader]
-            }
-          }
-        }
+              [role_group]: [
+                ...prevLeaders.leaders.committee[role_group],
+                newLeader,
+              ],
+            },
+          },
+        };
         return updatedObj;
-      })
-    }
-    else if(section === "officers"){
-      setCurrent((prevLeaders)=>{
+      });
+    } else if (section === "officers") {
+      setCurrent((prevLeaders) => {
         updatedObj = {
           ...prevLeaders,
-          leaders:{
+          leaders: {
             ...prevLeaders.leaders,
-            officers:{
+            officers: {
               ...prevLeaders.leaders.officers,
-              [role_group]:[...prevLeaders.leaders.officers[role_group], newLeader]
-            }
-          }
-        }
+              [role_group]: [
+                ...prevLeaders.leaders.officers[role_group],
+                newLeader,
+              ],
+            },
+          },
+        };
         return updatedObj;
-      })
-    }
-    else{
-      setCurrent((prevLeaders)=>{
+      });
+    } else {
+      console.log("adding advisor: ", newLeader);
+
+      setCurrent((prevLeaders) => {
         updatedObj = {
           ...prevLeaders,
-          leaders:{
+          leaders: {
             ...prevLeaders.leaders,
-            advisors:[...prevLeaders.leaders.advisors,newLeader]
-          }
-        }
-      })
+            advisors: [...prevLeaders.leaders.advisors, newLeader],
+          },
+        };
+        return updatedObj;
+      });
     }
   };
 
@@ -622,3 +639,4 @@ const BoardAdmin = () => {
 };
 
 export default BoardAdmin;
+

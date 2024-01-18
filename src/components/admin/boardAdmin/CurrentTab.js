@@ -157,14 +157,6 @@ const CurrentTab = (props) => {
             >
               Add Officer
             </Button>
-            <Button
-              onClick={() => {
-                setSection("officers");
-                setGroupModal(true);
-              }}
-            >
-              Add new group
-            </Button>
           </Card.Header>
           <ListGroup variant="flush">
             {Object.keys(props.data.leaders.officers).map((groupKey) => (
@@ -215,14 +207,6 @@ const CurrentTab = (props) => {
               }}
             >
               Add Committee Member
-            </Button>
-            <Button
-              onClick={() => {
-                setSection("committee");
-                setGroupModal(true);
-              }}
-            >
-              Add new group
             </Button>
           </Card.Header>
           <ListGroup variant="flush">

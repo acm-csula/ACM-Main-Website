@@ -36,7 +36,6 @@ const AddMembers = (props) => {
   //uploads new member to database
   const addHandler = async (e) => {
     e.preventDefault();
-    if (selectedGroup !== "Select role group") {
       //get input values
       const firstN = firstRef.current.value;
       const lastN = lastRef.current.value;
@@ -97,8 +96,8 @@ const AddMembers = (props) => {
         console.error("Error adding event:", error.message);
       }
       props.onAdd(newLeader, props.section, selectedGroup);
+      setImg("");
       props.onHide();
-    } 
   };
 
   return (
