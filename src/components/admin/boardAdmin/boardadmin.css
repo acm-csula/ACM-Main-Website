@@ -13,3 +13,7 @@
 .board-cards{
   height:auto;
 }
+
+.listimg:hover{
+  background-color:rgb(133, 217, 223);
+}

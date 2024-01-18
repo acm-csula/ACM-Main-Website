@@ -18,9 +18,11 @@ import {
 } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db } from "../../../professional-events/firebaseConfig";
+import ListPhotos from "./ListPhotos";
 
 const AddMembers = (props) => {
   const [selectedGroup, setGroup] = useState("Select role group");
+  const [imageList, setListModal] = useState(false);
 
   const firstRef = useRef("");
   const lastRef = useRef("");
@@ -36,68 +38,75 @@ const AddMembers = (props) => {
   //uploads new member to database
   const addHandler = async (e) => {
     e.preventDefault();
-      //get input values
-      const firstN = firstRef.current.value;
-      const lastN = lastRef.current.value;
-      const pos = positionRef.current.value;
+    //get input values
+    const firstN = firstRef.current.value;
+    const lastN = lastRef.current.value;
+    const pos = positionRef.current.value;
 
-      const storage = getStorage();
-      let newLeader;
-      try {
-        const docRef = doc(db, "acm_board", props.data.id);
-        let downloadURL = "";
-        //store image in firebase storage first
-        if (img) {
-          // Create a storage reference with the folderName as the path
-          const storageRef = ref(
-            storage,
-            `${
-              "gs://acm-calstatela.appspot.com/Leaders" +
-              " " +
-              props.data.schoolyear
-            }/${img.name}`
-          );
+    const storage = getStorage();
+    let newLeader;
+    try {
+      const docRef = doc(db, "acm_board", props.data.id);
+      let downloadURL = "";
+      //store image in firebase storage first
+      if (typeof img === "object") {
+        // Create a storage reference with the folderName as the path
+        const storageRef = ref(
+          storage,
+          `${
+            "gs://acm-calstatela.appspot.com/Leaders" +
+            " " +
+            props.data.schoolyear
+          }/${img.name}`
+        );
 
-          // Upload the file to the specified folder
-          await uploadBytes(storageRef, img);
+        // Upload the file to the specified folder
+        await uploadBytes(storageRef, img);
 
-          // Get the download URL of the uploaded file
-          downloadURL = await getDownloadURL(storageRef);
+        // Get the download URL of the uploaded file
+        downloadURL = await getDownloadURL(storageRef);
 
-          console.log("Image uploaded successfully:", downloadURL);
-        }
-        newLeader = {
-          first: firstN,
-          last: lastN,
-          position: pos,
-          img: downloadURL ? downloadURL : "",
-        };
-        const leaders = "leaders";
-        let updateObj = {};
-        if (props.section == "committee") {
-          const committee = "committee";
-          updateObj = {
-            [`${leaders}.${committee}.${selectedGroup}`]: arrayUnion(newLeader),
-          };
-        } else if (props.section == "officers") {
-          const officers = "officers";
-          updateObj = {
-            [`${leaders}.${officers}.${selectedGroup}`]: arrayUnion(newLeader),
-          };
-        } else {
-          const advisors = "advisors";
-          updateObj = {
-            [`${leaders}.${advisors}`]: arrayUnion(newLeader),
-          };
-        }
-        await updateDoc(docRef, updateObj);
-        console.log("New leader: ", newLeader);
-      } catch (error) {
-        console.error("Error adding event:", error.message);
+        console.log("Image uploaded successfully:", downloadURL);
       }
-      props.onAdd(newLeader, props.section, selectedGroup);
-      setImg("");
-      props.onHide();
+      else{
+        downloadURL = img;
+      }
+      newLeader = {
+        first: firstN,
+        last: lastN,
+        position: pos,
+        img: downloadURL ? downloadURL : "",
+      };
+      const leaders = "leaders";
+      let updateObj = {};
+      if (props.section == "committee") {
+        const committee = "committee";
+        updateObj = {
+          [`${leaders}.${committee}.${selectedGroup}`]: arrayUnion(newLeader),
+        };
+      } else if (props.section == "officers") {
+        const officers = "officers";
+        updateObj = {
+          [`${leaders}.${officers}.${selectedGroup}`]: arrayUnion(newLeader),
+        };
+      } else {
+        const advisors = "advisors";
+        updateObj = {
+          [`${leaders}.${advisors}`]: arrayUnion(newLeader),
+        };
+      }
+      await updateDoc(docRef, updateObj);
+      console.log("New leader: ", newLeader);
+    } catch (error) {
+      console.error("Error adding event:", error.message);
+    }
+    props.onAdd(newLeader, props.section, selectedGroup);
+    setImg("");
+    props.onHide();
+  };
+
+  const setExistingImage = (selectedImage) =>{
+    setImg(selectedImage.link);
   };
 
   return (
@@ -113,7 +122,7 @@ const AddMembers = (props) => {
             {props.section !== "advisors" &&
               Object.keys(props.data.leaders[props.section]).map((group) => (
                 <Form.Check // prettier-ignore
-                inline
+                  inline
                   type={"radio"}
                   id={`default-radio`}
                   label={group}
@@ -145,7 +154,14 @@ const AddMembers = (props) => {
               <Form.Control type="text" ref={positionRef} required />
             </Form.Group>
             <Form.Group controlId="image">
-              <Form.Label>Upload photo</Form.Label>
+              <br />
+              <Button onClick={()=>setListModal(true)}>
+                Select existing photo
+              </Button>{" "}
+              OR
+              <br />
+              <br />
+              <Form.Label>Upload new photo</Form.Label>
               <Form.Control type="file" onChange={handleImg} />
             </Form.Group>
             <Modal.Footer>
@@ -165,6 +181,7 @@ const AddMembers = (props) => {
             </Modal.Footer>
           </Modal.Body>
         </Form>
+        <ListPhotos imgs={props.imgs} onSetImage={setExistingImage} onHide={() => setListModal(false)} show={imageList} />
       </Modal>
     </>
   );

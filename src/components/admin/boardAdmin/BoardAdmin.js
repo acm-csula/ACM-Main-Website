@@ -3,9 +3,10 @@ Known bugs:
 - Editing wihout a photo wont change into default logo
 - Uploading a photo then cancelling the dialog button, keeps that photo. 
 This may cause the following update to use that previous photo if no new photo was uploaded
-- (AVOID EDITING BOARD LEADERS' "POSITION" FIELD) In the Board section, if the position field is edited, the webpage may not function properly
+- In the Board section, if the position field is edited, the webpage may not function properly.
+So, avoid editing "POSITION" field only in Board section.
+You can edit position on Officers, Committee, and Advisors
 */
-
 
 import React, { useState } from "react";
 import { useEffect } from "react";
@@ -30,6 +31,7 @@ import CurrentTab from "./CurrentTab";
 import ArchiveTab from "./ArchiveTab";
 const BoardAdmin = () => {
   const [currentBoard, setCurrent] = useState(null);
+  const [imgArray, setImgLinks] = useState([]);
   const lodash = require("lodash");
 
   useEffect(() => {
@@ -49,7 +51,50 @@ const BoardAdmin = () => {
             const boardItem = { id: doc.id, ...doc.data() };
             boardList.push(boardItem);
           });
-          setCurrent(boardList.at(boardList.length - 1));
+          const latestBoard = boardList.at(boardList.length - 1);
+          setCurrent(latestBoard);
+          let imgArray = [];
+          if (latestBoard) {
+            Object.keys(latestBoard.leaders.board).map((key) => {
+              const leader = latestBoard.leaders.board[key];
+              imgArray.push({
+                link: leader.img,
+                name: leader.first + " " + leader.last,
+              });
+            });
+            Object.keys(latestBoard.leaders.committee).map((roleKey) => {
+              Object.keys(latestBoard.leaders.committee[roleKey]).map(
+                (member) => {
+                  const leader = latestBoard.leaders.committee[roleKey][member]
+                  imgArray.push(
+                    {
+                      link: leader.img,
+                      name: leader.first + " " + leader.last,
+                    }
+                  );
+                }
+              );
+            });
+            Object.keys(latestBoard.leaders.officers).map((roleKey) => {
+              Object.keys(latestBoard.leaders.officers[roleKey]).map(
+                (member) => {
+                  const leader = latestBoard.leaders.officers[roleKey][member]
+                  imgArray.push({
+                    link: leader.img,
+                    name: leader.first + " " + leader.last,
+                  }
+                  );
+                }
+              );
+            });
+            latestBoard.leaders.advisors.map((advisor) => {
+              imgArray.push({
+                link: advisor.img,
+                name: advisor.first + " " + advisor.last,
+              });
+            });
+            setImgLinks(imgArray);
+          }
         }
       } catch (err) {
         console.log("Error occured when fetching board", err);
@@ -63,7 +108,6 @@ const BoardAdmin = () => {
     };
   }, []);
   console.log("Current Leaders State: ", currentBoard);
-
   const updateLeaderHandler = (newData) => {
     if (newData.section == "board") {
       if (newData.oldLeader.position == "President") {
@@ -614,7 +658,7 @@ const BoardAdmin = () => {
 
   return (
     <div class="container main-boardadmin">
-      {currentBoard && (
+      {currentBoard && imgArray && (
         <>
           <h1 align="center">Board page</h1>
 
@@ -623,6 +667,7 @@ const BoardAdmin = () => {
             <Tab eventKey="current" title="Current">
               <CurrentTab
                 data={currentBoard}
+                imgs={imgArray}
                 onUpdate={updateLeaderHandler}
                 onDelete={deleteLeaderHandler}
                 onAdd={addLeaderHandler}
@@ -639,4 +684,3 @@ const BoardAdmin = () => {
 };
 
 export default BoardAdmin;
-
