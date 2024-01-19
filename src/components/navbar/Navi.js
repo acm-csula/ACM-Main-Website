@@ -109,11 +109,13 @@ class Navi extends React.Component {
                   <div className="nav-dropdown-text">project workshops</div>
                 </NavDropdown.Item>
 
-                {/* Temporarily disabled due to cancellation
+                {/*
+                
                 <NavDropdown.Item href="/programs">
-                  <div className="nav-dropdown-text">mentorship</div>
+                  <div className="nav-dropdown-text">code cracking</div>
                 </NavDropdown.Item>
                 */}
+
                 <NavDropdown.Item href="/professional">
                   <div className="nav-dropdown-text">events</div>
                 </NavDropdown.Item>
