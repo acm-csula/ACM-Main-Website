@@ -20,6 +20,7 @@ const CurrentTab = (props) => {
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.president}
+              imgs={props.imgs}
               onUpdate={(leaderData) => {
                 const section = { section: "board" };
                 const oldLeader = { oldLeader: props.data.leaders.board.president };
@@ -34,6 +35,7 @@ const CurrentTab = (props) => {
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.vicepresident}
+              imgs={props.imgs}
               onUpdate={(leaderData) => {
                 const section = { section: "board" };
                 const oldLeader = { oldLeader: props.data.leaders.board.vicepresident };
@@ -48,6 +50,7 @@ const CurrentTab = (props) => {
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.secretary}
+              imgs={props.imgs}
               onUpdate={(leaderData) => {
                 const section = { section: "board" };
                 const oldLeader = { oldLeader: props.data.leaders.board.secretary };
@@ -62,6 +65,7 @@ const CurrentTab = (props) => {
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.treasurer}
+              imgs={props.imgs}
               onUpdate={(leaderData) => {
                 const section = { section: "board" };
                 const oldLeader = { oldLeader: props.data.leaders.board.treasurer };
@@ -76,6 +80,7 @@ const CurrentTab = (props) => {
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.vp_affairs1}
+              imgs={props.imgs}
               onUpdate={(leaderData) => {
                 const section = { section: "board" };
                 const oldLeader = { oldLeader: props.data.leaders.board.vp_affairs1 };
@@ -90,6 +95,7 @@ const CurrentTab = (props) => {
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.vp_affairs2}
+              imgs={props.imgs}
               onUpdate={(leaderData) => {
                 const section = { section: "board" };
                 const oldLeader = { oldLeader: props.data.leaders.board.vp_affairs2 };
@@ -104,6 +110,7 @@ const CurrentTab = (props) => {
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.webmaster}
+              imgs={props.imgs}
               onUpdate={(leaderData) => {
                 const section = { section: "board" };
                 const oldLeader = { oldLeader: props.data.leaders.board.webmaster };
@@ -118,6 +125,7 @@ const CurrentTab = (props) => {
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.proj_manager1}
+              imgs={props.imgs}
               onUpdate={(leaderData) => {
                 const section = { section: "board" };
                 const oldLeader = { oldLeader: props.data.leaders.board.proj_manager1 };
@@ -132,6 +140,7 @@ const CurrentTab = (props) => {
               className="col-md-6"
               enableEdit={true}
               leader={props.data.leaders.board.proj_manager2}
+              imgs={props.imgs}
               onUpdate={(leaderData) => {
                 const section = { section: "board" };
                 const oldLeader = { oldLeader: props.data.leaders.board.proj_manager2 };
@@ -176,6 +185,7 @@ const CurrentTab = (props) => {
                       className="col-md-6"
                       enableEdit={true}
                       leader={member}
+                      imgs={props.imgs}
                       onUpdate={(leaderData) => {
                         const section = { section: "officers" };
                         const r_group = { role_group: groupKey };
@@ -235,6 +245,7 @@ const CurrentTab = (props) => {
                       className="col-md-6"
                       enableEdit={true}
                       leader={member}
+                      imgs={props.imgs}
                       onUpdate={(leaderData) => {
                         const section = { section: "committee" };
                         const r_group = { role_group: groupKey };
@@ -282,6 +293,7 @@ const CurrentTab = (props) => {
                 className="col-md-6"
                 enableEdit={true}
                 leader={advisor}
+                imgs={props.imgs}
                 onUpdate={(leaderData) => {
                   const section = { section: "advisors" };
                   const oldLeader = { oldLeader: advisor };

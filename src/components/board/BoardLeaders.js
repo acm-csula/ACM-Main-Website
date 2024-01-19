@@ -64,6 +64,7 @@ const BoardLeaders = (props) => {
             <EditLeader
               leader={selectedLeader}
               show={editModal}
+              imgs={props.imgs}
               onHide={() => setEditModal(false)}
               onUpdate={props.onUpdate}
             />

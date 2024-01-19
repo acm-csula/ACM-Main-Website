@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import { useRef } from "react";
 import { Modal, Form, Button, InputGroup } from "react-bootstrap";
+import ListPhotos from "./ListPhotos";
 const EditLeader = (props) => {
   const firstRef = useRef("");
   const lastRef = useRef("");
   const positionRef = useRef("");
   const [img, setImg] = useState(null);
+  const [imageList, setListModal] = useState(false);
 
   const updateLeaderHandler = (e) => {
     e.preventDefault();
     const editedLeader = {
-      leader:{
+      leader: {
         first: firstRef.current.value
-        ? firstRef.current.value
-        : props.leader.first,
-      last: lastRef.current.value ? lastRef.current.value : props.leader.last,
-      position: positionRef.current.value
-        ? positionRef.current.value
-        : props.leader.position,
-      img: img ? img : props.leader.img
-      }
+          ? firstRef.current.value
+          : props.leader.first,
+        last: lastRef.current.value ? lastRef.current.value : props.leader.last,
+        position: positionRef.current.value
+          ? positionRef.current.value
+          : props.leader.position,
+        img: img ? img : props.leader.img,
+      },
     };
     props.onUpdate(editedLeader);
     props.onHide();
@@ -29,6 +31,10 @@ const EditLeader = (props) => {
   const handleImg = (e) => {
     const file = e.target.files[0];
     setImg(file);
+  };
+
+  const setExistingImage = (selectedImage) =>{
+    setImg(selectedImage.link);
   };
   return (
     <>
@@ -65,7 +71,14 @@ const EditLeader = (props) => {
               />
             </Form.Group>
             <Form.Group controlId="image">
-              <Form.Label>Update photo</Form.Label>
+              <br />
+              <Button onClick={() => setListModal(true)}>
+                Select existing photo
+              </Button>{" "}
+              OR
+              <br />
+              <br />
+              <Form.Label>Upload new photo</Form.Label>
               <Form.Control type="file" onChange={handleImg} />
             </Form.Group>
             <Modal.Footer>
@@ -82,6 +95,12 @@ const EditLeader = (props) => {
             </Modal.Footer>
           </Form>
         </Modal.Body>
+        <ListPhotos
+          imgs={props.imgs}
+          onHide={() => setListModal(false)}
+          onSetImage={setExistingImage}
+          show={imageList}
+        />
       </Modal>
     </>
   );

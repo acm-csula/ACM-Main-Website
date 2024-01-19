@@ -25,7 +25,13 @@ import {
   getDoc,
   arrayUnion,
 } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+} from "firebase/storage";
 import { db } from "../../professional-events/firebaseConfig";
 import CurrentTab from "./CurrentTab";
 import ArchiveTab from "./ArchiveTab";
@@ -53,48 +59,30 @@ const BoardAdmin = () => {
           });
           const latestBoard = boardList.at(boardList.length - 1);
           setCurrent(latestBoard);
-          let imgArray = [];
-          if (latestBoard) {
-            Object.keys(latestBoard.leaders.board).map((key) => {
-              const leader = latestBoard.leaders.board[key];
-              imgArray.push({
-                link: leader.img,
-                name: leader.first + " " + leader.last,
+
+          let imgArray=[];
+          const storageObj = getStorage();
+          const imgsRef = ref(
+            storageObj,
+            `${
+              "gs://acm-calstatela.appspot.com/Leaders" +
+              " " +
+              latestBoard.schoolyear
+            }`
+          );
+          listAll(imgsRef)
+            .then(async (res) => {
+              const downloadPromises = res.items.map(async (itemRef) => {
+                const downloadURL = await getDownloadURL(itemRef);
+                imgArray.push({link:downloadURL, name:itemRef.name});
               });
+
+              setImgLinks(imgArray);
+              await Promise.all(downloadPromises);
+            })
+            .catch((error) => {
+              console.error("Error listing items:", error.message);
             });
-            Object.keys(latestBoard.leaders.committee).map((roleKey) => {
-              Object.keys(latestBoard.leaders.committee[roleKey]).map(
-                (member) => {
-                  const leader = latestBoard.leaders.committee[roleKey][member]
-                  imgArray.push(
-                    {
-                      link: leader.img,
-                      name: leader.first + " " + leader.last,
-                    }
-                  );
-                }
-              );
-            });
-            Object.keys(latestBoard.leaders.officers).map((roleKey) => {
-              Object.keys(latestBoard.leaders.officers[roleKey]).map(
-                (member) => {
-                  const leader = latestBoard.leaders.officers[roleKey][member]
-                  imgArray.push({
-                    link: leader.img,
-                    name: leader.first + " " + leader.last,
-                  }
-                  );
-                }
-              );
-            });
-            latestBoard.leaders.advisors.map((advisor) => {
-              imgArray.push({
-                link: advisor.img,
-                name: advisor.first + " " + advisor.last,
-              });
-            });
-            setImgLinks(imgArray);
-          }
         }
       } catch (err) {
         console.log("Error occured when fetching board", err);
@@ -108,6 +96,7 @@ const BoardAdmin = () => {
     };
   }, []);
   console.log("Current Leaders State: ", currentBoard);
+  console.log("Current images: ", imgArray);
   const updateLeaderHandler = (newData) => {
     if (newData.section == "board") {
       if (newData.oldLeader.position == "President") {
@@ -316,6 +305,7 @@ const BoardAdmin = () => {
       const docRef = doc(db, "acm_board", currentBoard.id);
       const docSnapshot = await getDoc(docRef);
       let leader = newInfo.leader;
+      let downloadURL = "";
       if (typeof newInfo.leader.img === "object") {
         // Create a storage reference with the folderName as the path
         const storageRef = ref(
@@ -331,22 +321,23 @@ const BoardAdmin = () => {
         await uploadBytes(storageRef, newInfo.leader.img);
 
         // Get the download URL of the uploaded file
-        const downloadURL = await getDownloadURL(storageRef);
+        downloadURL = await getDownloadURL(storageRef);
 
         console.log("Image uploaded successfully:", downloadURL);
 
         leader.img = downloadURL;
         console.log(leader);
-
-        if (docSnapshot.exists()) {
-          // Document exists, proceed with the update
-          await updateDoc(docRef, { [boardPath]: leader });
-          console.log("Board leader successfully updated!");
-        } else {
-          console.error("Document does not exist!");
-        }
-        return downloadURL;
+      } else {
+        downloadURL = newInfo.leader.img;
       }
+      if (docSnapshot.exists()) {
+        // Document exists, proceed with the update
+        await updateDoc(docRef, { [boardPath]: leader });
+        console.log("Board leader successfully updated!");
+      } else {
+        console.error("Document does not exist!");
+      }
+      return downloadURL;
     } catch (error) {
       console.error("Error updating President subobject: ", error);
     }
