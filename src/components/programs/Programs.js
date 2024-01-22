@@ -68,7 +68,7 @@ const Programs = () => {
     <div className="programs-body">
       <div className="prodev-header-container">
         <div id="prodev-header-title">
-          Participate in our CodeCracking program for Fall 2023!
+          Participate in our CodeCracking program for Spring 2024!
         </div>
       </div>
       {/* 
@@ -90,7 +90,7 @@ const Programs = () => {
         <br />
         <span className="disclaimer">
           <b>
-            2. This program is a semester-long program, and sessions are twice a week.
+            2. This program is a semester-long program, and sessions are on Thursdays from 3:00-4:20pm.
           </b>
         </span>
       </div>

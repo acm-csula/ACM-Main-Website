@@ -7,7 +7,7 @@ import "./Programs.css";
 
 /********* UPDATING MENTORSHIP PAGE CONTENT FOR THE NEW SEMESTER *********
   Important Note: It is best to update this page's contents once
-            the design team has provided the flyers for the current semester
+            the DESIGN TEAMM has provided the flyers for the current semester
   1. If you don't have access to firestore, ask the Web Master to follow
     this step.
 
@@ -30,6 +30,12 @@ import "./Programs.css";
     - if the sign up link is provided paste the link at the Button element
     - then simply uncomment the Button element
 ***************************************************************************/
+
+/***********************************
+ * Spring 2024 - Mentorship page temporarily changed to Code Cracking Workshops
+ * 
+ * 
+ ***********************************/
 
 const Mentorship = (props) => {
   let isVideo = false;
@@ -79,37 +85,37 @@ const Mentorship = (props) => {
         {/* LIST OF WORKSHOPS/EVENTS/TOPICS  */}
         <div className="row workshop-container">
           <h1 className="program-description col-12">
-            Covered topics from the mentorship program:
+            Skills to be earned:
           </h1>
 
           <div className="skill-item col-lg-4 col-md-6 col-12">
             <div className="icon-box">
-              <Icon.FileEarmarkTextFill className="icon" />
-              <b>Building your Resume/LinkedIn</b>
-            </div>
-          </div>
-          <div className="skill-item col-lg-4 col-md-6 col-12">
-            <div className="icon-box">
-              <Icon.Search className="icon" />
-              <b>Internship/Job Hunting</b>
+              <Icon.Tools className="icon" />
+              <b>Technical skills</b>
             </div>
           </div>
           <div className="skill-item col-lg-4 col-md-6 col-12">
             <div className="icon-box">
               <Icon.PeopleFill className="icon" />
-              <b>Interviews</b>
+              <b>Interview skills</b>
+            </div>
+          </div>
+          <div className="skill-item col-lg-4 col-md-6 col-12">
+            <div className="icon-box">
+              <Icon.FileBinary className="icon" />
+              <b>Data Structures</b>
             </div>
           </div>
           <div className="skill-item2 col-lg-4 col-md-6 col-12">
             <div className="icon-box">
-              <Icon.Mortarboard className="icon" />
-              <b>Succeeding as an Undergrad</b>
+              <Icon.Diagram3 className="icon" />
+              <b>Algorithms</b>
             </div>
           </div>
           <div className="skill-item2 col-lg-4 col-md-6 col-12">
             <div className="icon-box">
-              <Icon.CashCoin className="icon" />
-              <b>Financial Management</b>
+              <Icon.ChatDots className="icon" />
+              <b>Critical Thinking</b>
             </div>
           </div>
         </div>
