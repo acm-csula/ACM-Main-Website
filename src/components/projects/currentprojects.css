@@ -6,6 +6,11 @@
 .current-card {
   background-image: url("./img/bluecard.jpg");
   background-size: cover;
+  width: auto;
+	height: auto;
+	background-color:#00000000 !important;
+	/* padding: 20px;
+	margin: 20px; */
 }
 
 .current-flyer {
