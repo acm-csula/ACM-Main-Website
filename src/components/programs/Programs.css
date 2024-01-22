@@ -60,7 +60,8 @@
 .programs-card {
   margin: auto;
   text-align: left;
-  max-width: 100%;
+  max-width: 85%;
+  background-color: #333030;
 }
 
 .programs-nav-link {

@@ -52,6 +52,13 @@
   text-align: left;
   padding-top: 32vh;
 }
+.about-card{
+  background-color: #1f1f1f;
+}
+
+.aboutme-card{
+  background-color: #1f1f1f;
+}
 
 .header-container {
   position: relative;
