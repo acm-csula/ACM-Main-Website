@@ -147,7 +147,7 @@ class FAQ extends React.Component {
                     After joining ACM the board sends out forums for ACM members
                     to fill out on which committee they’d like to join as a
                     leader. To learn more about when the forums are released,
-                    please contact an ACM leader.
+                    please contact us here at <a href="mailto:acm.calstatela@gmail.com">acm.calstatela@gmail.com</a>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>

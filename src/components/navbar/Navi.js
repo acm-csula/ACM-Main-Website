@@ -109,11 +109,11 @@ class Navi extends React.Component {
                   <div className="nav-dropdown-text">project workshops</div>
                 </NavDropdown.Item>
 
-                {/* Temporarily disabled due to cancellation
+                
                 <NavDropdown.Item href="/programs">
-                  <div className="nav-dropdown-text">mentorship</div>
+                  <div className="nav-dropdown-text">code cracking</div>
                 </NavDropdown.Item>
-                */}
+
                 <NavDropdown.Item href="/professional">
                   <div className="nav-dropdown-text">events</div>
                 </NavDropdown.Item>
@@ -181,9 +181,7 @@ class Navi extends React.Component {
         </Navbar>
         <div class="hover-announcements-background"></div>
         <div class="hover-announcements">
-          Come attend ACM's last general meeting on Nov 28th, 3:00-4:20pm, at
-          FA219 to see how much the club has accomplished over the Fall 2023
-          semester.
+          Welcome back CSULA students! Come by at our First General Meeting on February 6th at Room FA219 to kickstart our upcoming ACM events for Spring 2024!
         </div>
       </>
     );

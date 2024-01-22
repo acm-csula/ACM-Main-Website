@@ -37,7 +37,7 @@ const AddModal = (props) => {
         // Create a storage reference with the folderName as the path
         const storageRef = ref(
           storage,
-          `${"gs://acm-calstatela.appspot.com/" + semester + " " + year}/${title}`
+          `${"gs://acm-calstatela.appspot.com/" + semester + " " + year}/${image.name}`
         );
 
         // Upload the file to the specified folder
