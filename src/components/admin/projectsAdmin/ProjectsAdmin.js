@@ -69,7 +69,7 @@ const ProjectsAdmin = () => {
             var skillsArr = doc.data().level.beginners.skills
             skillsArr = skillsArr.join(", ")
             
-            uProject["level"] = "Beginners";
+            uProject["level"] = "beginners";
             uProject["imgUrl"] = doc.data().level.beginners.flyer;
             uProject["title"] = doc.data().level.beginners.title;
             uProject["id"] = doc.id;
@@ -85,7 +85,7 @@ const ProjectsAdmin = () => {
             var skillsArr = doc.data().level.advanced.skills;
             skillsArr = skillsArr.join(", ")
 
-            uProject["level"] = "Advanced";
+            uProject["level"] = "advanced";
             uProject["imgUrl"] = doc.data().level.advanced.flyer;
             uProject["title"] = doc.data().level.advanced.title;
             uProject["id"] = doc.id;
@@ -101,7 +101,7 @@ const ProjectsAdmin = () => {
             skillsArr = skillsArr.join(", ");
 
             const uProject = {};
-            uProject["level"] = "Beginners";
+            uProject["level"] = "beginners";
             uProject["imgUrl"] = doc.data().level.beginners.flyer;
             uProject["title"] = doc.data().level.beginners.title;
             uProject["id"] = doc.id;
@@ -116,7 +116,7 @@ const ProjectsAdmin = () => {
             var skillsArr = doc.data().level.advanced.skills;
             skillsArr = skillsArr.join(", ");
 
-            uProject["level"] = "Advanced";
+            uProject["level"] = "advanced";
             uProject["imgUrl"] = doc.data().level.advanced.flyer;
             uProject["title"] = doc.data().level.advanced.title;
             uProject["id"] = doc.id;
@@ -150,6 +150,7 @@ const ProjectsAdmin = () => {
         <Button className="position-absolute" style={{ marginLeft: "90vw" }}>
           Add a Project
         </Button>
+        {/* <ProjectAddModel show={addModel} onHide={() => setAddModel(false)} /> */}
         <Tabs
           defaultActiveKey={activeTab}
           variant="pills"

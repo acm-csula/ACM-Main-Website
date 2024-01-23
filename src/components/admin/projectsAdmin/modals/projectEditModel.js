@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Image, Modal, Row } from "react-bootstrap";
-
+import { db } from "../../../professional-events/firebaseConfig";
+import { doc, updateDoc } from "firebase/firestore";
 const ProjectEditModal = (props) => {
+  const [title, setTitle] = useState("");
+  const [leaders, setLeaders] = useState([]);
+  const [leaderImgs, setLeaderImgs] = useState([]);
+
+  const editHandler = () => {
+    const editProject = async () => {
+      try {
+        if (title !== "") {
+          const projectRef = doc(db, "project_workshop", props.data.id);
+
+          const nestedPath = "level." + props.data.level + ".title";
+
+          await updateDoc(projectRef, { [nestedPath]: title });
+
+          console.log("Successfully edited: ", title);
+          props.editProject(props.data.id, title);
+        }
+      } catch (error) {
+        console.error("Error editing project:", error.message);
+      }
+    };
+    editProject();
+  };
+
   return (
     <>
       <Modal
@@ -12,7 +37,7 @@ const ProjectEditModal = (props) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Edit "select_project"
+            Edit "{props.data.title}"
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -23,7 +48,8 @@ const ProjectEditModal = (props) => {
                 <Form.Control
                   type="text"
                   style={{ marginBottom: "40px" }}
-                  placeholder="project_title"
+                  placeholder={props.data.title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
 
                 <Form.Label>Change Skills</Form.Label>
@@ -42,7 +68,11 @@ const ProjectEditModal = (props) => {
                 <Form.Control type="file" size="lg" />
               </Form.Group>
             </Row>
-            <Button variant="primary" type="submit" style={{ float: "right" }}>
+            <Button
+              variant="success"
+              style={{ float: "right" }}
+              onClick={editHandler}
+            >
               Confirm
             </Button>
             <Button
