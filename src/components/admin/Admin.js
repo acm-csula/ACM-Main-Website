@@ -11,12 +11,12 @@ const Admin = () => {
         <Button variant="primary" className="m-2">
           Projects
         </Button>
-        <Link to="/admin/events">
+        <Link to="/ACM_admin/events">
           <Button variant="primary" className="m-2">
             Events
           </Button>
         </Link>
-        <Link to="/admin/board">
+        <Link to="/ACM_admin/board">
           <Button variant="primary" className="m-2">
             Board
           </Button>
