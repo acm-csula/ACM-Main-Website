@@ -118,14 +118,7 @@ body:not(.keyboardUser) *:focus {
     box-shadow: inset 0 -1px 0 #ddd;
   }
 
-.card{
-    background-color: #252830;
-    border-radius: 10px !important;
-    margin: 2.5rem;
-    position: relative !important;
-    height: 15rem;
-    width: 15rem;
-}
+
 
 #lstext{
     margin-top: 0.5rem;
