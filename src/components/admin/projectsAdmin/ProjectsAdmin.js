@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProjectsAdmin.scss";
 import { Button, Container, Tab, Tabs } from "react-bootstrap";
 import { db } from "../../professional-events/firebaseConfig";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, documentId, getCountFromServer, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 
 import ProjectAddModel from "./modals/projectAddModel";
 import ProjectSubTab from "./project-subtab";
@@ -47,15 +47,22 @@ const ProjectsAdmin = () => {
 
     const fetchData = async () => {
       try {
+        const collectionRef = collection(db, "project_workshop");
+        const countProjects = await getCountFromServer(collectionRef)
+        const latestDoc = countProjects.data().count
         const curProjects = query(
-          collection(db, "project_workshop"),
-          where("semester", "==", "Spring 2024")
-        );
-        const archProjects = query(
-          collection(db, "project_workshop"),
-          where("semester", "!=", "Spring 2024")
+          collectionRef,
+          where(documentId(), "==", latestDoc.toString())
         );
 
+
+        
+        
+        
+        const archProjects = query(
+          collectionRef,
+          where(documentId(), "!=", latestDoc.toString())
+        );
         const proSnap = await getDocs(curProjects);
         const archSnap = await getDocs(archProjects);
         const curGroup = [];
@@ -66,16 +73,16 @@ const ProjectsAdmin = () => {
           proSnap.forEach((doc) => {
             const uProject = {};
 
-            var skillsArr = doc.data().level.beginners.skills
-            skillsArr = skillsArr.join(", ")
-            
+            var skillsArr = doc.data().level.beginners.skills;
+            skillsArr = skillsArr.join(", ");
+
             uProject["level"] = "beginners";
             uProject["imgUrl"] = doc.data().level.beginners.flyer;
             uProject["title"] = doc.data().level.beginners.title;
             uProject["id"] = doc.id;
             uProject["leaders"] = doc.data().level.beginners.leaders;
-            uProject["skills"] = skillsArr
-            uProject["semester"] = doc.data().level.semester
+            uProject["skills"] = skillsArr;
+            uProject["semester"] = doc.data().level.semester;
             curGroup.push(uProject);
           });
 
@@ -84,19 +91,19 @@ const ProjectsAdmin = () => {
             const uProject = {};
 
             var skillsArr = doc.data().level.advanced.skills;
-            skillsArr = skillsArr.join(", ")
+            skillsArr = skillsArr.join(", ");
 
             uProject["level"] = "advanced";
             uProject["imgUrl"] = doc.data().level.advanced.flyer;
             uProject["title"] = doc.data().level.advanced.title;
             uProject["id"] = doc.id;
             uProject["leaders"] = doc.data().level.advanced.leaders;
-            uProject["skills"] = skillsArr
+            uProject["skills"] = skillsArr;
             uProject["semester"] = doc.data().level.semester;
             curGroup.push(uProject);
           });
 
-          //archived benginners snap 
+          //archived benginners snap
           // archSnap.forEach((doc) => {
 
           //   var skillsArr = doc.data().level.beginners.skills;
@@ -135,7 +142,8 @@ const ProjectsAdmin = () => {
           // console.log(currentProjectsTemp);
         }
       } catch (err) {
-        console.log("Error when fetching events");
+        console.log("Error when fetching events", err);
+
       }
     };
 

@@ -1,16 +1,38 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Image, Modal, Row } from "react-bootstrap";
 import { db } from "../../../professional-events/firebaseConfig";
-import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, collection, doc,getDocs, documentId, getCountFromServer, query, updateDoc, where } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const ProjectEditModal = (props) => {
   const [title, setTitle] = useState("");
   const [leaders, setLeaders] = useState([]);
   const [uploadImg, setUploadImg] = useState(null);
-  const [leaderImgs, setLeaderImgs] = useState([]);
+  
   const [skills, setSkills] = useState("");
 
   const [imgName, setImageName] = useState("");
+
+
+    const fetchData = async () => {
+      try{
+        const boardRef = collection(db, "acm_board");
+        const countBoardDocs = await getCountFromServer(boardRef)
+        const latestBoard = countBoardDocs.data().count
+        const curBoard = query(boardRef, where(documentId(), "==", latestBoard.toString()))
+        const boardSnap = await getDocs(curBoard)
+        
+        boardSnap.forEach((doc) => {
+          console.log(doc.data())
+        })
+
+      }
+      catch(err){
+        console.log(err)
+
+      }
+    }
+    fetchData();
+
 
   const editHandler = () => {
     const editProject = async () => {
@@ -44,14 +66,19 @@ const ProjectEditModal = (props) => {
 
           const nestedPath = "level." + props.data.level + ".flyer";
           await updateDoc(projectRef, { [nestedPath]: downloadLink });
-        } else if (skills !== "") {
+        } 
+        else if (skills !== "") {
           const nestedPath = "level." + props.data.level + ".skills";
           let skillsArr = skills.split(", ");
-          const fireLength = props.data.level.skills.length;
-          const fireSkillsArr = props.data.level.skills;
+          const fireSkillsArr = props.data.skills.split(', ');
+          
+          console.log(fireSkillsArr)
+          console.log(skillsArr)
+          
 
           for (const element of fireSkillsArr) {
-            await updateDoc(projectRef, { [nestedPath]: arrayRemove(element) });
+            
+            await updateDoc(projectRef, { [nestedPath]:  arrayRemove(element) });
           }
           for (const element of skillsArr) {
             await updateDoc(projectRef, { [nestedPath]: arrayUnion(element) });
@@ -90,7 +117,7 @@ const ProjectEditModal = (props) => {
                 <Form.Label>Change Title</Form.Label>
                 <Form.Control
                   type="text"
-                  style={{ marginBottom: "40px" }}
+                  style={{ marginBottom: "20px" }}
                   placeholder={props.data.title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -99,15 +126,14 @@ const ProjectEditModal = (props) => {
                 <Form.Control
                   as="textarea"
                   placeholder={props.data.skills}
-                  style={{ marginBottom: "40px", paddingBottom: "20px" }}
+                  onChange={(e) => setSkills(e.target.value)}
+                  style={{ marginBottom: "20px", paddingBottom: "20px" }}
                 />
 
                 <Form.Label>Change Leaders</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  onChange={(e) => setSkills(e.target.value)}
-                  style={{ paddingBottom: "20px" }}
-                />
+                <select multiple={true}>
+
+                </select>
               </Form.Group>
 
               <Form.Group style={{}} controlId="changeImg">
