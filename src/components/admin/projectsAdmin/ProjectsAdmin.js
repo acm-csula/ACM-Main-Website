@@ -49,11 +49,11 @@ const ProjectsAdmin = () => {
       try {
         const curProjects = query(
           collection(db, "project_workshop"),
-          where("semester", "==", "Fall 2023")
+          where("semester", "==", "Spring 2024")
         );
         const archProjects = query(
           collection(db, "project_workshop"),
-          where("semester", "!=", "Fall 2023")
+          where("semester", "!=", "Spring 2024")
         );
 
         const proSnap = await getDocs(curProjects);
@@ -75,6 +75,7 @@ const ProjectsAdmin = () => {
             uProject["id"] = doc.id;
             uProject["leaders"] = doc.data().level.beginners.leaders;
             uProject["skills"] = skillsArr
+            uProject["semester"] = doc.data().level.semester
             curGroup.push(uProject);
           });
 
@@ -91,42 +92,45 @@ const ProjectsAdmin = () => {
             uProject["id"] = doc.id;
             uProject["leaders"] = doc.data().level.advanced.leaders;
             uProject["skills"] = skillsArr
+            uProject["semester"] = doc.data().level.semester;
             curGroup.push(uProject);
           });
 
-          //archived benginners snap
-          archSnap.forEach((doc) => {
+          //archived benginners snap 
+          // archSnap.forEach((doc) => {
 
-            var skillsArr = doc.data().level.beginners.skills;
-            skillsArr = skillsArr.join(", ");
+          //   var skillsArr = doc.data().level.beginners.skills;
+          //   skillsArr = skillsArr.join(", ");
 
-            const uProject = {};
-            uProject["level"] = "beginners";
-            uProject["imgUrl"] = doc.data().level.beginners.flyer;
-            uProject["title"] = doc.data().level.beginners.title;
-            uProject["id"] = doc.id;
-            uProject["leaders"] = doc.data().level.beginners.leaders;
-            uProject["skills"] = skillsArr;
-            archGroup.push(uProject);
-          });
-          //archived advanced snap
-          archSnap.forEach((doc) => {
-            const uProject = {};
+          //   const uProject = {};
+          //   uProject["level"] = "beginners";
+          //   uProject["imgUrl"] = doc.data().level.beginners.flyer;
+          //   uProject["title"] = doc.data().level.beginners.title;
+          //   uProject["id"] = doc.id;
+          //   uProject["leaders"] = doc.data().level.beginners.leaders;
+          //   uProject["skills"] = skillsArr;
+          //   uProject["semester"] = doc.data().level.semester;
+          //   archGroup.push(uProject);
+          // });
+          // //archived advanced snap
+          // archSnap.forEach((doc) => {
+          //   const uProject = {};
 
-            var skillsArr = doc.data().level.advanced.skills;
-            skillsArr = skillsArr.join(", ");
+          //   var skillsArr = doc.data().level.advanced.skills;
+          //   skillsArr = skillsArr.join(", ");
 
-            uProject["level"] = "advanced";
-            uProject["imgUrl"] = doc.data().level.advanced.flyer;
-            uProject["title"] = doc.data().level.advanced.title;
-            uProject["id"] = doc.id;
-            uProject["leaders"] = doc.data().level.advanced.leaders;
-            uProject["skills"] = skillsArr;
-            archGroup.push(uProject);
-          });
+          //   uProject["level"] = "advanced";
+          //   uProject["imgUrl"] = doc.data().level.advanced.flyer;
+          //   uProject["title"] = doc.data().level.advanced.title;
+          //   uProject["id"] = doc.id;
+          //   uProject["leaders"] = doc.data().level.advanced.leaders;
+          //   uProject["skills"] = skillsArr;
+          //   uProject["semester"] = doc.data().level.semester;
+          //   archGroup.push(uProject);
+          // });
 
           setCurrentProjects(curGroup);
-          setArchivedProjects(archGroup);
+          // setArchivedProjects(archGroup);
 
           // console.log(currentProjectsTemp);
         }
