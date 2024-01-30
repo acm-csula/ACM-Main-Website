@@ -107,7 +107,7 @@ const CurrentProjects = (props) => {
                 size="sm"
                 disabled
               >
-                Join Now!
+                Form opens Feb 6th
               </Button>
             </Card.Body>
           </Card>
@@ -173,7 +173,7 @@ const CurrentProjects = (props) => {
                 size="sm"
                 disabled
               >
-                Join Now!
+                Form opens Feb 6th
               </Button>
             </Card.Body>
           </Card>
