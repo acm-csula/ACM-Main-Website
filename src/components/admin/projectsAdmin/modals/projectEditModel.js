@@ -1,38 +1,71 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Image, Modal, Row } from "react-bootstrap";
 import { db } from "../../../professional-events/firebaseConfig";
-import { arrayRemove, arrayUnion, collection, doc,getDocs, documentId, getCountFromServer, query, updateDoc, where } from "firebase/firestore";
+import {
+  arrayRemove,
+  arrayUnion,
+  collection,
+  doc,
+  getDocs,
+  documentId,
+  getCountFromServer,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Multiselect from "multiselect-react-dropdown";
 const ProjectEditModal = (props) => {
   const [title, setTitle] = useState("");
   const [leaders, setLeaders] = useState([]);
   const [uploadImg, setUploadImg] = useState(null);
-  
   const [skills, setSkills] = useState("");
-
   const [imgName, setImageName] = useState("");
+  const [selectedLeaders, setSelectedLeaders] = useState([])
 
+  useEffect(() => {
+    let isMounted = true;
 
-    const fetchData = async () => {
-      try{
-        const boardRef = collection(db, "acm_board");
-        const countBoardDocs = await getCountFromServer(boardRef)
-        const latestBoard = countBoardDocs.data().count
-        const curBoard = query(boardRef, where(documentId(), "==", latestBoard.toString()))
-        const boardSnap = await getDocs(curBoard)
-        
-        boardSnap.forEach((doc) => {
-          console.log(doc.data())
-        })
+    if (isMounted) {
+      const fetchData = async () => {
+        try {
+          const boardRef = collection(db, "acm_board");
+          const countBoardDocs = await getCountFromServer(boardRef);
+          let latestBoard = countBoardDocs.data().count;
+          if (latestBoard < 10) {
+            latestBoard = "0" + latestBoard.toString();
+          }
+          console.log(latestBoard);
+          const curBoard = query(
+            boardRef,
+            where(documentId(), "==", latestBoard)
+          );
+          const boardSnap = await getDocs(curBoard);
 
-      }
-      catch(err){
-        console.log(err)
+          boardSnap.forEach((doc) => {
+            //only fetches officers and committee
+            let leaderArr = [];
+            let officerArr = doc.data().leaders.officers.Project;
+            let committeeArr = doc.data().leaders.committee.Projects;
 
-      }
+            for (const element of officerArr) {
+              const name = element.first + " " + element.last;
+              leaderArr.push(name);
+            }
+
+            for (const element of committeeArr) {
+              const name = element.first + " " + element.last;
+              leaderArr.push(name);
+            }
+            setLeaders(leaderArr);
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchData();
     }
-    fetchData();
-
+  }, []);
 
   const editHandler = () => {
     const editProject = async () => {
@@ -66,23 +99,42 @@ const ProjectEditModal = (props) => {
 
           const nestedPath = "level." + props.data.level + ".flyer";
           await updateDoc(projectRef, { [nestedPath]: downloadLink });
-        } 
+        }
+
+        //handles skills
         else if (skills !== "") {
           const nestedPath = "level." + props.data.level + ".skills";
           let skillsArr = skills.split(", ");
-          const fireSkillsArr = props.data.skills.split(', ');
-          
-          console.log(fireSkillsArr)
-          console.log(skillsArr)
-          
+          const fireSkillsArr = props.data.skills.split(", ");
+
+          console.log(fireSkillsArr);
+          console.log(skillsArr);
 
           for (const element of fireSkillsArr) {
-            
-            await updateDoc(projectRef, { [nestedPath]:  arrayRemove(element) });
+            await updateDoc(projectRef, { [nestedPath]: arrayRemove(element) });
           }
           for (const element of skillsArr) {
             await updateDoc(projectRef, { [nestedPath]: arrayUnion(element) });
           }
+        }
+        else if (selectedLeaders.length !== 0){
+          const nestedPath = "level." + props.data.level + ".leaders";
+          const fireLeaderArr = props.data.leaders;
+
+          
+          
+          for(const entry of selectedLeaders){
+            const leaderArr = {}
+            leaderArr["name"] = entry
+            
+            
+            
+            
+
+
+          }
+
+          await updateDoc(projectRef, {[nestedPath]: arrayRemove(selectedLeaders)})
         }
       } catch (error) {
         console.error("Error editing project:", error.message);
@@ -131,9 +183,24 @@ const ProjectEditModal = (props) => {
                 />
 
                 <Form.Label>Change Leaders</Form.Label>
-                <select multiple={true}>
-
-                </select>
+                <Multiselect
+                  isObject={false}
+                  options={leaders}
+                  placeholder="Select Leaders"
+                  onSelect={(e) => {
+                    setSelectedLeaders(e)
+                  }}
+                  style={{
+                    searchBox: {
+                      backgroundColor: "white",
+                    },
+                    multiselectContainer: {
+                      backgroundColor: "black",
+                      color: "black",
+                      boarderRadius: "20px",
+                    },
+                  }}
+                />
               </Form.Group>
 
               <Form.Group style={{}} controlId="changeImg">
