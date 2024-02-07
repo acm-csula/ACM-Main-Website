@@ -137,10 +137,10 @@ const Mentorship = (props) => {
           variant="success"
           className="join-button mx-auto"
           size="lg"
-          href="https://forms.gle/hAjvNSbS47ghMxuE8"
-          disabled
+          href="https://docs.google.com/forms/d/e/1FAIpQLSe7wkqq5MKmvaVF5D6ik3EceyjAaiRltGplG86G4wnKW30kvw/viewform"
+          
         >
-          Form not yet available..
+          Join Now!
         </Button>
       </div>
     </div>

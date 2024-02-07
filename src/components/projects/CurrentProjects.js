@@ -103,11 +103,10 @@ const CurrentProjects = (props) => {
               </Button>
               <Button
                 variant="success"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSdIf1IzGFR7u8kjlTy4GS_ZQpVcgzdIFavdsSf2A8BAgLcdGQ/viewform"
+                href="https://docs.google.com/forms/d/e/1FAIpQLScaDpC5NeRCuvXgheLtCTw1wpmNR06LL_TsbLDnOTYVCXH9yQ/viewform"
                 size="sm"
-                disabled
               >
-                Form opens Feb 6th
+                Join Now!
               </Button>
             </Card.Body>
           </Card>
@@ -169,11 +168,10 @@ const CurrentProjects = (props) => {
               </Button>
               <Button
                 variant="success"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSdG4hsCiknMPzvGUWOt8aewiYZR7UV_xEDjfcAtyQk3nJ9Vfw/viewform"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSd4Scdl9AstL8S_AMdu3URlp62KqcShg4E_vUolxCqsugl5uw/viewform"
                 size="sm"
-                disabled
               >
-                Form opens Feb 6th
+                Join Now!
               </Button>
             </Card.Body>
           </Card>
