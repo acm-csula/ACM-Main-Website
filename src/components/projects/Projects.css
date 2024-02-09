@@ -238,7 +238,7 @@ iframe[src*="youtube"] {
   color: black !important;
 }
 
-.card-title {
+.titlecard  {
   border: 3px solid black;
   border-radius: 4em;
   width: 50%;

@@ -28,17 +28,19 @@ class Projects extends React.Component {
       const queryWorkshops = await getDocs(projs);
       const project = [];
 
+      
       queryWorkshops.forEach((doc) => {
         const data = doc.data();
         project.push(data);
+        console.log(data);
       });
       this.setState({ currentProjSem: project.reverse()[0].semester });
       this.setState({ currentProj: project.shift() });
       this.setState({ archiveProj: project });
 
-
     
 
+      
     // fetchEvents();
     // firebase
     //   .firestore()
@@ -97,7 +99,7 @@ class Projects extends React.Component {
               3.{" "}
               <span class="date-disclaimer">
                 {" "}
-                Sign-ups are officially closed
+                Sign-up opens February 6th
               </span>
             </b>
           </div>
@@ -118,7 +120,7 @@ class Projects extends React.Component {
           <iframe
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/B6H_Jzp_NB4"
+            src="https://www.youtube.com/embed/8REOyF19cqQ"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

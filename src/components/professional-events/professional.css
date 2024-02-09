@@ -53,6 +53,12 @@
   margin-bottom: 4rem;
 }
 
+.professional-card{
+  width: auto;
+	height: auto;
+	background-color:#00000000 !important;
+}
+
 /* Don't delete: .jumbotron affects all Jumbotrons */
 .jumbotron {
   color: white;

@@ -8,7 +8,7 @@ import "./Programs.css";
 /********* UPDATING MENTORSHIP PAGE CONTENT FOR THE NEW SEMESTER *********
   Important Note: It is best to update this page's contents once
             the design team has provided the flyers for the current semester
-  1. If you don't have access to firestore, ask the Web Master to follow
+  1. If you don't have access to firebase firestore (database), ask the Web Master to follow
     this step.
 
     Instruction: Update the "mentorship" collection in the firebase.
@@ -18,7 +18,7 @@ import "./Programs.css";
     - if flyer and/or videoLink is unavailable, leave it blank
 
   2. If the current program is Mentorship, leave the description as it is.
-    However, if current semester has different type of program for example
+    However, if current semester has different type of program for example:
     PRO-DEV workshop, then feel free to change the description an
     *Mentorship default description is at the bottom page*
   3. Adding icons:
@@ -62,18 +62,21 @@ const Mentorship = (props) => {
           </span>
         </h2>
         <p className="aboutprogram">
-          Welcome to our Code Cracking Workshop – your key to success in the
-          challenging world of technical interviews! Are you preparing for
-          software engineering, data science, or any technical role interviews?
-          Look no further! Our workshop is designed to equip you with the skills
-          and confidence needed to ace those crucial technical interviews and
-          land your dream job.
+          If you feel that you are lacking professional skills, or you seek more
+          involvement in the tech industry, then this program is perfect for
+          you! The mentorship program will teach valuable skills and provide
+          resources that are crucial for a professional. Additionally, the
+          program helps increase your opportunity in landing jobs and improves
+          your financial status. By applying, you will have the opportunity to
+          learn important life lessons from your mentors that are not taught in
+          the typical classroom environment. Overall, this program will benefit
+          you professionally and academically by the time you graduate.
           <br />
-          Workshops are open for sign up to{" "}
+          Mentorships are open for sign up to{" "}
           <b>
             <u>all ACM members</u>
           </b>{" "}
-          in all levels (Freshmen, Sophomores, Juniors and Seniors)
+          in all different levels (Freshmen, Sophomores, Juniors and Seniors)
         </p>
 
         {/* LIST OF WORKSHOPS/EVENTS/TOPICS  */}
@@ -181,28 +184,4 @@ export default Mentorship;
           </b>{" "}
           in all different levels (Freshmen, Sophomores, Juniors and Seniors)
         </p>
-
-
-  ***This is the description of Code Cracking program***
-  Welcome to our Mastering Technical Interviews Workshop – your key to success in the challenging world of technical interviews! Are you preparing for software engineering, data science, or any technical role interviews? Look no further! Our workshop is designed to equip you with the skills and confidence needed to ace those crucial technical interviews and land your dream job.
-
-What to Expect:
-
-Comprehensive Curriculum: Our workshop covers a wide range of technical topics commonly tested in interviews, including data structures, algorithms, problem-solving strategies, and system design. You'll gain a deep understanding of the key concepts that interviewers often focus on.
-
-Interactive Sessions: Engage in hands-on coding sessions, mock interviews, and collaborative problem-solving activities. Our experienced instructors will guide you through real-world scenarios, providing valuable insights and personalized feedback to enhance your problem-solving skills.
-
-Interview Strategies: Learn effective strategies to approach different types of technical interviews. From behavioral questions to coding challenges, we'll help you develop a solid game plan to tackle any interview scenario with confidence.
-
-Peer Learning: Connect with like-minded individuals who share your passion for technical excellence. Collaborate with peers, participate in group discussions, and build a supportive network within the tech community.
-
-Why Choose Our Workshop:
-
-Experienced Instructors: Our team of industry professionals and experienced interviewers bring a wealth of knowledge to the table. Benefit from their insights, tips, and firsthand experience navigating technical interviews at top tech companies.
-
-Tailored Learning: Whether you're a recent graduate or a seasoned professional, our workshop is crafted to meet the needs of participants at various skill levels. We provide a supportive learning environment where everyone can thrive.
-
-Practical Approach: We believe in learning by doing. Our workshop emphasizes practical, real-world applications of technical concepts. You'll leave not just with knowledge but with the ability to apply it effectively.
-
-Don't miss this opportunity to sharpen your technical skills and boost your confidence! Join us on the journey to mastering technical interviews. 
 */

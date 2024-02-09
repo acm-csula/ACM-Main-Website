@@ -126,7 +126,7 @@ class AboutUs extends React.Component {
         <div className="bottom-section">
           <div id="about-us-info">
             <Accordion>
-              <Card>
+              <Card className="aboutme-card">
                 <Accordion.Toggle
                   className="accordian-container"
                   as={Card.Header}
@@ -141,7 +141,7 @@ class AboutUs extends React.Component {
                 </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey="0">
-                  <Card.Body>
+                  <Card.Body className="about-card">
                     <Row className="info-row">
                       <Col className="info-col" lg={6}>
                         <div className="info-content-container">
@@ -179,7 +179,7 @@ class AboutUs extends React.Component {
                 </Accordion.Collapse>
               </Card>
 
-              <Card>
+              <Card className="aboutme-card">
                 <Accordion.Toggle
                   className="accordian-container"
                   as={Card.Header}
@@ -193,7 +193,7 @@ class AboutUs extends React.Component {
                 </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey="1">
-                  <Card.Body>
+                  <Card.Body className="about-card">
                     <Row className="info-row">
                       <Col className="info-col" lg={6}>
                         <div className="info-content-container">
@@ -227,7 +227,7 @@ class AboutUs extends React.Component {
                 </Accordion.Collapse>
               </Card>
 
-              <Card>
+              <Card className="aboutme-card">
                 <Accordion.Toggle
                   className="accordian-container"
                   as={Card.Header}
@@ -241,7 +241,7 @@ class AboutUs extends React.Component {
                 </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey="2">
-                  <Card.Body>
+                  <Card.Body className="about-card">
                     <Row className="info-row">
                       <Col className="info-col" lg={6}>
                         <div className="info-content-container">
@@ -274,7 +274,7 @@ class AboutUs extends React.Component {
                 </Accordion.Collapse>
               </Card>
 
-              <Card>
+              <Card className="aboutme-card">
                 <Accordion.Toggle
                   className="accordian-container"
                   as={Card.Header}
@@ -288,7 +288,7 @@ class AboutUs extends React.Component {
                 </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey="3">
-                  <Card.Body>
+                  <Card.Body className="about-card">
                     <Row className="info-row">
                       <Col className="info-col" lg={6}>
                         <div className="info-content-container">

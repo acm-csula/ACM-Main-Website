@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import logo from "./img/acm_logo.png";
+import { Button } from "react-bootstrap";
+import * as Icon from "react-bootstrap-icons";
+import EditLeader from "../admin/boardAdmin/modals/EditLeader";
+import DeleteLeader from "../admin/boardAdmin/modals/DeleteLeader";
 
 const BoardLeaders = (props) => {
+  //the following useState variables are only used for the board admin
+  const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDelModal] = useState(false);
+  const [selectedLeader, setSelected] = useState(null);
+
   if (props.leader == null) {
     return <div></div>;
   } else {
     return (
       <div class="leadercontainer card">
+        {props.enableEdit && (
+          <div>
+            <Button
+              style={{ width: "3em" }}
+              onClick={() => {
+                setSelected(props.leader);
+                setEditModal(true);
+              }}
+            >
+              <Icon.PencilFill />
+            </Button>
+            <Button style={{ width: "3em" }}
+              onClick={() => {
+                setSelected(props.leader);
+                setDelModal(true);
+              }} variant="danger">
+              <Icon.Trash />
+            </Button>
+          </div>
+        )}
         <div align="center">
           {props.leader.img && (
             <img
@@ -16,10 +45,7 @@ const BoardLeaders = (props) => {
             />
           )}
           {!props.leader.img && (
-            <img
-              class="leaderimg rounded-circle p-3 card-img"
-              src={logo}
-            />
+            <img class="leaderimg rounded-circle p-3 card-img" src={logo} />
           )}
 
           <div class="card-body leadercardbody">
@@ -31,6 +57,25 @@ const BoardLeaders = (props) => {
             </h6>
           </div>
         </div>
+
+        {/*This component is only rendered on editing leaders*/}
+        {selectedLeader && (
+          <>
+            <EditLeader
+              leader={selectedLeader}
+              show={editModal}
+              imgs={props.imgs}
+              onHide={() => setEditModal(false)}
+              onUpdate={props.onUpdate}
+            />
+            <DeleteLeader
+              leader={selectedLeader}
+              show={deleteModal}
+              onDelete={props.onDelete}
+              onHide={() => setDelModal(false)}
+            />
+          </>
+        )}
       </div>
     );
   }

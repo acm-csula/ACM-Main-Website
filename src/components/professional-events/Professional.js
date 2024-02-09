@@ -106,6 +106,7 @@ class Professional extends React.Component {
               this.state.upcomingEvent.map((upcomingEvents) => {
                 return (
                   <Card
+                    className="professional-card"
                     style={{ width: "24rem", padding: "10px", margin: "2em" }}
                   >
                     <center>
@@ -141,6 +142,7 @@ class Professional extends React.Component {
               this.state.semesterEvent.map((semesterEvents) => {
                 return (
                   <Card
+                    className="professional-card"
                     style={{ width: "24rem", padding: "10px", margin: "2em" }}
                     onLoad
                   >

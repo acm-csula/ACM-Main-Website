@@ -70,11 +70,11 @@ class App extends React.Component {
 
     const AdminContainer = () => (
       <>
-        <Route exact path="/admin" component={Admin} />
+        <Route exact path="/ACM_admin" component={Admin} />
         <Route path="/login" component={ACM_Login} />
-        <Route path="/admin/projects" component={ProjectsAdmin} />
-        <Route path="/admin/events" component={EventsAdmin} />
-        <Route path="/admin/board" component={BoardAdmin} />
+        <Route path="/ACM_admin/projects" component={ProjectsAdmin} />
+        <Route path="/ACM_admin/events" component={EventsAdmin} />
+        <Route path="/ACM_admin/board" component={BoardAdmin} />
       </>
     );
     const DefaultContainer = () => (
@@ -113,7 +113,7 @@ class App extends React.Component {
           <Switch>
             <Route
               exact
-              path={["/login", "/admin*"]}
+              path={["/login", "/ACM_admin*"]}
               component={AdminContainer}
             />
             <Route component={DefaultContainer} />
