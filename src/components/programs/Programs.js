@@ -5,21 +5,12 @@ import { Carousel } from "react-responsive-carousel";
 import { Col, Tab, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Programs.css";
-import Mentorship from "./Mentorship.js";
 import ArchiveProgram from "./ArchivePrograms.js";
 import { db } from "../professional-events/firebaseConfig.js";
 import { collectionGroup, getDocs, query, orderBy } from "firebase/firestore";
-/* Updating the Mentorship page:
-  - Update schoolYears array
-  - Add new mentorship section
-  - update the flyer image
-*/
+import CodeCracking from "./CodeCracking.js";
+import Mentorship from "./Mentorship.js"
 
-//These are list of semesters that has mentorship programs
-/*Step 1: If there's a new program, insert the new semester year
-as the first element with this format -> ["first", *Season* *Year*]
-Step 2: Update the following ordinals of older semesters
-*/
 const Programs = () => {
   const [currentSem, setCurrent] = useState(null);
   const [currentProgram, setProgram] = useState(null);
@@ -60,10 +51,6 @@ const Programs = () => {
     };
   }, []);
 
-  /*This function updates the text of the dropdown button*/
-  const changeYear = (sem) => {
-    setCurrent(sem);
-  };
   return (
     <div className="programs-body">
       <div className="prodev-header-container">
@@ -71,11 +58,6 @@ const Programs = () => {
           Participate in our CodeCracking program for Spring 2024!
         </div>
       </div>
-      {/* 
-                Remember to update dates in the disclaimer: 
-                1. Mentorship program signups open
-                2. Signup deadline 
-                */}
 
       <div className="disclaimer-body">
         <h3 className="disclaimer_header">
@@ -94,22 +76,6 @@ const Programs = () => {
           </b>
         </span>
       </div>
-      {/* Commenting videos for now because there's not yet new ones
-        
-        <div className="videoWrapper">
-          <div className="embed-responsive embed-responsive-16by9">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/gCGZ_U_9jeY"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
-        */}
       <div className="card programs-card">
         <Tab.Container id="left-tabs-example" defaultActiveKey={"current"}>
           <Nav className="project-tab-label" variant="pills">
@@ -134,13 +100,10 @@ const Programs = () => {
             */}
           </Nav>
           <Col sm={12} className="programs-tab-container"></Col>
-          {/*Starting here, each tab pane should be mapped*/}
-          {/*Access total number of past mentorships*/}
-          {/*Each event key must be identified as just index numbers 0 to n*/}
           {currentProgram && (
             <Tab.Content className="programs-tab-content">
               <Tab.Pane eventKey={"current"}>
-                <Mentorship mentorship={currentProgram} />
+                <CodeCracking mentorship={currentProgram} />
                 <div class="border-carousel"></div>
                 <h2>
                   ❖{" "}
