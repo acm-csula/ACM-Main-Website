@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, Form, Image, Modal, Row } from "react-bootstrap";
+import { Button, Col, Form, Image, Modal, Row } from "react-bootstrap";
 import { db } from "../../../professional-events/firebaseConfig";
 import {
-  arrayRemove,
-  arrayUnion,
   collection,
   doc,
   getDocs,
@@ -13,20 +11,44 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  deleteObject,
+} from "firebase/storage";
 import Multiselect from "multiselect-react-dropdown";
 const ProjectEditModal = (props) => {
   const [title, setTitle] = useState("");
   const [leaders, setLeaders] = useState([]);
+  const [curLeaders, setCurLeaders] = useState([]);
   const [uploadImg, setUploadImg] = useState(null);
   const [skills, setSkills] = useState("");
   const [imgName, setImageName] = useState("");
-  const [selectedLeaders, setSelectedLeaders] = useState([])
+  const [selectedLeaders, setSelectedLeaders] = useState([]);
+  const [hideModel, setHideModel] = useState(false)
 
   useEffect(() => {
     let isMounted = true;
 
     if (isMounted) {
+      if (props.data.level === "advanced") {
+        const leaderArr = [];
+        for (const leader of props.data.leaders) {
+          leaderArr.push(leader.name);
+        }
+        setCurLeaders(leaderArr);
+      }
+      if (props.data.level === "beginners") {
+        const leaderArr = [];
+        for (const leader of props.data.leaders) {
+          leaderArr.push(leader.name);
+        }
+        setCurLeaders(leaderArr);
+      }
+
       const fetchData = async () => {
         try {
           const boardRef = collection(db, "acm_board");
@@ -35,7 +57,7 @@ const ProjectEditModal = (props) => {
           if (latestBoard < 10) {
             latestBoard = "0" + latestBoard.toString();
           }
-          console.log(latestBoard);
+          // console.log(latestBoard);
           const curBoard = query(
             boardRef,
             where(documentId(), "==", latestBoard)
@@ -65,7 +87,7 @@ const ProjectEditModal = (props) => {
       };
       fetchData();
     }
-  }, []);
+  }, [props.data.leaders, props.data.level]);
 
   const editHandler = () => {
     const editProject = async () => {
@@ -77,16 +99,43 @@ const ProjectEditModal = (props) => {
           const nestedPath = "level." + props.data.level + ".title";
           await updateDoc(projectRef, { [nestedPath]: title });
           console.log("Successfully edited: ", title);
-          props.editProject(props.data.id, title);
+          // props.editProject(props.data.id, title);
         }
         //handles image uploded and flyer change
-        else if (uploadImg) {
+        if (uploadImg) {
           const storage = getStorage();
-          const storageRef = ref(
-            storage,
-            `${"gs://acm-calstatela.appspot.com/Spring 2024/" + imgName}`
-          );
-          await uploadBytes(storageRef, uploadImg);
+          const storageRef = ref(storage, `${"Spring 2024/" + imgName}`);
+          const semesterRef = ref(storage, "Spring 2024/");
+          listAll(semesterRef)
+            .then((res) => {
+              res.items.forEach(async (itemRef) => {
+                // console.log(itemRef.fullPath);
+                const fileRef = ref(
+                  storage,
+                  `${"gs://acm-calstatela.appspot.com/" + itemRef.fullPath}`
+                );
+                // console.log(itemRef.fullPath);
+                const flyerLink = await getDownloadURL(fileRef);
+                if (flyerLink === props.data.imgUrl) {
+                  deleteObject(fileRef)
+                    .then(() => {
+                      console.log(itemRef.name + " deleted Successfully");
+                    })
+                    .catch((err) => {
+                      console.log("Failed to Delete: " + err);
+                    });
+                }
+              });
+            })
+            .catch((err) => {
+              console.log("Error fetching list from storage: " + err);
+            });
+
+          await uploadBytes(storageRef, uploadImg)
+            .then()
+            .catch((err) => {
+              console.log("Error uploading: " + err);
+            });
 
           const downloadLink = await getDownloadURL(
             ref(
@@ -102,45 +151,86 @@ const ProjectEditModal = (props) => {
         }
 
         //handles skills
-        else if (skills !== "") {
+        if (skills !== "") {
           const nestedPath = "level." + props.data.level + ".skills";
           let skillsArr = skills.split(", ");
-          const fireSkillsArr = props.data.skills.split(", ");
+          // console.log(skillsArr);
 
-          console.log(fireSkillsArr);
-          console.log(skillsArr);
-
-          for (const element of fireSkillsArr) {
-            await updateDoc(projectRef, { [nestedPath]: arrayRemove(element) });
-          }
-          for (const element of skillsArr) {
-            await updateDoc(projectRef, { [nestedPath]: arrayUnion(element) });
-          }
+          await updateDoc(projectRef, { [nestedPath]: skillsArr });
         }
-        else if (selectedLeaders.length !== 0){
+        //handles leaders
+        if (selectedLeaders.length !== 0) {
+          // console.log("Made it!");
+
           const nestedPath = "level." + props.data.level + ".leaders";
-          const fireLeaderArr = props.data.leaders;
+          const newLeaderArr = [];
+          let officerRef = {};
+          let committeeRef = {};
 
-          
-          
-          for(const entry of selectedLeaders){
-            const leaderArr = {}
-            leaderArr["name"] = entry
-            
-            
-            
-            
+          const boardRef = collection(db, "acm_board");
+          const countBoardDocs = await getCountFromServer(boardRef);
+          let latestBoard = countBoardDocs.data().count;
+          if (latestBoard < 10) {
+            latestBoard = "0" + latestBoard.toString();
+          }
+          // console.log(latestBoard);
+          const curBoard = query(
+            boardRef,
+            where(documentId(), "==", latestBoard)
+          );
+          const boardSnap = await getDocs(curBoard);
 
+          boardSnap.forEach((doc) => {
+            officerRef = doc.data().leaders.officers.Project;
+            committeeRef = doc.data().leaders.committee.Projects;
+          });
 
+          for (const entry of selectedLeaders) {
+            let splitName = entry.split(" ");
+            //deals with multiple last names
+            if (splitName.length > 3) {
+              let tempArr = splitName.shift();
+              let lastName = tempArr.join(" ");
+              splitName[1] = lastName;
+              splitName.splice(2, splitName.length - 2);
+            }
+            for (const leader of officerRef) {
+              if (
+                splitName[0] === leader.first &&
+                splitName[1] === leader.last
+              ) {
+                const newLeader = {};
+                newLeader["img"] = leader.img;
+                newLeader["name"] = entry;
+                newLeaderArr.push(newLeader);
+              }
+            }
+            for (const leader of committeeRef) {
+              if (
+                splitName[0] === leader.first &&
+                splitName[1] === leader.last
+              ) {
+                const newLeader = {};
+                newLeader["img"] = leader.img;
+                newLeader["name"] = entry;
+                newLeaderArr.push(newLeader);
+              }
+            }
           }
 
-          await updateDoc(projectRef, {[nestedPath]: arrayRemove(selectedLeaders)})
+          await updateDoc(projectRef, { [nestedPath]: newLeaderArr });
+          // console.log(selectedLeaders)
+          // console.log(newLeaderArr)
+
+          // await updateDoc(projectRef, {[nestedPath]: arrayRemove(selectedLeaders)})
         }
       } catch (error) {
         console.error("Error editing project:", error.message);
       }
     };
     editProject();
+    console.log("Works!");
+    setHideModel(true);
   };
 
   const handleImg = (e) => {
@@ -156,16 +246,41 @@ const ProjectEditModal = (props) => {
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
-        centered>
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Edit "{props.data.title}"
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form className="mb-5">
-            <Row md={5} style={{ gap: "40px" }}>
-              <Form.Group controlId="title" style={{ gap: "40px" }}>
+        <Modal.Body style={{}}>
+          <Form
+            style={
+              {
+                // marginLeft: "20px",
+              }
+            }
+          >
+            {/* <Row
+              md={2}
+              style={{
+                gap: "100px",
+                overflow: "auto",
+                display: "inline",
+              }}
+            > */}
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                gap: "150px",
+              }}
+            >
+              <Form.Group
+                controlId="title"
+                style={{ marginTop: "25px", width: "500px" }}
+              >
                 <Form.Label>Change Title</Form.Label>
                 <Form.Control
                   type="text"
@@ -186,9 +301,10 @@ const ProjectEditModal = (props) => {
                 <Multiselect
                   isObject={false}
                   options={leaders}
+                  // selectedValues={curLeaders}
                   placeholder="Select Leaders"
                   onSelect={(e) => {
-                    setSelectedLeaders(e)
+                    setSelectedLeaders(e);
                   }}
                   style={{
                     searchBox: {
@@ -207,16 +323,24 @@ const ProjectEditModal = (props) => {
                 <Image width="300px" height="350px" src={props.imgUrl} />
                 <Form.Control type="file" size="lg" onChange={handleImg} />
               </Form.Group>
-            </Row>
+            </div>
+
+            {/* </Row> */}
             <Button
               variant="success"
               style={{ float: "right" }}
-              onClick={editHandler}>
+              onClick={(e) => {
+                editHandler(e)
+                props.onHide?.(e)
+              }}
+              
+            >
               Confirm
             </Button>
             <Button
               onClick={props.onHide}
-              style={{ float: "right", marginRight: "20px" }}>
+              style={{ float: "right", marginRight: "20px" }}
+            >
               Close
             </Button>
           </Form>
