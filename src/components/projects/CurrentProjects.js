@@ -55,11 +55,13 @@ const CurrentProjects = (props) => {
               class="current-flyer img-thumbnail shadow-lg mb-5 bg-white rounded"
             />
             <Card.Body>
-              <Card.Title className="shadow mb-3">
+              <Card.Title className="titlecard shadow mb-3">
                 Beginners Workshop
               </Card.Title>
               <Card.Text className="currentDesc p-2">
-                Interested in app development? Improve on your critical thinking and programming skills by developing a wordle game in our beginners workshop.
+                Learn the fundamentals of programming, and develop your first
+                project using the VSCode editor here in our beginner's project
+                workshop
                 <Collapse in={begOpen}>
                   <div>
                     <div class="skills-section my-4">
@@ -118,10 +120,13 @@ const CurrentProjects = (props) => {
               class="current-flyer img-thumbnail shadow-lg mb-5 bg-white rounded"
             />
             <Card.Body>
-              <Card.Title className="shadow mb-3">Advanced Workshop</Card.Title>
+              <Card.Title className="titlecard shadow mb-3">
+                Advanced Workshop
+              </Card.Title>
               <Card.Text className="currentDesc p-2">
-                Interested in game development? In this advanced workshop series, we are
-                using C# and Unity game engine to create and implement a 2 dimensional plaform game.
+                Interested in game development? In this advanced workshop
+                series, we will be using Python to create and
+                implement a 2 dimensional shooter game.
                 <Collapse in={advOpen}>
                   <div>
                     <div class="skills-section my-4">

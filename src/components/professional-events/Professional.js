@@ -1,7 +1,12 @@
 import React from "react";
 import "./professional.css";
-import {firebase, db} from "./firebaseConfig.js";
-import { getFirestore, collection, getDocs, collectionGroup } from "firebase/firestore";
+import { firebase, db } from "./firebaseConfig.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  collectionGroup,
+} from "firebase/firestore";
 import { Card, Button, Image } from "react-bootstrap";
 
 /*
@@ -18,6 +23,7 @@ class Professional extends React.Component {
   state = {
     semesterEvent: null,
     upcomingEvent: null,
+    pastEvent: null,
     seeMore: false,
   };
 
@@ -41,6 +47,16 @@ class Professional extends React.Component {
     });
 
     this.setState({ upcomingEvent: comingUpEvents });
+
+    const pastEvents = collectionGroup(db, "pastEvents");
+    const queryAllPast = await getDocs(pastEvents);
+    const prevEvents = [];
+    queryAllPast.forEach((doc) => {
+      const data = doc.data();
+      prevEvents.push(data);
+    });
+
+    this.setState({ pastEvent: prevEvents });
 
     // firebase
     //   .firestore()
@@ -90,6 +106,7 @@ class Professional extends React.Component {
               this.state.upcomingEvent.map((upcomingEvents) => {
                 return (
                   <Card
+                    className="professional-card"
                     style={{ width: "24rem", padding: "10px", margin: "2em" }}
                   >
                     <center>
@@ -125,6 +142,7 @@ class Professional extends React.Component {
               this.state.semesterEvent.map((semesterEvents) => {
                 return (
                   <Card
+                    className="professional-card"
                     style={{ width: "24rem", padding: "10px", margin: "2em" }}
                     onLoad
                   >
@@ -164,76 +182,16 @@ class Professional extends React.Component {
           <p className="text-center events-header">Past Events</p>
           <div class="professional-slideshow">
             <div class="images">
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={require("./images/google-ama-event-fall-2022.jpg").default}
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={require("./images/Hackathon-Flyer-Fall-2022.png").default}
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={require("./images/Mentorship-fall-2022.png").default}
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={
-                  require("./images/Black-Panther-Wakanda-Forever-fall-2022.png")
-                    .default
-                }
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={require("./images/github-workshop.PNG").default}
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={require("./images/mwd-jpl-spring-2019.png").default}
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={
-                  require("./images/spring-2019-resume-workshop.png").default
-                }
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={require("./images/richard-fung-2018-google.png").default}
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={require("./images/internship.png").default}
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={
-                  require("./images/manny-sanchez-lockheed-spring-2019.png")
-                    .default
-                }
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={
-                  require("./images/linkedin-handshake-workshop.png").default
-                }
-                thumbnail
-              />
-              <Image
-                style={{ width: "350px", height: "30rem", margin: "1em" }}
-                src={require("./images/google-ama-event-fall-2022.jpg").default}
-                thumbnail
-              />
+              {this.state.pastEvent &&
+                this.state.pastEvent.map((pastE) => {
+                  return (
+                    <Image
+                      style={{ width: "350px", height: "30rem", margin: "1em" }}
+                      src={pastE.imgUrl}
+                      thumbnail
+                    />
+                  );
+                })}
             </div>
           </div>
         </div>
