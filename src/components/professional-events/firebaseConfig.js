@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"; //main app
 import {getAuth} from "firebase/auth"; //authentication function
-import {getFirestore} from "firebase/firestore"; //database functions
+import {CACHE_SIZE_UNLIMITED, getFirestore, persistentLocalCache} from "firebase/firestore"; //database functions
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,7 +19,7 @@ const firebase = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebase);
+const app = initializeApp(firebase,{cacheSizeBytes: CACHE_SIZE_UNLIMITED}, {localCache: persistentLocalCache()});
 const auth = getAuth(app); //initialize authentication service
 const db = getFirestore(app); //initialize database access
 export {auth, db};

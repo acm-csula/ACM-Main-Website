@@ -9,7 +9,7 @@ function CurrentEventsModal(props) {
     const handleShow = () => setShow(true);
 
     return(
-        <div class="test">
+        <div class="test"> 
             {/* This button will most likely take it's text from a prop
             since we will use the Google Calendar API at the highest lvl
             of component Hierarchy */}
