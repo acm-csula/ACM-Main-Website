@@ -48,7 +48,7 @@ const ACM_Login = () => {
                 <h1>LOGIN</h1>
                 <form onSubmit={handleRegister} className="loginContainer">
 
-                    <label htmlFor="email" className="formText">Email</label>
+                    <label htmlFor="email" className="formText" style={{color: "white"}}>Email</label>
                     <input type="email" className="textBox" onChange={(e)=>(setEmail(e.target.value))} value={email}/>
 
                   
