@@ -181,7 +181,7 @@ class Navi extends React.Component {
         </Navbar>
         <div class="hover-announcements-background"></div>
         <div class="hover-announcements">
-          Welcome back CSULA students! Come by at our First General Meeting on February 6th at Room FA219 to kickstart our upcoming ACM events for Spring 2024!
+        Come chill at our ACM discord for our first Spring Discord Movie Night on Feb. 23, Friday. The movie will be announed in a couple days.
         </div>
       </>
     );
