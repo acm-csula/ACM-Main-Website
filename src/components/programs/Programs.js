@@ -72,7 +72,12 @@ const Programs = () => {
         <br />
         <span className="disclaimer">
           <b>
-            2. This program is a semester-long program, and sessions are on Thursdays from 3:00-4:20pm.
+            2. This is a semester-long program.
+          </b>
+        </span>
+        <span className="disclaimer">
+          <b>
+            3. Sessions are every Thursday from 3:00-4:20pm.
           </b>
         </span>
       </div>

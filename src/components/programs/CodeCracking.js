@@ -108,8 +108,9 @@ const CodeCracking = (props) => {
           className="join-button mx-auto"
           size="lg"
           href="https://docs.google.com/forms/d/e/1FAIpQLSe7wkqq5MKmvaVF5D6ik3EceyjAaiRltGplG86G4wnKW30kvw/viewform"
+          disabled
         >
-          Join Now!
+          Sign-up closed
         </Button>
       </div>
     </div>

@@ -105,8 +105,9 @@ const CurrentProjects = (props) => {
                 variant="success"
                 href="https://docs.google.com/forms/d/e/1FAIpQLScaDpC5NeRCuvXgheLtCTw1wpmNR06LL_TsbLDnOTYVCXH9yQ/viewform"
                 size="sm"
+                disabled
               >
-                Join Now!
+                Sign-up closed
               </Button>
             </Card.Body>
           </Card>
@@ -170,8 +171,9 @@ const CurrentProjects = (props) => {
                 variant="success"
                 href="https://docs.google.com/forms/d/e/1FAIpQLSd4Scdl9AstL8S_AMdu3URlp62KqcShg4E_vUolxCqsugl5uw/viewform"
                 size="sm"
+                disabled
               >
-                Join Now!
+                Sign-up closed
               </Button>
             </Card.Body>
           </Card>
