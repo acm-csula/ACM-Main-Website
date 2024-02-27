@@ -99,7 +99,7 @@ class Projects extends React.Component {
               3.{" "}
               <span class="date-disclaimer">
                 {" "}
-                Sign-up deadline on the 27th of February.
+                Sign-up officially closed!
               </span>
             </b>
           </div>

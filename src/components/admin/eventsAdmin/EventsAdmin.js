@@ -15,6 +15,7 @@ const EventsAdmin = () => {
   const [upcoming, setUpcoming] = useState([]);
   const [semester, setSemester] = useState([]);
   const [past, setPast] = useState([]);
+  const [featured, setFeatured] = useState([]);
 
   /* INITIALIZATION (useEffect)
     1. fetch events from firestore collection: upcomingEvents, semesterEvents, pastEvents
@@ -28,14 +29,17 @@ const EventsAdmin = () => {
         const upcoming = collectionGroup(db, "upcomingEvents");
         const semester = collectionGroup(db, "semesterEvents");
         const past = collectionGroup(db, "pastEvents");
+        const featured = collectionGroup(db, "featuredEvent");
         const upcomingSnapshot = await getDocs(upcoming);
         const semSnapshot = await getDocs(semester);
         const pastSnapshot = await getDocs(past);
+        const featuredSnapshot = await getDocs(featured);
 
         if (isMounted) {
           const upcomingGroup = [];
           const semGroup = [];
           const pastGroup = [];
+          const featuredGroup = [];
           upcomingSnapshot.forEach((doc) => {
             const uEvent = {};
             uEvent["id"] = doc.id;
@@ -57,10 +61,18 @@ const EventsAdmin = () => {
             pEvent["imgUrl"] = doc.data().imgUrl;
             pastGroup.push(pEvent);
           });
+          featuredSnapshot.forEach((doc) => {
+            const fEvent = {};
+            fEvent["id"] = doc.id;
+            fEvent["altText"] = doc.data().altText;
+            fEvent["imgUrl"] = doc.data().imgUrl;
+            featuredGroup.push(fEvent);
+          });
 
           setUpcoming(upcomingGroup);
           setSemester(semGroup);
           setPast(pastGroup);
+          setFeatured(featuredGroup);
         }
       } catch (err) {
         console.log("Error occured when fetching events");
@@ -79,7 +91,6 @@ const EventsAdmin = () => {
     setActiveTab(selectedKey);
   };
 
-
   //updates the local state after adding new event
   const onAddHandler = (eid, title, img) => {
     const newEventObj = { id: eid, altText: title, imgUrl: img };
@@ -88,6 +99,8 @@ const EventsAdmin = () => {
       setUpcoming((prevArray) => [...prevArray, newEventObj]);
     } else if (activeTab === "semesterEvents") {
       setSemester((prevArray) => [...prevArray, newEventObj]);
+    } else if (activeTab === "featuredEvent") {
+      setFeatured((prevArray) => [...prevArray, newEventObj]);
     } else {
       setPast((prevArray) => [...prevArray, newEventObj]);
     }
@@ -105,6 +118,10 @@ const EventsAdmin = () => {
       const updatedSemester = semester.filter((item) => item.id !== idToRemove);
 
       setSemester(updatedSemester);
+    } else if (activeTab === "featuredEvent") {
+      const updatedFeatured = featured.filter((item) => item.id !== idToRemove);
+
+      setFeatured(updatedFeatured);
     } else {
       const updatedPast = past.filter((item) => item.id !== idToRemove);
 
@@ -115,27 +132,36 @@ const EventsAdmin = () => {
   //handles the title change of an event
   const onEditHandler = (idToEdit, newName) => {
     if (activeTab === "upcomingEvents") {
-      const updatedUpcoming = upcoming.map((obj) =>{
-        if(obj.id === idToEdit){
-          return { ...obj, altText: newName }
+      const updatedUpcoming = upcoming.map((obj) => {
+        if (obj.id === idToEdit) {
+          return { ...obj, altText: newName };
         }
         return obj;
       });
 
       setUpcoming(updatedUpcoming);
     } else if (activeTab === "semesterEvents") {
-      const updatedSemester = semester.map((obj) =>{
-        if(obj.id === idToEdit){
-          return { ...obj, altText: newName }
+      const updatedSemester = semester.map((obj) => {
+        if (obj.id === idToEdit) {
+          return { ...obj, altText: newName };
         }
         return obj;
       });
 
       setSemester(updatedSemester);
+    } else if (activeTab === "featuredEvent") {
+      const updatedFeatured = featured.map((obj) => {
+        if (obj.id === idToEdit) {
+          return { ...obj, altText: newName };
+        }
+        return obj;
+      });
+
+      setFeatured(updatedFeatured);
     } else {
-      const updatedPast = past.map((obj) =>{
-        if(obj.id === idToEdit){
-          return { ...obj, altText: newName }
+      const updatedPast = past.map((obj) => {
+        if (obj.id === idToEdit) {
+          return { ...obj, altText: newName };
         }
         return obj;
       });
@@ -143,20 +169,21 @@ const EventsAdmin = () => {
     }
   };
 
-
   /*handles moving an event to different tab
     1. copy the old event from previous tab location 
     2. paste to different tab location
     3. delete the old event
   */
-  const onMoveHandler = (oldCopyID, newCopy, newTab) =>{
-
+  const onMoveHandler = (oldCopyID, newCopy, newTab) => {
     //pasting to new tab location
     if (newTab === "upcomingEvents") {
       setUpcoming((prevArray) => [...prevArray, newCopy]);
     } else if (newTab === "semesterEvents") {
       setSemester((prevArray) => [...prevArray, newCopy]);
-    } else {
+    }
+    else if (newTab === "featuredEvent") {
+      setFeatured((prevArray) => [...prevArray, newCopy]);
+    }  else {
       setPast((prevArray) => [...prevArray, newCopy]);
     }
 
@@ -169,6 +196,10 @@ const EventsAdmin = () => {
       const updatedSemester = semester.filter((item) => item.id !== oldCopyID);
 
       setSemester(updatedSemester);
+    }else if (activeTab === "featuredEvent") {
+      const updatedFeatured = featured.filter((item) => item.id !== oldCopyID);
+
+      setSemester(updatedFeatured);
     } else {
       const updatedPast = past.filter((item) => item.id !== oldCopyID);
 
@@ -216,6 +247,15 @@ const EventsAdmin = () => {
         <Tab eventKey="pastEvents" title="Past">
           <EventSubTab
             data={past}
+            activeSection={activeTab}
+            onDelete={onDeleteHandler}
+            onEdit={onEditHandler}
+            onMove={onMoveHandler}
+          />
+        </Tab>
+        <Tab eventKey="featuredEvent" title="Featured">
+          <EventSubTab
+            data={featured}
             activeSection={activeTab}
             onDelete={onDeleteHandler}
             onEdit={onEditHandler}

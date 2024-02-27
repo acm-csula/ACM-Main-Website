@@ -109,7 +109,6 @@ class Navi extends React.Component {
                   <div className="nav-dropdown-text">project workshops</div>
                 </NavDropdown.Item>
 
-                
                 <NavDropdown.Item href="/programs">
                   <div className="nav-dropdown-text">code cracking</div>
                 </NavDropdown.Item>
@@ -181,7 +180,9 @@ class Navi extends React.Component {
         </Navbar>
         <div class="hover-announcements-background"></div>
         <div class="hover-announcements">
-        Come chill at our ACM discord for our first Spring Discord Movie Night on Feb. 23, Friday. The movie will be announed in a couple days.
+          Join us for our club's Game Night extravaganza on Friday, March 1st!
+          It's a fantastic opportunity to earn prizes, connect with fellow members,
+          and indulge in some friendly competition.
         </div>
       </>
     );

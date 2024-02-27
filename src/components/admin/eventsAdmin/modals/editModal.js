@@ -99,6 +99,9 @@ const EditModal = (props) => {
                   <Dropdown.Item onClick={() => moveHandler("pastEvents")}>
                     Past
                   </Dropdown.Item>
+                  <Dropdown.Item onClick={() => moveHandler("featuredEvents")}>
+                    Featured
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Modal.Footer>
