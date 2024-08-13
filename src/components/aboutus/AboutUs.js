@@ -50,7 +50,7 @@ class AboutUs extends React.Component {
                   animateOnce="true"
                 >
                   <li class="list-group-item mission-statement-item">
-                    Provide computer science lessonsand resources to
+                    Provide computer science knowledge and resources to
                     students.
                   </li>
                 </AnimationOnScroll>
