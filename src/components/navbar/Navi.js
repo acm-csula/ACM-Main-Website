@@ -180,9 +180,8 @@ class Navi extends React.Component {
         </Navbar>
         <div class="hover-announcements-background"></div>
         <div class="hover-announcements">
-          Join us for our club's Game Night extravaganza on Friday, March 1st!
-          It's a fantastic opportunity to earn prizes, connect with fellow members,
-          and indulge in some friendly competition.
+        Happy Fall 2024! We hope you had a great summer. Our first general meeting on Augest 27th at 3:00 PM in room FA 218! Pizza, 
+        snacks and drinks will be provided. We will be announcing our workshops, future events and fundraisers. We hope to see you there!
         </div>
       </>
     );
