@@ -1,6 +1,9 @@
 import React, { useReducer } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import "../membership.css";
+import { v4 as uuidv4 } from 'uuid';
+import {JSEncrypt} from 'jsencrypt'
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const stripePromise = loadStripe(
-  "pk_live_51H0yOZEr4ylg7vlAnEDF4YfjfRe1VAEKjRMuW2Lh7zlMG9Lh68k4LZmuTm0RtR5MeNLJzkxUT0p53pdnQKgeIY1800N4Sipf5y"
+  "pk_live_51H0yOZEr4ylg7vlAnEDF4YfjfRe2VAEKjRMuW2Lh7zlMG9Lh68k4LZmuTm0RtR5MeNLJzkxUT0p53pdnQKgeIY1800N4Sipf5y"
 );
 
 const formatPrice = ({ amount, currency, quantity }) => {
@@ -59,15 +62,20 @@ const Regular = () => {
     error: null,
   });
 
+
   const handleClick = async (event) => {
+    const successUrl = new URL(`https://acmcsulaweb.pythonanywhere.com/`)
+    
     // Call your backend to create the Checkout session.
     dispatch({ type: "setLoading", payload: { loading: true } });
     // When the customer clicks on the button, redirect them to Checkout.
     const stripe = await stripePromise;
+    
     const { error } = await stripe.redirectToCheckout({
+      
       mode: "payment",
-      lineItems: [{ price: state.priceId, quantity: state.quantity }],
-      successUrl: `https://acmcsulaweb.pythonanywhere.com/`,
+      lineItems: [{ price: state.priceId, quantity: state.quantity }],      
+      successUrl: successUrl.toString(),
       cancelUrl: `${window.location.origin}/Membership`,
     });
     // If `redirectToCheckout` fails due to a browser or network
@@ -149,7 +157,7 @@ const Regular = () => {
           <a href="mailto:acm.calstatela@gmail.com">acm.calstatela@gmail.com</a>
         </h2>
         <h2 className="member-description-points">
-          ACM Memberships are good for one school year (Fall 2023-Spring 2024)
+          ACM Memberships are good for one school year (Fall 2024-Spring 2025)
         </h2>
         <h1 className="refund">No Refunds</h1>
       </div>

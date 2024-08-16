@@ -21,7 +21,7 @@
   font-weight: bold;
   position: relative;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgb(0, 153, 255, 0.4)),
-    url("./images/Fall2022FirstGeneralMeeting.jpg") center center;
+    url("./images/about-us-bg.jpg") center center;
   background-size: cover !important;
 }
 

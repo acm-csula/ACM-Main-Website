@@ -20,33 +20,6 @@ const ProjectsAdmin = () => {
   const [currentProjects, setCurrentProjects] = useState([]);
   const [archivedProjects, setArchivedProjects] = useState([]);
 
-  // const currentProjectsTemp = [
-  //   {
-  //     _id: 0,
-  //     altText: "BP Event Name",
-  //     imgUrl: dummyBegImg,
-  //   },
-  //   {
-  //     _id: 1,
-  //     altText: "AP Event Name",
-  //     imgUrl: dummyAdImg,
-  //   },
-  // ];
-
-  // const archivedProjects = [
-  //   {
-  //     altText: "Event 1",
-  //     imgUrl: "placeholder",
-  //   },
-  //   {
-  //     altText: "Event 2",
-  //     imgUrl: "placeholder",
-  //   },
-  //   {
-  //     altText: "Event 3",
-  //     imgUrl: "placeholder",
-  //   },
-  // ];
 
   useEffect(() => {
     let isMounted = true;
