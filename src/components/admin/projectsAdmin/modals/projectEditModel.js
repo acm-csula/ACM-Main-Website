@@ -10,6 +10,8 @@ import {
   query,
   updateDoc,
   where,
+  orderBy,
+  limit,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -52,17 +54,15 @@ const ProjectEditModal = (props) => {
       const fetchData = async () => {
         try {
           const boardRef = collection(db, "acm_board");
-          const countBoardDocs = await getCountFromServer(boardRef);
-          let latestBoard = countBoardDocs.data().count;
-          if (latestBoard < 10) {
-            latestBoard = "0" + latestBoard.toString();
-          }
-          // console.log(latestBoard);
+          
           const curBoard = query(
             boardRef,
-            where(documentId(), "==", latestBoard)
+            orderBy("year", "desc"), limit(1)
           );
           const boardSnap = await getDocs(curBoard);
+
+          
+
 
           boardSnap.forEach((doc) => {
             //only fetches officers and committee
@@ -104,8 +104,8 @@ const ProjectEditModal = (props) => {
         //handles image uploded and flyer change
         if (uploadImg) {
           const storage = getStorage();
-          const storageRef = ref(storage, `${"Spring 2024/" + imgName}`);
-          const semesterRef = ref(storage, "Spring 2024/");
+          const storageRef = ref(storage, `${"Fall 2024/" + imgName}`);
+          const semesterRef = ref(storage, "Fall 2024/");
           listAll(semesterRef)
             .then((res) => {
               res.items.forEach(async (itemRef) => {
@@ -140,7 +140,7 @@ const ProjectEditModal = (props) => {
           const downloadLink = await getDownloadURL(
             ref(
               storage,
-              `${"gs://acm-calstatela.appspot.com/Spring 2024/" + imgName}`
+              `${"gs://acm-calstatela.appspot.com/Fall 2024/" + imgName}`
             )
           );
 
@@ -167,16 +167,11 @@ const ProjectEditModal = (props) => {
           let officerRef = {};
           let committeeRef = {};
 
-          const boardRef = collection(db, "acm_board");
-          const countBoardDocs = await getCountFromServer(boardRef);
-          let latestBoard = countBoardDocs.data().count;
-          if (latestBoard < 10) {
-            latestBoard = "0" + latestBoard.toString();
-          }
+          const boardRef = collection(db, "acm_board");       
           // console.log(latestBoard);
           const curBoard = query(
             boardRef,
-            where(documentId(), "==", latestBoard)
+            orderBy("year", "desc"), limit(1)
           );
           const boardSnap = await getDocs(curBoard);
 

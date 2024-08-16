@@ -26,6 +26,7 @@ import ACM_Login from "./components/login/ACM_Login.js";
 import Admin from "./components/admin/Admin";
 import { Navbar } from "react-bootstrap";
 
+
 import ProjectsAdmin from "./components/admin/projectsAdmin/ProjectsAdmin";
 import BoardAdmin from "./components/admin/boardAdmin/BoardAdmin";
 import EventsAdmin from "./components/admin/eventsAdmin/EventsAdmin";
@@ -87,6 +88,7 @@ class App extends React.Component {
         <Route path="/aboutus" component={AboutUs} />
         <Route path="/calendar" component={Calendar} />
         <Route path="/membership" component={Membership} />
+        {/* <Route path="/mentorship" component={Mentorship} /> */}
         <Route path="/faq" component={FAQ} />
         <Route path="/contactus" component={ContactUs} />
         <Route path="/events" component={Events} />

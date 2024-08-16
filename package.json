@@ -19,6 +19,7 @@
     "force": "^0.0.3",
     "google-spreadsheet": "^4.1.1",
     "gsap": "^3.12.2",
+    "jsencrypt": "^3.3.2",
     "moment": "^2.29.4",
     "multiselect-react-dropdown": "^2.0.25",
     "n": "^9.2.0",
@@ -43,7 +44,9 @@
     "sass": "^1.66.1",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4",
-    "stable": "^0.1.8"
+    "stable": "^0.1.8",
+    "uuid": "^10.0.0",
+    "uuidv4": "^6.2.13"
   },
   "scripts": {
     "start": "react-scripts start --openssl-legacy-provider",
