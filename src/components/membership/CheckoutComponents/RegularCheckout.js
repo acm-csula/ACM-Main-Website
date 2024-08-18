@@ -1,8 +1,8 @@
 import React, { useReducer } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { Image } from "react-bootstrap";
 import "../membership.css";
-import { v4 as uuidv4 } from 'uuid';
-import {JSEncrypt} from 'jsencrypt'
+
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const stripePromise = loadStripe(
-  "pk_live_51H0yOZEr4ylg7vlAnEDF4YfjfRe2VAEKjRMuW2Lh7zlMG9Lh68k4LZmuTm0RtR5MeNLJzkxUT0p53pdnQKgeIY1800N4Sipf5y"
+  "pk_live_51H0yOZEr4ylg7vlA2NrCa8mA4hoRTDztfZBz9GcoRZLOUAEd0NAF37DVC32QExQWNo8mmL2iwJkNIc7FWd859lkx00ZFYuNiTA"
 );
 
 const formatPrice = ({ amount, currency, quantity }) => {
@@ -148,10 +148,11 @@ const Regular = () => {
         <br />
         <div class="mx-auto p-2">
           <div class="border border-primary bg-dark p-3">
-            <h3 class="text-danger">Disclaimer:</h3> Strictly follow the steps above in order to
-            receive the FULL BENEFITS.
+            <h3 class="text-danger">Disclaimer:</h3> You'll recieve our FULL BENIFITS  after a small member's fee of $5.
+            <h3 className="member-description-points">The project porkshop sign-up form will be in your <i>Welcome Email</i>, sent after you become an ACM member.</h3>
           </div>
         </div>
+        
         <h2 className="member-description-points">
           Send us an email if you have any questions or concerns: <t />
           <a href="mailto:acm.calstatela@gmail.com">acm.calstatela@gmail.com</a>
@@ -166,19 +167,20 @@ const Regular = () => {
         role="link"
         onClick={handleClick}
         disabled={state.loading}
+        // disabled
       >
-        {state.loading || !state.price ? `Loading...` : `Buy for $5`}
+          
+        {state.loading || !state.price ? `Loading...` : `Become a member!`}
       </button>
+      {/* <h4 className="text-danger"><b>Membership Registration Down For Emergency Maintenance</b> </h4> */}
       <div class="images">
         <center>
-          <img src="https://i.imgur.com/XUSg11H.jpg" alt="react logo" />
+          <Image src={require("../images/membership1.jpg")} alt="react logo" />
         </center>
         <center>
-          <img src="https://i.imgur.com/jjHtfJ2.jpg" alt="react logo" />
-        </center>
+          <Image src={require("../images/membership2.jpg")} alt="react logo" />        </center>
         <center>
-          <img src="https://i.imgur.com/P44Nnbn.jpg" alt="react logo" />
-        </center>
+          <Image src={require("../images/membership3.jpg")} alt="react logo" />        </center>
       </div>
     </div>
   );
