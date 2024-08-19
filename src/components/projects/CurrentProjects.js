@@ -8,6 +8,7 @@ import {
   Collapse,
   Container,
   Carousel,
+  Image,
   Modal,
 } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
@@ -57,7 +58,7 @@ const CurrentProjects = (props) => {
       <Modal show={isBegModalOpen} onHide={closeBegModal} size="lg">
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body className="d-flex justifiy-content-center">
-          <img src={props.current.level.beginners.flyer} />
+          <Image src={props.current.level.beginners.flyer} style={{objectFit: "contain", overflow: "hidden"}} />
         </Modal.Body>
 
       </Modal>
@@ -65,7 +66,7 @@ const CurrentProjects = (props) => {
       <Modal show={isAdvModalOpen} onHide={closeAdvModal} size="lg">
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body className="d-flex justifiy-content-center">
-          <img src={props.current.level.advanced.flyer} />
+          <Image src={props.current.level.advanced.flyer} style={{objectFit: "contain", overflow: "hidden"}} />
         </Modal.Body>
 
 

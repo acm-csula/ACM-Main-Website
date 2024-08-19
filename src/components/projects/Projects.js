@@ -99,7 +99,7 @@ class Projects extends React.Component {
               3.{" "}
               <span class="date-disclaimer">
                 {" "}
-                Sign-up officially closed!
+                Sign-ups are open! Please check your Welcome Email  !
               </span>
             </b>
           </div>
@@ -120,7 +120,7 @@ class Projects extends React.Component {
           <iframe
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/8REOyF19cqQ"
+            src="https://www.youtube.com/embed/S-udTtM_hoY?si=7l_2_9SRkAsybCmB"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

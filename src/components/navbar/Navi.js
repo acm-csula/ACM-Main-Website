@@ -180,8 +180,8 @@ class Navi extends React.Component {
         </Navbar>
         <div class="hover-announcements-background"></div>
         <div class="hover-announcements">
-          Happy Fall 2024! We hope you had a great summer. Our first general meeting on Augest 27th at 3:00 PM in room FA 218! Pizza, 
-          snacks and drinks will be provided. We will be announcing our workshops, future events and fundraisers. We hope to see you there!
+          Happy Fall 2024! We hope you had a great summer. Our first general meeting is on August 27th at 3:00 PM in room FA 218! Pizza, 
+          snacks, and drinks will be provided. We will be announcing our workshops, future events and fundraisers. We hope to see you there!
         </div>
       </>
     );
