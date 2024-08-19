@@ -142,7 +142,7 @@ const Regular = () => {
         How to become an ACM member? Follow these steps:
       </div>
       <div className="register-body">
-        <br /> Step 1: Click the following button below: 'Buy for $5' <br />
+        <br /> Step 1: Click the following button below: 'Become a member!' <br />
         Step 2: Fill out the sign up form (redirect will happen after successful
         payment)
         <br />
