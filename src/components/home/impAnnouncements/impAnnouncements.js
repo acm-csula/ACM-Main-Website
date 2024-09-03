@@ -86,12 +86,12 @@ const ImpAnnouncements = () => {
     
     <section className="impAnnouncements-tease">
       <div className="content">
-        <div className="title mt-4 mb-5">Academic Year 2023-2024</div>
+        <div className="title mt-4 mb-5">Academic Year 2024-2025</div>
         <div className="video-header">
           <iframe
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/QORLZ94PzVk"
+            src="https://www.youtube.com/embed/7NoRuK4Z9Nw?si=e1JoEb8z6K94BFKl"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -134,6 +134,7 @@ const ImpAnnouncements = () => {
                       className="carousel-event-image"
                       src={event.imgUrl}
                       alt={event.altText}
+                      
                     />
                   </div>
                 ))}
@@ -145,7 +146,7 @@ const ImpAnnouncements = () => {
       <Modal show={isOpen} onHide={closeModal} size="lg">
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body className="d-flex justify-content-center">
-          {selectedImage && <img src={selectedImage} alt="Selected Event" />}
+          {selectedImage && <Image src={selectedImage} alt="Selected Event" style={{objectFit: "contain", overflow: "hidden"}}/>}
         </Modal.Body>
       </Modal>
       

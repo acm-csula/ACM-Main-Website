@@ -17,7 +17,7 @@ const ACM_Login = () => {
         .then((userCredential) =>  {
             //sighned in
             console.log('Loging Successfully');
-            history.push("./admin");
+            history.push("./ACM_admin");
         })
         .catch((error) => {
             alert("Wrong credentials")

@@ -98,7 +98,7 @@ const Programs = () => {
           <li>
           <span className="disclaimer">
           <b>
-            3. Sessions are every Thursday from 3:00-4:20pm.
+            3. Sessions are every Thursday: 4:30pm - 5:50pm & Saturday: 9:00am - 10:20am.
           </b>
         </span>
 

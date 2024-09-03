@@ -131,7 +131,7 @@ const Mentorship = (props) => {
         <Modal show={isOpen} onHide={closeModel} size="lg">
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body className="d-flex justify-content-center" >
-            <img src={props.mentorship.flyer}/>
+            <Image src={props.mentorship.flyer} style={{objectFit: "contain", overflow: "hidden"}} />
           </Modal.Body>
         </Modal>
         
