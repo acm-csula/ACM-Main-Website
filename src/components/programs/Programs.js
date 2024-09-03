@@ -61,7 +61,7 @@ const Programs = () => {
 
       <div className="disclaimer-body">
         <h3 className="disclaimer_header">
-          <b>Disclaimers:</b>
+          <b>Friendly Reminder: </b>
         </h3>
         <span className="disclaimer">
           <b>

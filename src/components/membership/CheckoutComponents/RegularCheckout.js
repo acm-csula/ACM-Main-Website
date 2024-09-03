@@ -140,7 +140,7 @@ const Regular = () => {
         <br />
         <div class="mx-auto p-2">
           <div class="border border-primary bg-dark p-3">
-            <h3 class="text-danger">Disclaimer:</h3> Strictly follow the steps above in order to
+            <h3 class="text-danger">What To Do: </h3> Strictly follow the steps above in order to
             receive the FULL BENEFITS.
           </div>
         </div>
