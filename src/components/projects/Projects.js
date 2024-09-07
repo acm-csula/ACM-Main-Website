@@ -78,7 +78,7 @@ class Projects extends React.Component {
                 */}
         <div className="disclaimer-body">
           <h3 className="disclaimer_header mt-4 mb-4">
-            <b>Disclaimers...</b>
+            <b>Heads up!.</b>
           </h3>
           <div className="disclaimer">
             <b>
