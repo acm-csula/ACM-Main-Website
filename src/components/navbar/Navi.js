@@ -110,7 +110,7 @@ class Navi extends React.Component {
                 </NavDropdown.Item>
 
                 <NavDropdown.Item href="/programs">
-                  <div className="nav-dropdown-text">code cracking</div>
+                  <div className="nav-dropdown-text">mentorship</div>
                 </NavDropdown.Item>
 
                 <NavDropdown.Item href="/professional">
@@ -180,9 +180,7 @@ class Navi extends React.Component {
         </Navbar>
         <div class="hover-announcements-background"></div>
         <div class="hover-announcements">
-          Join us for our club's Game Night extravaganza on Friday, March 1st!
-          It's a fantastic opportunity to earn prizes, connect with fellow members,
-          and indulge in some friendly competition.
+          Interested in professional development? Become an ACM member and join our Mentorship Program where alumni discuss making a resume, getting an intership, time management and finacial literacy! Hosted online on Thursdays: 4:30 pm to 5:50 pm and Saturdays: 9:00 am to 10:20 am.
         </div>
       </>
     );

@@ -55,7 +55,7 @@
 .contact-us-block {
   width: 90%;
   font-weight: bold;
-  color: white;
+  color: whi  te;
 }
 
 .faq-header-container {
@@ -64,7 +64,7 @@
   font-weight: bold;
   position: relative;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgb(0, 153, 255, 0.4)),
-    url("./images/header-background-image.jpg") center top;
+    url("./images/faq-bg.jpg") center top 50vw;
   background-size: cover !important;
 }
 

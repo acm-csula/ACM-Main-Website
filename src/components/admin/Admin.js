@@ -8,9 +8,11 @@ const Admin = () => {
       style={{ height: "100vh" }}
     >
       <div className="d-flex flex-wrap justify-content-center align-items-center">
-        <Button variant="primary" className="m-2">
-          Projects
-        </Button>
+        <Link to="/ACM_admin/projects">
+          <Button variant="primary" className="m-2">
+            Projects
+          </Button>
+        </Link>
         <Link to="/ACM_admin/events">
           <Button variant="primary" className="m-2">
             Events

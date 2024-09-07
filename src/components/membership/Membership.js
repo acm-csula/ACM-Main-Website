@@ -69,7 +69,7 @@ class Membership extends React.Component {
 					</center> */}
 					<div className = "member-card-header">
 						<Card.Header className="join-card-header text-center">
-							<h2><span className="highlight-text"><b><i>ACM Membership 2023-2024</i></b></span></h2>
+							<h2><span className="highlight-text"><b><i>ACM Membership 2024-2025</i></b></span></h2>
 						</Card.Header>
 					</div>
 					<div className="member-body">

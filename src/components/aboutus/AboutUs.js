@@ -7,7 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 // import { Carousel } from "react-responsive-carousel";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import "./aboutus.css";
-import constitution from "./images/2023-2024 Constitution.pdf"
+import constitution from "./images/2024-2025 Constitution.pdf"
 import FallBoard from "./images/Fall2023Board.png"
 import AndroidWorkshop from "./images/android-workshop.png"
 import FallGeneralMeeting from "./images/fall-2019-general-meeting.jpg"
@@ -62,7 +62,7 @@ class AboutUs extends React.Component {
                 >
                   <li class="list-group-item mission-statement-item">
                     Host programming workshops that teach <br /> <br /> projects
-                    and new technologies outside of classes at CSULA.
+                    and new technologies outside of classes at Cal State LA.
                   </li>
                 </AnimationOnScroll>
 
@@ -149,7 +149,7 @@ class AboutUs extends React.Component {
                             <li className="about-item">
                               We are a chapter of the Association for Computing
                               Machinery (ACM) at California State University,
-                              Los Angeles (CSULA).
+                              Los Angeles (Cal State LA).
                             </li>
                             <li className="about-item">
                               ACM is the world's largest educational and
@@ -158,7 +158,7 @@ class AboutUs extends React.Component {
                               profession.
                             </li>
                             <li className="about-item">
-                              ACM@CSULA is the largest computer science student
+                              ACM @ Cal State LA is the largest computer science student
                               organization on campus.
                             </li>
                             <li className="about-item">

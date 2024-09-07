@@ -2,12 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { Col, Tab, Nav } from "react-bootstrap";
+import { Col, Tab, Nav, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Programs.css";
 import ArchiveProgram from "./ArchivePrograms.js";
 import { db } from "../professional-events/firebaseConfig.js";
-import { collectionGroup, getDocs, query, orderBy } from "firebase/firestore";
+import { collectionGroup, getDocs, query, orderBy, limit } from "firebase/firestore";
 import CodeCracking from "./CodeCracking.js";
 import Mentorship from "./Mentorship.js"
 
@@ -15,6 +15,11 @@ const Programs = () => {
   const [currentSem, setCurrent] = useState(null);
   const [currentProgram, setProgram] = useState(null);
   const [prevMentorship, setPrev] = useState(null);
+
+  const [isOpen, setIsOpen] = useState(false)
+  const openModel = () => setIsOpen(true)
+  const closeModel = () => setIsOpen(false)
+  
   useEffect(() => {
     let isMounted = true;
     const events = [];
@@ -24,11 +29,12 @@ const Programs = () => {
       try {
         const programsRef = collectionGroup(db, "mentorship");
         const programsSnapshot = await getDocs(
-          query(programsRef, orderBy("date", "desc"))
+          query(programsRef, orderBy("date", "desc"), limit(1))
         );
 
         programsSnapshot.forEach((doc) => {
           const data = doc.data();
+          console.log(data.speakers)
           events.push(data);
           seasons.push(data.season);
         });
@@ -45,41 +51,62 @@ const Programs = () => {
 
     fetchData();
 
+    // console.log(events)
+
     return () => {
       // Cleanup function to set isMounted to false when component is unmounted
       isMounted = false;
     };
   }, []);
 
+  //temp mesure
+  const handleImageError = (e) => {
+    e.target.src = "./pro-dev-mentors/wilson.jpg";
+  }
+
   return (
     <div className="programs-body">
       <div className="prodev-header-container">
         <div id="prodev-header-title">
-          Participate in our CodeCracking program for Spring 2024!
+          Participate in our Mentorship program for Fall 2025!
         </div>
       </div>
 
       <div className="disclaimer-body">
         <h3 className="disclaimer_header">
-          <b>Friendly Reminder: </b>
+          <b>Disclaimers:</b>
         </h3>
-        <span className="disclaimer">
+
+        <ul style={{listStyle: "none"}}>
+          <li>
+          <span className="disclaimer">
           <b>
             1. ACM membership is required to apply for the program!
             If you are not a member, you will not be allowed in.
           </b>
         </span>
-        <br />
-        <span className="disclaimer">
+
+          </li>
+          <li>
+          <span className="disclaimer">
           <b>
             2. This is a semester-long program.
           </b>
         </span>
-        <span className="disclaimer">
+
+          </li>
+          <li>
+          <span className="disclaimer">
           <b>
-            3. Sessions are every Thursday from 3:00-4:20pm.
+            3. Sessions are every Thursday: 4:30pm - 5:50pm & Saturday: 9:00am - 10:20am.
           </b>
         </span>
+
+          </li>
+        </ul>
+        
+      
+        
       </div>
       <div className="card programs-card">
         <Tab.Container id="left-tabs-example" defaultActiveKey={"current"}>
@@ -108,7 +135,7 @@ const Programs = () => {
           {currentProgram && (
             <Tab.Content className="programs-tab-content">
               <Tab.Pane eventKey={"current"}>
-                <CodeCracking mentorship={currentProgram} />
+                <Mentorship mentorship={currentProgram} />
                 <div class="border-carousel"></div>
                 <h2>
                   ❖{" "}
@@ -122,14 +149,15 @@ const Programs = () => {
                     {currentProgram.speakers &&
                       currentProgram.speakers.map((leader) => {
                         return (
-                          <div>
+                          <>
                             <img
                               className="carousel-leader-image"
                               src={leader.imgURL}
                               alt="leader"
+                 
                             />
                             <p className="legend">{leader.name}</p>
-                          </div>
+                          </>
                         );
                       })}
                   </Carousel>

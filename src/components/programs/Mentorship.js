@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Image, Modal} from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Programs.css";
@@ -32,6 +32,11 @@ import "./Programs.css";
 ***************************************************************************/
 
 const Mentorship = (props) => {
+
+  const [isOpen, setIsOpen] = useState(false)
+  const openModel = () => setIsOpen(true)
+  const closeModel = () => setIsOpen(false)
+
   let isVideo = false;
   if (props.mentorship.videoLink != "") {
     isVideo = true;
@@ -123,21 +128,31 @@ const Mentorship = (props) => {
         <p className="program-description">Sign-up now!</p>
 
         {/*Stored in firestore*/}
-        <img
-          src={props.mentorship.flyer}
-          className="current-poster rounded m-auto d-block"
-          alt="mentorship flyer"
-        ></img>
+        <Modal show={isOpen} onHide={closeModel} size="lg">
+          <Modal.Header closeButton></Modal.Header>
+          <Modal.Body className="d-flex justify-content-center" >
+            <Image src={props.mentorship.flyer} style={{objectFit: "contain", overflow: "hidden"}} />
+          </Modal.Body>
+        </Modal>
+        
+          <Image onClick={openModel} style={{cursor: "pointer"}}
+
+            src={props.mentorship.flyer}
+            className="current-poster rounded m-auto d-block"
+            alt="mentorship flyer"
+          ></Image>
+
+
+        
 
         {/*Only update here if signup link is live*/}
         <Button
           variant="success"
           className="join-button mx-auto"
           size="lg"
-          href="https://forms.gle/hAjvNSbS47ghMxuE8"
-          disabled
+          href="https://docs.google.com/forms/d/e/1FAIpQLSewB2UxdKUC2N67fitAlOVFw5Fq90ct-oGmY-dHR9nGyZ6DAA/viewform"
         >
-          Form not yet available..
+          Sign up here!
         </Button>
       </div>
     </div>
