@@ -74,7 +74,7 @@ const Programs = () => {
 
       <div className="disclaimer-body">
         <h3 className="disclaimer_header">
-          <b>Disclaimers:</b>
+          <b>Heads up!</b>
         </h3>
 
         <ul style={{listStyle: "none"}}>

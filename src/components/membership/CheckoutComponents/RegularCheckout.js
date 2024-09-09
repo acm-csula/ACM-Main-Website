@@ -148,7 +148,7 @@ const Regular = () => {
         <br />
         <div class="mx-auto p-2">
           <div class="border border-primary bg-dark p-3">
-            <h3 class="text-danger">Disclaimer:</h3> You'll recieve our FULL BENEFITS  after a small member's fee of $5.
+            <h3 class="text-danger">Heads up!</h3> You'll recieve our FULL BENEFITS  after a small member's fee of $5.
             <h3 className="member-description-points">The project workshop sign-up form will be in your <i>Welcome Email</i>, sent after you become an ACM member.</h3>
           </div>
         </div>
