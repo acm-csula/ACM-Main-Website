@@ -4,8 +4,10 @@
   font-weight: bold;
   position: relative;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgb(0, 153, 255, 0.4)),
-    url("./img/board.png") center;
-  background-size: cover !important;
+    url("./img/Fall-2024-Board.jpg") ;
+  background-size: cover  !important;
+  background-position-y: top 25%;
+  
 }
 
 #board-header-title {
