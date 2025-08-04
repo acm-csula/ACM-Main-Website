@@ -19,6 +19,7 @@ class HeaderCarousel extends React.Component {
                   "a welcoming community",
                   "real-life experience",
                   "problem solvers",
+                  ":)",
                   "hard workers",
                   "future leaders",
                 ]}

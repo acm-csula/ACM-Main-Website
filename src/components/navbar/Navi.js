@@ -9,10 +9,84 @@ import {
 } from "react-bootstrap";
 
 
+class Navi extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      announcement: localStorage.getItem('acm-announcement') || 
+        "Fall semester is starting soon! Interested in becoming an ACM member? Join us! More information about us and our Prodev Program coming soon."
+    };
+  }
+
+  componentDidMount() {
+    // Listen for announcement updates
+    window.addEventListener('announcementUpdated', this.handleAnnouncementUpdate);
+  }
+
+  componentWillUnmount() {
+    // Clean up event listener
+    window.removeEventListener('announcementUpdated', this.handleAnnouncementUpdate);
+  }
+
+  handleAnnouncementUpdate = (event) => {
+    this.setState({ announcement: event.detail.announcement });
+  };
+
+  render() {
+    return (
+      <>
+        <Navbar
+          collapseOnSelect
+          fixed="top"
+          id="navb"
+          expand="lg"
+          variant="dark"
+        >
+          <Navbar.Brand id="homepage" href="/">
+            <img
+              src={logo}
+              width="90"
+              height="50"
+              className="d-inline-block align-top"
+              alt="ACM logo"
+            />
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav" className="me-auto">
+            <Nav className="ml-auto">
+              <Nav.Link href="/aboutus">About Us</Nav.Link>
+              <Nav.Link href="/board">Board</Nav.Link>
+              <Nav.Link href="/events">Calendar</Nav.Link>
+              <Nav.Link href="/professional">Events</Nav.Link>
+              <Nav.Link href="/programs">Programs</Nav.Link>
+            </Nav>
+            <div class="membership-btn" >
+              <Nav.Link href="/membership">
+                <Button variant="light" style={{fontSize: "16px"}}>Membership</Button>
+              </Nav.Link>
+            </div>
+            {/* <Nav.Link href="https://calstatelaacm-portal.web.app/#/"><Button variant="light">ACM Portal</Button></Nav.Link> */}
+          </Navbar.Collapse>
+        </Navbar>
+        <div class="hover-announcements-background"></div>
+        <div className="hover-announcements">
+          {this.state.announcement}
+        </div>
+        {/* <div class="hover-announcements">
+        Fall semester is starting soon! Interested in becoming an ACM member? Join us! More information about us and our Prodev Program coming soon. 
+        </div> */}
+      </>
+    );
+  }
+}
+
+export default Navi;
+
+
+// Below is the old archive comments of the repo. from V.510:
 
 // function ElectionResults() {
 //   const [show, setShow] = useState(false);
-
 //   const handleClose = () => setShow(false);
 //   const handleShow = () => setShow(true);
 
@@ -53,29 +127,7 @@ import {
 //   );
 // }
 
-class Navi extends React.Component {
-  render() {
-    return (
-      <>
-        <Navbar
-          collapseOnSelect
-          fixed="top"
-          id="navb"
-          expand="lg"
-          variant="dark"
-        >
-          <Navbar.Brand id="homepage" href="/">
-            <img
-              src={logo}
-              width="90"
-              height="50"
-              className="d-inline-block align-top"
-              alt="ACM logo"
-            />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav" className="me-auto">
-            <Nav className="ml-auto">
+
               {/* <NavDropdown
                 title="about us"
                 className="collapsible-nav-dropdown"
@@ -106,22 +158,16 @@ class Navi extends React.Component {
                   <div className="nav-dropdown-text">events</div>
                 </NavDropdown.Item>
               </NavDropdown> */} 
-              <Nav.Link href="/aboutus">About Us</Nav.Link>
 
-              <Nav.Link href="/board">Board</Nav.Link>
 
-              <Nav.Link href="/events">Calendar</Nav.Link>
-
-              <Nav.Link href="/professional">Events</Nav.Link>
-
-              <Nav.Link href="/programs">Programs</Nav.Link>
               {/* Uncomment Sponsors page link when pamphlet is received */}
               {/* <Nav.Link href="/sponsor">sponsors</Nav.Link> */}
 
               {/* <Nav.Link href="/contactus">contact us</Nav.Link> */}
-              {/* <Nav.Link href="/contactus">contact us</Nav.Link> */}
-            </Nav>
-            {/* <Nav className="socials">
+              {/* <Nav.Link href="/contactus">contact us</Nav.Link> */}              
+
+
+              {/* <Nav className="socials">
               <Navbar.Brand
                 id="instagram"
                 href="https://www.instagram.com/calstatela_acm/?hl=en"
@@ -165,22 +211,7 @@ class Navi extends React.Component {
             </Nav> */}
             {/* <div class = "election">
       <ElectionResults />
-    </div> */}
-            <div class="membership-btn" >
-              <Nav.Link href="/membership">
-                <Button variant="light" style={{fontSize: "16px"}}>Membership</Button>
-              </Nav.Link>
-            </div>
-            {/* <Nav.Link href="https://calstatelaacm-portal.web.app/#/"><Button variant="light">ACM Portal</Button></Nav.Link> */}
-          </Navbar.Collapse>
-        </Navbar>
-        <div class="hover-announcements-background"></div>
-        <div class="hover-announcements">
-        Interested in professional development? Become an ACM member and join our Prodev Program where alumni & ACM leaders discuss making a resume, getting an intership, time management and finacial literacy! Hosted online every other Thursday, starting Febuary 4th, from 3:00pm - 4:00pm.
-        </div>
-      </>
-    );
-  }
-}
-
-export default Navi;
+    </div> */}     
+    
+    
+    // I moved out all of these old archive comments to clean up the new code. -JV

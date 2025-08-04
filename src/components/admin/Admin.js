@@ -9,7 +9,7 @@ const Admin = () => {
     >
       <div className="d-flex flex-wrap justify-content-center align-items-center">
         <Link to="/ACM_admin/projects">
-          <Button variant="primary" className="m-2" disabled>
+          <Button variant="primary" className="m-2">
             Projects
           </Button>
         </Link>
@@ -26,6 +26,11 @@ const Admin = () => {
         <Button variant="primary" className="m-2">
           Mentorship
         </Button>
+        <Link to="/ACM_admin/carouselAnnouncement">
+          <Button variant="primary" className="m-2">
+            Announcements
+          </Button>
+        </Link>
       </div>
     </div>
   );

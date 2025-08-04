@@ -158,7 +158,7 @@ const Regular = () => {
           <a href="mailto:acm.calstatela@gmail.com">acm.calstatela@gmail.com</a>
         </h2>
         <h2 className="member-description-points">
-          ACM Memberships are good for one school year (Fall 2024-Spring 2025)
+          ACM Memberships are good for one school year (Fall 2025-Spring 2026)
         </h2>
         <h1 className="refund">No Refunds</h1>
       </div>

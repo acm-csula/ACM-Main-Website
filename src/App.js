@@ -25,6 +25,7 @@ import NewBoard from "./components/board/NewBoard";
 import ACM_Login from "./components/login/ACM_Login.js";
 import Admin from "./components/admin/Admin";
 import ProDev from "./components/prodev/ProDev.js";
+import carouselAnnouncements from "./components/admin/announcementsAdmin/AnnouncementsAdmin.js";
 import { Navbar } from "react-bootstrap";
 
 
@@ -78,6 +79,7 @@ class App extends React.Component {
         <Route path="/ACM_admin/projects" component={ProjectsAdmin} />
         <Route path="/ACM_admin/events" component={EventsAdmin} />
         <Route path="/ACM_admin/board" component={BoardAdmin} />
+        <Route path="/ACM_admin/carouselAnnouncement" component={carouselAnnouncements}/>
       </>
     );
     const DefaultContainer = () => (
