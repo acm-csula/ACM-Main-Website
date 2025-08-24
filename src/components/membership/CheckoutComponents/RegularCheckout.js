@@ -111,6 +111,8 @@ const Regular = () => {
           ></FontAwesomeIcon>
           <br /> Access to project workshops (Beginner and Advanced).
         </div>
+
+        {/*
         <div className="mentorship-section">
           <FontAwesomeIcon
             className="iconBrandNav"
@@ -119,6 +121,8 @@ const Regular = () => {
           ></FontAwesomeIcon>
           <br /> Access to our exclusive 10-week Fall Mentorship program.
         </div>
+        */}
+
         <div className="pro-dev-section">
           <FontAwesomeIcon
             className="iconBrandNav"
