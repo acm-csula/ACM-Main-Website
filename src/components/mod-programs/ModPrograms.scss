@@ -1,12 +1,56 @@
 .ModContainer {
-    width: 50%;
-    margin:auto;
-    padding: 10vw 0;
-    display: flex;
-    gap: 50px;
-    flex-direction: column;
-
+        width: 55%;
+        max-width: 1100px;
+        margin: 0 auto;
     
-    
+    padding: 7rem 0 5rem; 
+        display: flex;
+        gap: 50px;
+        flex-direction: column;
+}
 
+
+@media (max-width: 1400px) {
+    .ModContainer { width: 62%; }
+}
+
+@media (max-width: 1200px) {
+    .ModContainer { width: 70%; }
+}
+
+
+@media (max-width: 992px) {
+    .ModContainer { width: 82%; padding: 6.25rem 0 4rem; } 
+}
+
+@media (max-width: 768px) {
+    .ModContainer { 
+        width: 100%;
+        padding: 8.5rem 1.1rem 3rem; 
+        gap: 40px;
+    }
+    .ModContainer .modproj-card,
+    .ModContainer .modprodev-card { width: 100%; }
+}
+
+
+@media (max-width: 600px) {
+    .ModContainer { 
+        padding: 8.25rem 0.9rem 2.5rem; 
+        gap: 34px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .ModContainer { 
+        padding: 8rem 0.75rem 2.25rem; 
+        gap: 30px;
+    }
+    .ModContainer .card { width: 100%; }
+}
+
+/* Ultra small (older devices) */
+@media (max-width: 360px) {
+    .ModContainer { padding: 7.5rem 0.55rem 2rem; }
 }
