@@ -62,6 +62,7 @@
   text-align: left;
   max-width: 85%;
   background-color: #333030;
+  padding: 1rem;
 }
 
 .programs-nav-link {
@@ -137,6 +138,7 @@
   border-bottom: solid #333030;
   border-width: 0.5em;
   display: flex;
+  flex-wrap: wrap;
   max-width: 100%;
   align-items: center;
   margin: auto;
@@ -239,6 +241,7 @@
   min-width: 1.75in;
   max-width: 20vw;
   margin: 15px;
+  height: auto;
 }
 
 iframe[src*="youtube"] {
@@ -278,9 +281,11 @@ iframe[src*="youtube"] {
   #prodev-header-title {
     position: absolute;
     z-index: 1;
-    font-size: 2.5rem;
+    font-size: 1.75rem;
     top: 30%;
-    left: 10%;
+    left: 5%;
+    right: 5%;
+    text-align: center;
   }
   .skill-item2 {
     left: 0.2%;
@@ -291,8 +296,16 @@ iframe[src*="youtube"] {
   .programs-body {
     padding-top: 75px;
   }
+  .programs-card {
+    max-width: 95%;
+    padding: 0.5rem;
+  }
   .disclaimer-body {
     padding-right: 5px;
+    padding-left: 5px;
+  }
+  .disclaimer {
+    font-size: 16px;
   }
   .flex-column {
     padding-bottom: 35px;
@@ -303,17 +316,70 @@ iframe[src*="youtube"] {
     padding-left: 0px;
     padding-right: 0px;
   }
+  .current-poster {
+    max-width: 95%;
+    padding: 0.5em;
+  }
   .join-button {
     align-items: center;
+    margin-bottom: 1rem;
   }
   .pro-dev-card {
-    margin-left: -50px;
+    margin-left: 0;
   }
   .programs-tab-label {
     font-size: 0.85rem;
   }
   iframe[src*="youtube"] {
     min-width: 90vw;
+    height: 250px;
+  }
+  .mentorship-images {
+    float: none;
+    display: block;
+    max-width: 90%;
+    min-width: auto;
+    margin: 15px auto;
+  }
+  .mentorship-body {
+    padding: 5vh 5vw;
+  }
+  .icon-box {
+    padding: 40px 15px;
+    margin: 0 5px 10px;
+  }
+  .workshop-container {
+    border-width: 0.3em;
+  }
+  .program-description {
+    font-size: 20px;
+  }
+  .aboutprogram {
+    font-size: 15px;
+  }
+  .skill-item,
+  .skill-item2 {
+    padding: 15px 10px;
+  }
+}
+
+/*Tablet and medium screen sizes*/
+@media only screen and (min-width: 601px) and (max-width: 991px) {
+  .programs-card {
+    max-width: 90%;
+  }
+  .current-poster {
+    max-width: 80%;
+  }
+  #prodev-header-title {
+    font-size: 2rem;
+    left: 8%;
+  }
+  .mentorship-images {
+    max-width: 35%;
+  }
+  .skill-item2 {
+    left: 0.1%;
   }
 }
 
