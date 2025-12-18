@@ -8,9 +8,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import "./aboutus.css";
 import constitution from "./images/2024-2025 Constitution.pdf"
-import FallBoard from "./images/Fall2023Board.png"
-import AndroidWorkshop from "./images/android-workshop.png"
-import FallGeneralMeeting from "./images/fall-2019-general-meeting.jpg"
+import FallBoard from "./images/Board.jpg"
+import AndroidWorkshop from "./images/hackathon.jpg"
+import FallGeneralMeeting from "./images/ACM_SWE_event.jpg"
 import ConstitutionLogo from "./images/logo.png"
 
 class AboutUs extends React.Component {
