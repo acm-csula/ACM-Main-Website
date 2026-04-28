@@ -14,7 +14,7 @@ class Navi extends React.Component {
     super(props);
     this.state = {
       announcement: localStorage.getItem('acm-announcement') || 
-        "Fall semester is starting soon! Interested in becoming an ACM member? Join us! More information about us and our Prodev Program coming soon."
+        "Happy Spring Semester"
     };
   }
 
