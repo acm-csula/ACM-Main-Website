@@ -84,6 +84,7 @@ const ImpAnnouncements = () => {
     //     setFeatured(events);
     //   })
     //   .catch((error) => console.log(error));
+    //https://www.youtube.com/watch?v=k_GPd53Wb54
 
   let links = ["https://forms.gle/hAjvNSbS47ghMxuE8"];
 
@@ -93,11 +94,9 @@ const ImpAnnouncements = () => {
       <div className="content">
         <div className="title mt-4 mb-5">Academic Year 2025-2026</div>
         <div className="video-header">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/1RgaZ-inJCI?si=prc2ahxVdkNNM17w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/k_GPd53Wb54?si=sEZni_drAzCw3Uvv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
-        <div className="video-header">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/uuZdBf6RwGI?si=z3dBboLnXkuEgSWq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+        
 
         <div className="description mt-3">
           <p>
