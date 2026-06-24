@@ -5,8 +5,22 @@
     display: flex;
     gap: 50px;
     flex-direction: column;
+}
 
-    
-    
+/* Tablet responsiveness */
+@media only screen and (max-width: 991px) {
+    .ModContainer {
+        width: 70%;
+        padding: 100px 0 8vw 0;
+        gap: 40px;
+    }
+}
 
+/* Mobile responsiveness */
+@media only screen and (max-width: 600px) {
+    .ModContainer {
+        width: 90%;
+        padding: 120px 0 5vw 0;
+        gap: 30px;
+    }
 }

@@ -4,10 +4,7 @@
     cursor: pointer;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-decoration: none;
-
-
  }
-
 
  .figureContainer{
     display: flex;
@@ -16,28 +13,88 @@
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
  }
 
-    .figureContainer img{
-        width: 30%;
-        height: 30%;
-        border : 2px solid rgb(0, 153, 255, 0.4);
-        margin: 20px;
+ .figureContainer img{
+    width: 30%;
+    height: auto;
+    border : 2px solid rgb(0, 153, 255, 0.4);
+    margin: 20px;
+    min-width: 200px;
+ }
+
+ .title{
+    font-weight: bold;
+    font-size: 60px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+ }
+
+ .card{
+    border: 2px solid rgb(0, 153, 255, 0.4);
+    border-radius: 8px;
+ }
+
+ .link{
+    text-align: center;
+    margin-top: 20px;
+ }
+
+ .link img{
+    width: 5%;
+    height: auto;
+    min-width: 20px;
+    max-width: 30px;
+ }
+
+ /* Tablet responsiveness */
+ @media only screen and (max-width: 991px) {
+    .title{
+       font-size: 48px;
     }
 
-   .title{
-      font-weight: bold;
-      font-size: 60px;
-      font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    .figureContainer img{
+       width: 40%;
+       margin: 15px;
+       min-width: 180px;
+    }
 
-   }
+    .link img{
+       width: 6%;
+    }
+ }
 
-   .card{
-      border: 2px solid rgb(0, 153, 255, 0.4);
-      border-radius: 8px;
-   }
+ /* Mobile responsiveness */
+ @media only screen and (max-width: 600px) {
+    .title{
+       font-size: 36px;
+       padding: 10px;
+    }
 
-   .link img{
-      width:5%;
-      height: 5%;
-   }
+    .figureContainer{
+       flex-direction: column;
+       margin-top: 15px;
+       margin-bottom: 15px;
+    }
+
+    .figureContainer img{
+       width: 80%;
+       margin: 10px;
+       min-width: auto;
+       max-width: 350px;
+    }
+
+    .card{
+       border-width: 1px;
+    }
+
+    .link{
+       font-size: 14px;
+    }
+
+    .link img{
+       width: 8%;
+       min-width: 25px;
+       max-width: 35px;
+    }
+ }

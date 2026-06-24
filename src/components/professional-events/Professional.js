@@ -23,16 +23,19 @@ const Professional = () => {
         const semesterEvents = collectionGroup(db, "semesterEvents");
         const queryAllSemester = await getDocs(semesterEvents);
         const semesterEventsList = queryAllSemester.docs.map(doc => doc.data());
+        console.log("Semester Events:", semesterEventsList);
         setSemesterEvent(semesterEventsList);
 
         const upcomingEvents = collectionGroup(db, "upcomingEvents");
         const queryAllUpcoming = await getDocs(upcomingEvents);
         const upcomingEventsList = queryAllUpcoming.docs.map(doc => doc.data());
+        console.log("Upcoming Events:", upcomingEventsList);
         setUpcomingEvent(upcomingEventsList);
 
         const pastEvents = collectionGroup(db, "pastEvents");
         const queryAllPast = await getDocs(pastEvents);
         const pastEventsList = queryAllPast.docs.map(doc => doc.data());
+        console.log("Past Events:", pastEventsList);
         setPastEvent(pastEventsList);
       } catch (error) {
         console.error("Error fetching events:", error);
@@ -69,7 +72,7 @@ const Professional = () => {
               style={{ width: "24rem", padding: "10px", margin: "2em" }}
             >
               <center>
-                <img
+                <Image
                   style={{ height: "30rem", padding: "10px", cursor: "pointer" }}
                   src={event.imgUrl}
                   alt="Upcoming event"
@@ -100,7 +103,7 @@ const Professional = () => {
               style={{ width: "24rem", padding: "10px", margin: "2em" }}
             >
               <center>
-                <img
+                <Image
                   style={{ height: "30rem", padding: "10px", cursor: "pointer" }}
                   src={event.imgUrl}
                   alt="Current event"
